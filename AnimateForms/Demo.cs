@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace AnimateForms
 {
-    public partial class Form1 : Form
+    public partial class Demo : Form
     {
         private readonly int d = 5000;
         private Size eS = new Size(300, 20);
@@ -12,7 +12,7 @@ namespace AnimateForms
 
         private readonly Animate.Animate a = new Animate.Animate();
 
-        public Form1()
+        public Demo()
         {
             InitializeComponent();
         }
