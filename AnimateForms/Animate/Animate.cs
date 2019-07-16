@@ -9,6 +9,7 @@ namespace AnimateForms.Animate
     public class Animate
     {
         public delegate int Function(float t, float b, float c, float d);
+        public Helpers Helpers = new Helpers();
 
         public async Task<bool> Delay(int duration)
         {
@@ -44,6 +45,15 @@ namespace AnimateForms.Animate
                 _ = Resize(control, sizeTo, duration, easing);
 
             await Resize(controls.Last(), sizeTo, duration, easing);
+            return true;
+        }
+
+        public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function[] easings)
+        {
+            for (int i = 0; i < controls.Length - 1; i++)
+                _ = Resize(controls[i], sizeTo, duration, easings[i % easings.Length]);
+
+            await Resize(controls.Last(), sizeTo, duration, easings[controls.Length - 1 % easings.Length]);
             return true;
         }
 
