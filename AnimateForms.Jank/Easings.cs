@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AnimateForms.Jank
+namespace AnimateForms.Core
 {
     public static class Easings
     {

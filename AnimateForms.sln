@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29021.104
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimateForms", "AnimateForms\AnimateForms.csproj", "{A9D51588-EC0A-4589-AFDA-A1592CA4CE9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimateForms.Jank", "AnimateForms.Jank\AnimateForms.Jank.csproj", "{6EB42DA8-68F8-4FFD-842A-E16D1FC019EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimateForms.Core", "AnimateForms.Jank\AnimateForms.Core.csproj", "{6EB42DA8-68F8-4FFD-842A-E16D1FC019EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
