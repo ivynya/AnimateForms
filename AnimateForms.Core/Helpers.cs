@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AnimateForms.Animate
+namespace AnimateForms.Core
 {
     public class Helpers
     {
-        public Control[] CollectionToArray(Control.ControlCollection controlCollection)
-        {
-            IEnumerable<Control> controls = controlCollection.OfType<Control>();
-            return controls.ToArray();
-        }
-
         public Control[] SortCollectionByName(Control.ControlCollection controlCollection)
         {
             IEnumerable<Control> controls = controlCollection.OfType<Control>();

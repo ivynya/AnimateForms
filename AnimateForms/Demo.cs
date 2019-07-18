@@ -37,12 +37,8 @@ namespace AnimateForms
                 await a.Resize(a.Helpers.SortCollectionByName(parent.Controls),
                     eS, d, Easings.AllEasings);
                 
-                _ = a.Move(panel1, new Point(3, 159), d, Easings.CubicInOut);
-                _ = a.Move(panel2, new Point(3, 133), d, Easings.CubicInOut);
-                _ = a.Move(panel3, new Point(3, 107), d, Easings.CubicInOut);
-                _ = a.Move(panel5, new Point(3, 55), d, Easings.CubicInOut);
-                _ = a.Move(panel6, new Point(3, 29), d, Easings.CubicInOut);
-                await a.Move(panel7, new Point(3, 3), d, Easings.CubicInOut);
+                await a.Move(a.Helpers.SortCollectionByName(parent.Controls), 
+                    new Point(3, 159), new Point(0, -26), d, Easings.CubicInOut);
 
                 _ = a.Recolor(panel1, Color.Pink, d / 2, Easings.CubicInOut);
                 _ = a.Recolor(panel2, Color.Blue, d / 2, Easings.CubicInOut);
@@ -53,13 +49,9 @@ namespace AnimateForms
 
                 await a.Resize(a.Helpers.SortCollectionByName(parent.Controls),
                     dS, d, Easings.AllEasings);
-                
-                _ = a.Move(panel7, new Point(3, 159), d, Easings.CubicInOut);
-                _ = a.Move(panel6, new Point(3, 133), d, Easings.CubicInOut);
-                _ = a.Move(panel5, new Point(3, 107), d, Easings.CubicInOut);
-                _ = a.Move(panel3, new Point(3, 55), d, Easings.CubicInOut);
-                _ = a.Move(panel2, new Point(3, 29), d, Easings.CubicInOut);
-                await a.Move(panel1, new Point(3, 3), d, Easings.CubicInOut);
+
+                await a.Move(a.Helpers.SortCollectionByName(parent.Controls),
+                    new Point(3, 3), new Point(0, 26), d, Easings.CubicInOut);
 
                 _ = a.Recolor(panel1, Color.Red, d / 2, Easings.CubicInOut);
                 _ = a.Recolor(panel2, Color.Orange, d / 2, Easings.CubicInOut);

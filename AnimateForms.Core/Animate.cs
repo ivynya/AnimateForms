@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -8,20 +9,12 @@ namespace AnimateForms.Core
     public class Animate
     {
         public delegate int Function(float t, float b, float c, float d);
+        public Helpers Helpers = new Helpers();
 
-        private Function GetFunction(string function)
+        public async Task<bool> Delay(int duration)
         {
-            switch (function)
-            {
-                case "Linear": return Easings.Linear;
-                case "QuadIn": return Easings.QuadIn;
-                case "QuadOut": return Easings.QuadOut;
-                case "QuadInOut": return Easings.QuadInOut;
-                case "CubicIn": return Easings.CubicIn;
-                case "CubicOut": return Easings.CubicOut;
-                case "CubicInOut": return Easings.CubicInOut;
-                default: return Easings.Linear;
-            }
+            await Task.Delay(duration);
+            return true;
         }
 
         public async Task<bool> Resize(Control control, Size sizeTo, int duration, Function easing)
@@ -46,9 +39,29 @@ namespace AnimateForms.Core
             return true;
         }
 
-        public async Task<bool> Resize(Control control, Size sizeTo, int duration, string easing)
+        public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function easing)
         {
-            return await Resize(control, sizeTo, duration, GetFunction(easing));
+            foreach (Control control in controls)
+                _ = Resize(control, sizeTo, duration, easing);
+
+            await Resize(controls.Last(), sizeTo, duration, easing);
+            return true;
+        }
+
+        public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function[] easings)
+        {
+            for (int i = 0; i < controls.Length - 1; i++)
+                _ = Resize(controls[i], sizeTo, duration, easings[i % easings.Length]);
+
+            await Resize(controls.Last(), sizeTo, duration, easings[controls.Length - 1 % easings.Length]);
+            return true;
+        }
+
+        public async Task<bool> Resize(Control.ControlCollection controls, Size sizeTo, int duration, Function easing)
+        {
+            Control[] controlArray = new Control[controls.Count];
+            controls.CopyTo(controlArray, 0);
+            return await Resize(controlArray, sizeTo, duration, easing);
         }
 
         public async Task<bool> Move(Control control, Point moveTo, int duration, Function easing)
@@ -71,11 +84,6 @@ namespace AnimateForms.Core
             }
 
             return true;
-        }
-
-        public async Task<bool> Move(Control control, Point moveTo, int duration, string easing)
-        {
-            return await Move(control, moveTo, duration, GetFunction(easing));
         }
 
         public async Task<bool> Recolor(Control control, Color colorTo, int duration, Function easing, bool backColor = true)
@@ -110,11 +118,6 @@ namespace AnimateForms.Core
             }
 
             return true;
-        }
-
-        public async Task<bool> Recolor(Control control, Color colorTo, int duration, string easing, bool backColor = true)
-        {
-            return await Recolor(control, colorTo, duration, GetFunction(easing), backColor);
         }
     }
 }

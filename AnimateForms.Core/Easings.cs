@@ -4,6 +4,11 @@ namespace AnimateForms.Core
 {
     public static class Easings
     {
+        public static Animate.Function[] AllEasings = new Animate.Function[]
+        {
+            Linear, QuadIn, QuadOut, QuadInOut, CubicIn, CubicOut, CubicInOut
+        };
+
         public static int Linear(float t, float b, float c, float d)
         {
             return (int)Math.Round(c * t / d + b);

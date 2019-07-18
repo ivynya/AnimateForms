@@ -11,6 +11,14 @@ namespace AnimateForms.Animate
         public delegate int Function(float t, float b, float c, float d);
         public Helpers Helpers = new Helpers();
 
+        public struct Options
+        {
+            Function easing;
+            int duration;
+            int delay;
+            int interval;
+        }
+
         public async Task<bool> Delay(int duration)
         {
             await Task.Delay(duration);
@@ -42,7 +50,8 @@ namespace AnimateForms.Animate
         public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function easing)
         {
             foreach (Control control in controls)
-                _ = Resize(control, sizeTo, duration, easing);
+                if (control != controls.Last())
+                    _ = Resize(control, sizeTo, duration, easing);
 
             await Resize(controls.Last(), sizeTo, duration, easing);
             return true;
@@ -55,13 +64,6 @@ namespace AnimateForms.Animate
 
             await Resize(controls.Last(), sizeTo, duration, easings[controls.Length - 1 % easings.Length]);
             return true;
-        }
-
-        public async Task<bool> Resize(Control.ControlCollection controls, Size sizeTo, int duration, Function easing)
-        {
-            Control[] controlArray = new Control[controls.Count];
-            controls.CopyTo(controlArray, 0);
-            return await Resize(controlArray, sizeTo, duration, easing);
         }
 
         public async Task<bool> Move(Control control, Point moveTo, int duration, Function easing)
@@ -83,6 +85,22 @@ namespace AnimateForms.Animate
                                              easing(time, location.Y, yDif, duration));
             }
 
+            return true;
+        }
+
+        public async Task<bool> Move(Control[] controls, Point moveTo, Point offset, int duration, Function easing)
+        {
+            Point destination;
+            for (int i = 0; i < controls.Length - 1; i++)
+            {
+                destination = new Point(moveTo.X + (offset.X * i), 
+                                              moveTo.Y + (offset.Y * i));
+                _ = Move(controls[i], destination, duration, easing);
+            }
+
+            destination = new Point(moveTo.X + (offset.X * (controls.Length - 1)),
+                                    moveTo.Y + (offset.Y * (controls.Length - 1)));
+            await Move(controls.Last(), destination, duration, easing);
             return true;
         }
 
@@ -117,6 +135,16 @@ namespace AnimateForms.Animate
                     control.ForeColor = newColor;
             }
 
+            return true;
+        }
+
+        public async Task<bool> Recolor(Control[] controls, Color colorTo, int duration, Function easing)
+        {
+            foreach (Control control in controls)
+                if (control != controls.Last())
+                    _ = Recolor(control, colorTo, duration, easing);
+
+            await Recolor(controls.Last(), colorTo, duration, easing);
             return true;
         }
     }
