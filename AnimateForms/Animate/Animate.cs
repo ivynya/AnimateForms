@@ -147,5 +147,24 @@ namespace AnimateForms.Animate
             await Recolor(controls.Last(), colorTo, duration, easing);
             return true;
         }
+
+        public async Task<bool> Recolor(Control[] controls, Color[] colors, int duration, Function easing)
+        {
+            for (int i = 0; i < controls.Length - 1; i++)
+                _ = Recolor(controls[i], colors[i % colors.Length], duration, easing);
+
+            await Recolor(controls.Last(), colors[(controls.Length - 1) % colors.Length], duration, easing);
+            return true;
+        }
+
+        public async Task<bool> Recolor(Control[] controls, Color[] colors, int duration, Function[] easings)
+        {
+            for (int i = 0; i < controls.Length - 1; i++)
+                _ = Recolor(controls[i], colors[i % colors.Length], duration, easings[i % colors.Length]);
+
+            await Recolor(controls.Last(), colors[(controls.Length - 1) % colors.Length], 
+                duration, easings[colors.Length % colors.Length]);
+            return true;
+        }
     }
 }

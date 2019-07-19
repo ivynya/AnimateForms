@@ -32,33 +32,29 @@ namespace AnimateForms
 
         private async void Button3_Click(object sender, EventArgs e)
         {
+            Color[] rainbow = new Color[]
+            {
+                Color.Red, Color.Orange, Color.Yellow, Color.Green,
+                Color.Cyan, Color.Blue, Color.Magenta
+            };
+
+            Control[] controls = a.Helpers.SortCollectionByName(parent.Controls);
+
             while(true)
             {
-                await a.Resize(a.Helpers.SortCollectionByName(parent.Controls),
-                    eS, d, Easings.AllEasings);
+                await a.Resize(controls, eS, d, Easings.AllEasings);
                 
-                await a.Move(a.Helpers.SortCollectionByName(parent.Controls), 
-                    new Point(3, 159), new Point(0, -26), d, Easings.CubicInOut);
+                await a.Move(controls, new Point(3, 159), new Point(0, -26), d, Easings.CubicInOut);
 
-                _ = a.Recolor(panel1, Color.Pink, d / 2, Easings.CubicInOut);
-                _ = a.Recolor(panel2, Color.Blue, d / 2, Easings.CubicInOut);
-                _ = a.Recolor(panel3, Color.Cyan, d / 2, Easings.CubicInOut);
-                _ = a.Recolor(panel5, Color.Yellow, d / 2, Easings.CubicInOut);
-                _ = a.Recolor(panel6, Color.Orange, d / 2, Easings.CubicInOut);
-                await a.Recolor(panel7, Color.Red, d / 2, Easings.CubicInOut);
+                Array.Reverse(rainbow);
+                await a.Recolor(controls, rainbow, d, Easings.CubicInOut);
 
-                await a.Resize(a.Helpers.SortCollectionByName(parent.Controls),
-                    dS, d, Easings.AllEasings);
+                await a.Resize(controls, dS, d, Easings.AllEasings);
 
-                await a.Move(a.Helpers.SortCollectionByName(parent.Controls),
-                    new Point(3, 3), new Point(0, 26), d, Easings.CubicInOut);
+                await a.Move(controls, new Point(3, 3), new Point(0, 26), d, Easings.CubicInOut);
 
-                _ = a.Recolor(panel1, Color.Red, d / 2, Easings.CubicInOut);
-                _ = a.Recolor(panel2, Color.Orange, d / 2, Easings.CubicInOut);
-                _ = a.Recolor(panel3, Color.Yellow, d / 2, Easings.CubicInOut);
-                _ = a.Recolor(panel5, Color.Cyan, d / 2, Easings.CubicInOut);
-                _ = a.Recolor(panel6, Color.Blue, d / 2, Easings.CubicInOut);
-                await a.Recolor(panel7, Color.Pink, d / 2, Easings.CubicInOut);
+                Array.Reverse(rainbow);
+                await a.Recolor(controls, rainbow, d, Easings.CubicInOut);
             }
         }
 
