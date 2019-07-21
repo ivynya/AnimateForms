@@ -9,15 +9,6 @@ namespace AnimateForms.Animate
     public class Animate
     {
         public delegate int Function(float t, float b, float c, float d);
-        public Helpers Helpers = new Helpers();
-
-        public struct Options
-        {
-            Function easing;
-            int duration;
-            int delay;
-            int interval;
-        }
 
         public async Task<bool> Delay(int duration)
         {
@@ -49,12 +40,10 @@ namespace AnimateForms.Animate
 
         public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function easing)
         {
-            foreach (Control control in controls)
-                if (control != controls.Last())
-                    _ = Resize(control, sizeTo, duration, easing);
+            for (int i = 0; i < controls.Length - 1; i++)
+                _ = Resize(controls[i], sizeTo, duration, easing);
 
-            await Resize(controls.Last(), sizeTo, duration, easing);
-            return true;
+            return await Resize(controls.Last(), sizeTo, duration, easing);
         }
 
         public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function[] easings)
@@ -62,8 +51,21 @@ namespace AnimateForms.Animate
             for (int i = 0; i < controls.Length - 1; i++)
                 _ = Resize(controls[i], sizeTo, duration, easings[i % easings.Length]);
 
-            await Resize(controls.Last(), sizeTo, duration, easings[controls.Length - 1 % easings.Length]);
-            return true;
+            return await Resize(controls.Last(), sizeTo, duration, 
+                easings[controls.Length - 1 % easings.Length]);
+        }
+
+        public async Task<bool> Resize(Control[] controls, Size sizeTo, Options o)
+        {
+            await Delay(o.Delay);
+            for (int i = 0; i < controls.Length - 1; i++)
+            {
+                _ = Resize(controls[i], sizeTo, o.Duration, o.Easings[i % o.Easings.Length]);
+                await Delay(o.Interval);
+            }
+
+            return await Resize(controls.Last(), sizeTo, o.Duration, 
+                o.Easings[controls.Length - 1 % o.Easings.Length]);
         }
 
         public async Task<bool> Move(Control control, Point moveTo, int duration, Function easing)
@@ -90,18 +92,31 @@ namespace AnimateForms.Animate
 
         public async Task<bool> Move(Control[] controls, Point moveTo, Point offset, int duration, Function easing)
         {
-            Point destination;
+            Point destination = moveTo;
             for (int i = 0; i < controls.Length - 1; i++)
             {
-                destination = new Point(moveTo.X + (offset.X * i), 
-                                              moveTo.Y + (offset.Y * i));
                 _ = Move(controls[i], destination, duration, easing);
+                destination = new Point(moveTo.X + (offset.X * (i + 1)),
+                                        moveTo.Y + (offset.Y * (i + 1)));
             }
 
-            destination = new Point(moveTo.X + (offset.X * (controls.Length - 1)),
-                                    moveTo.Y + (offset.Y * (controls.Length - 1)));
-            await Move(controls.Last(), destination, duration, easing);
-            return true;
+            return await Move(controls.Last(), destination, duration, easing);
+        }
+
+        public async Task<bool> Move(Control[] controls, Point moveTo, Point offset, Options o)
+        {
+            await Delay(o.Delay);
+            Point destination = moveTo;
+            for (int i = 0; i < controls.Length - 1; i++)
+            {
+                _ = Move(controls[i], moveTo, o.Duration, o.Easings[i % o.Easings.Length]);
+                destination = new Point(moveTo.X + (offset.X * (i + 1)),
+                                        moveTo.Y + (offset.Y * (i + 1)));
+                await Delay(o.Interval);
+            }
+
+            return await Move(controls.Last(), destination, o.Duration,
+                o.Easings[controls.Length - 1 % o.Easings.Length]);
         }
 
         public async Task<bool> Recolor(Control control, Color colorTo, int duration, Function easing, bool backColor = true)

@@ -5,15 +5,15 @@ using System.Windows.Forms;
 
 namespace AnimateForms.Animate
 {
-    public class Helpers
+    public static class Helpers
     {
-        public Control[] CollectionToArray(Control.ControlCollection controlCollection)
+        public static Control[] CollectionToArray(Control.ControlCollection controlCollection)
         {
             IEnumerable<Control> controls = controlCollection.OfType<Control>();
             return controls.ToArray();
         }
 
-        public Control[] SortCollectionByName(Control.ControlCollection controlCollection)
+        public static Control[] SortCollectionByName(Control.ControlCollection controlCollection)
         {
             IEnumerable<Control> controls = controlCollection.OfType<Control>();
             Control[] controlsArray = controls.ToArray();

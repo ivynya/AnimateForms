@@ -20,13 +20,13 @@ namespace AnimateForms
 
         private async void Button1_Click(object sender, EventArgs e)
         {
-            await a.Resize(a.Helpers.SortCollectionByName(parent.Controls),
+            await a.Resize(Helpers.SortCollectionByName(parent.Controls),
                     eS, d, Easings.AllEasings);
         }
 
         private async void Button2_Click(object sender, EventArgs e)
         {
-            await a.Resize(a.Helpers.SortCollectionByName(parent.Controls),
+            await a.Resize(Helpers.SortCollectionByName(parent.Controls),
                     dS, d, Easings.AllEasings);
         }
 
@@ -34,11 +34,11 @@ namespace AnimateForms
         {
             Color[] rainbow = new Color[]
             {
-                Color.Red, Color.Orange, Color.Yellow, Color.Green,
+                Color.Red, Color.Orange, Color.Yellow, Color.Lime,
                 Color.Cyan, Color.Blue, Color.Magenta
             };
 
-            Control[] controls = a.Helpers.SortCollectionByName(parent.Controls);
+            Control[] controls = Helpers.SortCollectionByName(parent.Controls);
 
             while(true)
             {

@@ -49,6 +49,7 @@
     <Compile Include="Animate\Animate.cs" />
     <Compile Include="Animate\Easings.cs" />
     <Compile Include="Animate\Helpers.cs" />
+    <Compile Include="Animate\Options.cs" />
     <Compile Include="Demo.cs">
       <SubType>Form</SubType>
     </Compile>
