@@ -44,14 +44,16 @@ namespace AnimateForms
             {
                 await a.Resize(controls, eS, d, Easings.AllEasings);
                 
-                await a.Move(controls, new Point(3, 159), new Point(0, -26), d, Easings.CubicInOut);
+                await a.Move(controls, new Point(3, 159), new Point(0, -26), 
+                    new Options(Easings.SinInOut, d / 2, 0, 200));
 
                 Array.Reverse(rainbow);
                 await a.Recolor(controls, rainbow, d, Easings.CubicInOut);
 
                 await a.Resize(controls, dS, d, Easings.AllEasings);
 
-                await a.Move(controls, new Point(3, 3), new Point(0, 26), d, Easings.CubicInOut);
+                await a.Move(controls, new Point(3, 3), new Point(0, 26),
+                    new Options(Easings.QuintInOut, d / 2, 0, 200));
 
                 Array.Reverse(rainbow);
                 await a.Recolor(controls, rainbow, d, Easings.CubicInOut);

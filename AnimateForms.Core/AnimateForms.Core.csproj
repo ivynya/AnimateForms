@@ -52,6 +52,7 @@
     <Compile Include="Animate.cs" />
     <Compile Include="Easings.cs" />
     <Compile Include="Helpers.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
