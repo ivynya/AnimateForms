@@ -2,16 +2,19 @@
 
 namespace AnimateForms.Core
 {
+    /// <summary>
+    /// Includes a list of all basic easings
+    /// </summary>
+    /// <remarks>Easing equations pulled from http://gizma.com/easing/ </remarks>
     public static class Easings
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static Animate.Function[] AllEasings = new Animate.Function[]
         {
             Linear, QuadIn, QuadOut, QuadInOut, CubicIn, CubicOut, CubicInOut,
             QuartIn, QuartOut, QuartInOut, QuintIn, QuintOut, QuintInOut, SinIn,
             SinOut, SinInOut, ExpIn, ExpOut, ExpInOut, CircIn, CircOut, CircInOut
         };
-
-        // Easing equations pulled from http://gizma.com/easing/
 
         public static int Linear(float t, float b, float c, float d)
         {
@@ -155,4 +158,5 @@ namespace AnimateForms.Core
             return (int)Math.Round(c / 2 * (Math.Sqrt(1 - t * t) + 1) + b);
         }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
