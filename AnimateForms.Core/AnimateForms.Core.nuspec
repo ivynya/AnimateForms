@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AnimateForms</id>
+    <title>AnimateForms</title>
+    <version>0.1.0-alpha</version>
+    <authors>SDBagel</authors>
+    <owners>SDBagel</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/SDBagel/AnimateForms</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A lightweight, asynchronous animation library for Windows Forms.</description>
+    <summary>A lightweight async animation library for WinForms.</summary>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>Animation Library WindowsForms WinForms</tags>
+  </metadata>
+</package>
