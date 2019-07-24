@@ -20,4 +20,4 @@ Install using DLL:
 
 # Usage
 
-Documentation is incomplete, but a raw XML documentation file is included in the [releases](https://github.com/SDBagel/AnimateForms/releases).
+Complete code documentation is available [here](https://sdbagel.github.io/AnimateForms/). It should be easy enough to figure out, but there is currently no direct "Hello World" example. Included in this repository are also two demo applications, AnimateForms (not AnimateForms.Core) and NuGetDemo, which uses the latest NuGet package of this library available.
