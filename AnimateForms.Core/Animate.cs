@@ -6,39 +6,16 @@ using System.Windows.Forms;
 
 namespace AnimateForms.Core
 {
-    /// <summary>
-    /// Instantiable animator to handle animations
-    /// </summary>
     public class Animate
     {
-        /// <summary>
-        /// Used to represent an easing function.
-        /// </summary>
-        /// <param name="t">Current time</param>
-        /// <param name="b">Start value</param>
-        /// <param name="c">Change in value</param>
-        /// <param name="d">Duration</param>
-        /// <returns>Returns current value as an integer.</returns>
         public delegate int Function(float t, float b, float c, float d);
 
-        /// <summary>
-        /// Asynchronously delays for a specified amount of time, in milliseconds.
-        /// </summary>
-        /// <param name="duration">Milliseconds to delay.</param>
         public async Task<bool> Delay(int duration)
         {
             await Task.Delay(duration);
             return true;
         }
 
-        /// <summary>
-        /// Animates resizing a control using a specified easing.
-        /// </summary>
-        /// <param name="control">Control to be resized</param>
-        /// <param name="sizeTo">Target size</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easing">Easing function to use</param>
-        /// <returns>True/false on animation success/failure</returns>
         public async Task<bool> Resize(Control control, Size sizeTo, int duration, Function easing)
         {
             Size size = control.Size;
@@ -61,14 +38,6 @@ namespace AnimateForms.Core
             return true;
         }
 
-        /// <summary>
-        /// Animates resizing all controls in an array to a size.
-        /// </summary>
-        /// <param name="controls">The control array to resize</param>
-        /// <param name="sizeTo">Target size</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easing">Easing function to use</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function easing)
         {
             for (int i = 0; i < controls.Length - 1; i++)
@@ -77,18 +46,6 @@ namespace AnimateForms.Core
             return await Resize(controls.Last(), sizeTo, duration, easing);
         }
 
-        /// <summary>
-        /// Animates resizing all controls in an array, using an array of easings.
-        /// </summary>
-        /// <remarks>
-        /// The length of easings does not have to match the number of controls.
-        /// The function will loop through the list of easings if the length is exceeded.
-        /// </remarks>
-        /// <param name="controls">Control array to be resized</param>
-        /// <param name="sizeTo">Target size</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easings">Easing function to use</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function[] easings)
         {
             for (int i = 0; i < controls.Length - 1; i++)
@@ -98,14 +55,6 @@ namespace AnimateForms.Core
                 easings[controls.Length - 1 % easings.Length]);
         }
 
-        /// <summary>
-        /// Animates resizing a control array using an options object.
-        /// </summary>
-        /// <seealso cref="Options"/>
-        /// <param name="controls">Control array to resize</param>
-        /// <param name="sizeTo">Target size</param>
-        /// <param name="o">Options object</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Resize(Control[] controls, Size sizeTo, Options o)
         {
             await Delay(o.Delay);
@@ -119,14 +68,6 @@ namespace AnimateForms.Core
                 o.Easings[controls.Length - 1 % o.Easings.Length]);
         }
 
-        /// <summary>
-        /// Animates moving a control to a point using an easing.
-        /// </summary>
-        /// <param name="control">Control to move</param>
-        /// <param name="moveTo">Point to move to</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easing">Easing function to use</param>
-        /// <returns>True/false on animation success/failure</returns>
         public async Task<bool> Move(Control control, Point moveTo, int duration, Function easing)
         {
             Point location = control.Location;
@@ -149,15 +90,6 @@ namespace AnimateForms.Core
             return true;
         }
 
-        /// <summary>
-        /// Animates moving an array of controls to a point, with an offset for each control.
-        /// </summary>
-        /// <param name="controls">Control array to move</param>
-        /// <param name="moveTo">Point to move to</param>
-        /// <param name="offset">Offset per control</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easing">Easing function to use</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Move(Control[] controls, Point moveTo, Point offset, int duration, Function easing)
         {
             Point destination = moveTo;
@@ -171,15 +103,6 @@ namespace AnimateForms.Core
             return await Move(controls.Last(), destination, duration, easing);
         }
 
-        /// <summary>
-        /// Animates moving a control array to a point, with an offset per control, using an options object.
-        /// </summary>
-        /// <seealso cref="Options"/>
-        /// <param name="controls">Control array to move</param>
-        /// <param name="moveTo">Point to move to</param>
-        /// <param name="offset">Offset per control</param>
-        /// <param name="o">Options object</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Move(Control[] controls, Point moveTo, Point offset, Options o)
         {
             await Delay(o.Delay);
@@ -196,15 +119,6 @@ namespace AnimateForms.Core
                 o.Easings[(controls.Length - 1) % o.Easings.Length]);
         }
 
-        /// <summary>
-        /// Animates recoloring a control using an easing.
-        /// </summary>
-        /// <param name="control">Control to recolor</param>
-        /// <param name="colorTo">Color to transition to</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easing">Easing function to use</param>
-        /// <param name="backColor">Selects background if true or foreground if false</param>
-        /// <returns>True/false on animation success/failure</returns>
         public async Task<bool> Recolor(Control control, Color colorTo, int duration, Function easing, bool backColor = true)
         {
             Color color;
@@ -239,14 +153,6 @@ namespace AnimateForms.Core
             return true;
         }
 
-        /// <summary>
-        /// Recolors a control array with a single easing
-        /// </summary>
-        /// <param name="controls">Control array to recolor</param>
-        /// <param name="colorTo">Color to transition to</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easing">Easing function to use</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Recolor(Control[] controls, Color colorTo, int duration, Function easing)
         {
             foreach (Control control in controls)
@@ -256,18 +162,6 @@ namespace AnimateForms.Core
             return await Recolor(controls.Last(), colorTo, duration, easing);
         }
 
-        /// <summary>
-        /// Recolors a control array with a single easing and multiple colors.
-        /// </summary>
-        /// <remarks>
-        /// The length of colors does not have to match the number of controls.
-        /// The function will loop through the list of colors if the length is exceeded.
-        /// </remarks>
-        /// <param name="controls">Control array to recolor</param>
-        /// <param name="colors">Colors to transition to</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easing">Easing function to use</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Recolor(Control[] controls, Color[] colors, int duration, Function easing)
         {
             for (int i = 0; i < controls.Length - 1; i++)
@@ -276,18 +170,6 @@ namespace AnimateForms.Core
             return await Recolor(controls.Last(), colors[(controls.Length - 1) % colors.Length], duration, easing);
         }
 
-        /// <summary>
-        /// Recolors a control array with a multiple easings and multiple colors.
-        /// </summary>
-        /// <remarks>
-        /// The length of colors or easings does not have to match the number of controls.
-        /// The function will loop through the list of colors or easings if the length is exceeded.
-        /// </remarks>
-        /// <param name="controls">Control array to recolor</param>
-        /// <param name="colors">Colors to transition to</param>
-        /// <param name="duration">Duration of animation</param>
-        /// <param name="easings">Easing functions to use</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Recolor(Control[] controls, Color[] colors, int duration, Function[] easings)
         {
             for (int i = 0; i < controls.Length - 1; i++)
@@ -297,17 +179,6 @@ namespace AnimateForms.Core
                 duration, easings[controls.Length % easings.Length]);
         }
 
-        /// <summary>
-        /// Recolors a control array with a multiple easings and multiple colors.
-        /// </summary>
-        /// <remarks>
-        /// The length of colors or easings does not have to match the number of controls.
-        /// The function will loop through the list of colors or easings if the length is exceeded.
-        /// </remarks>
-        /// <param name="controls">Control array to recolor</param>
-        /// <param name="colors">Colors to transition to</param>
-        /// <param name="o">Duration of animation</param>
-        /// <returns>True/false on last animation success/failure</returns>
         public async Task<bool> Recolor(Control[] controls, Color[] colors, Options o)
         {
             await Delay(o.Delay);

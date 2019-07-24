@@ -10,16 +10,20 @@ body {
 }
 
 .container {
-  margin: 0 2rem;
+  margin: 0 1rem;
 }
 
-br {
-  clear: both;
+hr {
+  margin: 2rem 0;
 }
 
 a {
   color: #78a1bb;
   text-decoration: underline;
+}
+
+span {
+  background-color: #f4f4f4;
 }
 
 button {
@@ -36,7 +40,7 @@ button {
 
 nav {
   background-color: #32292f;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -127,13 +131,6 @@ nav button:hover {
   margin: 0.2rem 0;
 }
 
-.paragraph {
-  font-size: 1rem;
-  line-height: 2rem;
-  padding: 1rem 0.8rem;
-  text-align: center;
-}
-
 footer {
   background-color: #32292f;
   min-height: 10rem;
@@ -173,11 +170,6 @@ footer > p {
   nav {
     padding: 0 6rem;
   }
-  .paragraph {
-    font-size: 1.2rem;
-    line-height: 2.2rem;
-    padding: 2rem 2rem;
-  }
 }
 
 @media screen and (min-width: 992px) {
@@ -197,9 +189,9 @@ footer > p {
     width: 100%;
     text-align: center;
   }
-  .paragraph {
-    padding: 3rem 6rem;
-  }
+  .doc {
+    text-align: left;
+  }  
   footer {
     padding: 2rem 15%;
   }
