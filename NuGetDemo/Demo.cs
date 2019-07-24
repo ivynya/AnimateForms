@@ -5,11 +5,11 @@ using AnimateForms.Core;
 
 namespace NuGetDemo
 {
-    public partial class Form1 : Form
+    public partial class Demo : Form
     {
         private Animate a = new Animate();
 
-        public Form1()
+        public Demo()
         {
             InitializeComponent();
         }

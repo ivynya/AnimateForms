@@ -1,6 +1,6 @@
 ﻿namespace NuGetDemo
 {
-    partial class Form1
+    partial class Demo
     {
         /// <summary>
         /// Required designer variable.
