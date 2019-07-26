@@ -20,4 +20,6 @@ Install using DLL:
 
 # Usage
 
-Complete code documentation is available [here](https://sdbagel.github.io/AnimateForms/). It should be easy enough to figure out, but there is currently no direct "Hello World" example. Included in this repository are also two demo applications, AnimateForms (not AnimateForms.Core) and NuGetDemo, which uses the latest NuGet package of this library available.
+Complete code documentation is available [here](https://sdbagel.github.io/AnimateForms/). It includes methods and detailed descriptions on all aspects of the library. If something is missing, please create a pull request or an issue on this repository.
+
+A beginner's quickstart guide can be found [here](https://sdbagel.github.io/AnimateForms/Quickstart/). This covers creating a new WinForms project, installing the library, and putting together a small application using AnimateForms and the tools it offers.

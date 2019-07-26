@@ -52,7 +52,7 @@ namespace AnimateForms.Core
                 _ = Resize(controls[i], sizeTo, duration, easings[i % easings.Length]);
 
             return await Resize(controls.Last(), sizeTo, duration,
-                easings[controls.Length - 1 % easings.Length]);
+                easings[(controls.Length - 1) % easings.Length]);
         }
 
         public async Task<bool> Resize(Control[] controls, Size sizeTo, Options o)
@@ -65,7 +65,7 @@ namespace AnimateForms.Core
             }
 
             return await Resize(controls.Last(), sizeTo, o.Duration,
-                o.Easings[controls.Length - 1 % o.Easings.Length]);
+                o.Easings[(controls.Length - 1) % o.Easings.Length]);
         }
 
         public async Task<bool> Move(Control control, Point moveTo, int duration, Function easing)

@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>AnimateForms</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <img src="img/ico.svg" alt="Logo">
+      <a href="https://github.com/SDBagel/AnimateForms">
+        <button>Back to Repository</button>
+      </a>
+    </nav>
+  </header>
+  <div class="block-header">
+    <img src="img/Code-Banner.png" alt="Banner with Code">
+    <h1>Quickstart</h1>
+  </div>
+  <div class="container">
+    <div class="header">
+      <p>Overview</p>
+    </div>
+    <section>
+      <div class="card">
+        <p>This guide covers, from scratch, making a new .NET Framework Windows Forms app and using AnimateForms in it. We will make a simple WinForms app that animates showing some information when the user clicks a button. Totally useless, but a good way to get to know how to use AnimateForms.</p>
+      </div>
+    </section>
+    <div class="header">
+      <p>Creating your Project</p>
+    </div>
+    <section>
+      <div class="card doc">
+        <p>In case you haven't yet, go ahead and create a new Windows Forms application in Visual Studio. We will be using the .NET Framework variant since AnimateForms isn't supported on .NET Core WinForms yet, and our target framework version will be the .NET Framework 4.7.2. Earlier frameworks have not been tested, but any later framework can also be used.</p>
+      </div>
+      <div class="card qs">
+        <img src="img/qs-new-project.png" alt="New Project Window">
+      </div>
+    </section>
+    <div class="header">
+      <p>Placing Basic GUI</p>
+    </div>
+    <section>
+      <div class="card doc">
+        <p>For this project, we will need to include a Button control, a Panel control, and three Label controls placed within the Panel so that they are children of it. We will not rename any controls, and will leave the defaults (button1, panel1, etc) for this guide. For the purposes of visibility, I recolored the panel and resized elements so they would fit better on this page.</p>
+        <br>
+        <p>The button control will serve as our toggle show/hide info, the panel will house our info (labels), and we will apply animations to both the panel and labels.</p>
+      </div>
+      <div class="card qs">
+        <img src="img/qs-placing-controls.png" alt="Basic GUI Layout">
+      </div>
+    </section>
+    <div class="header">
+      <p>Installing AnimateForms</p>
+    </div>
+    <section>
+      <div class="card doc">
+        <p>Installing AnimateForms can be done in multiple ways, but I recommend doing it through the NuGet Package Manager, either through the console or the GUI. After installing, add the using statement to the Form1.cs code file.</p>
+        <br>
+        <p><b>Package Manager console:</b> <span>PM> Install-Package AnimateForms -Version 0.1.0-alpha</span></p>
+        <br>
+        <p><b>Package Manager GUI:</b></p>
+        <p>1) Tools > NuGet Package Manager > Manage NuGet Packages for Solution</p>
+        <p>2) Click Browse tab</p>
+        <p>3) Search for "AnimateForms" and check "Include prerelease"</p>
+        <p>4) Install package for this project</p>
+        <br>
+        <p><b>Downloading the DLL:</b></p>
+        <p>1) Download the ZIP with the DLL <a href="https://github.com/SDBagel/AnimateForms/releases">here</a>.</p>
+        <p>2) In Visual Studio, right click "References" in the Solution Explorer for the project.</p>
+        <p>3) Right click and click "Add reference"</p>
+        <p>4) Click the "Browse" tab and browse locally for the DLL.</p>
+        <p>5) Add the DLL.</p>
+      </div>
+      <div class="card qs">
+        <img src="img/qs-nuget-install.png" alt="Nuget Install">
+      </div>
+    </section>
+    <div class="header">
+      <p>Adding the Animations</p>
+    </div>
+    <section>
+      <div class="card doc">
+        <p>AnimateForms features a simple and easy to use API. In this guide, we will cover just the Resize method and some of the options it provides. The documentation for the rest of the methods the library provides is available <a href="/">here</a>.</p>
+        <br>
+        <p>Let's add a boolean to our code first. This determines what animation to play based on whether the panel is shown or hidden.</p>
+        <br>
+        <p><span>private bool panelShown = true;</span></p>
+        <br>
+        <p>Then, we need a new <b>Animate</b> class to call the animations. Declare the following:</p>
+        <br>
+        <p><span>private readonly Animate a = new Animate();</span></p>
+        <br>
+        <p>The button control will serve as our toggle. Double click it in the designer to create a new event handler for when it is clicked. Then, we want to make it an async method. Don't worry, making a WinForms event handler async won't break anything, as long as the return is still void.</p>
+        <br>
+        <p><span>private <b>async</b> void Button1_Click(object sender, EventArgs e) { }</span></p>
+        <br>
+        <p>In this method, we want to check the state of the boolean, apply the animation, the toggle the boolean end. We can use a simple if else statement. If the panel is shown, we want to run the following snippet of code:</p>
+        <p><span>await a.Resize(panel1, new Size(0, 0), 1000, Easings.QuadInOut);</span></p>
+        <p>This resizes the panel to be 0 pixels high and 0 pixels wide, essentially invisible and non-interactable. Optionally, you could also disable the panel after the await call has completed to prevent tab cycling to it. The duration of this is 1 second (1000ms) and uses the easing QuadInOut.</p>
+        <br>
+        <p>If the panel is not shown, run the same command, but use the expanded size, something like (300, 300).</p>
+        <br>
+        <p>At the end of the method, do <span>panelShown = !panelShown;</span> to keep things correct.</p>
+      </div>
+    </section>
+    <div class="header">
+      <p>More Methods</p>
+    </div>
+    <section>
+      <div class="card doc">
+        <p>After the previous step, you have a working animation. You can click run to try it out for yourself. However, we will also cover using the options object and bulk animations in this guide.</p>
+        <br>
+        <p>AnimateForms is capable of applying animations to Control arrays - as such, it is possible to execute an animation on a Control's child controls through the use of a helper function. In addition to animating the panel, we also want to animate the panel's child controls.</p>
+        <br>
+        <p>Let's start by adding the following to the <span>if (panelShown)</span> block. All of this code can simply be mirrored to the other side for the reverse animation. Before the previous <span>await a.Resize(...)</span> call, we can add another <span>await a.Resize(...)</span> directly after it. Await prevents the code from continuing before the function has returned a value, and so we know these two animations will play sequentially.</p>
+        <br>
+        <p>As parameters, we want to plug in a Control[], but <span>panel1.Controls</span> returns a ControlCollection. We can use one of AnimateForms' helper functions to convert that into a sorted Control[] easily. Simply plug in Helpers.SortCollectionByName(panel1.Controls) as a parameter into the animate function.</p>
+        <br>
+        <p><span>await a.Resize(Helpers.SortCollectionByName(panel1.Controls), new Size(0, 0), 1000, Easings.QuadInOut);</span></p>
+        <br>
+        <p>While this will work, what if we wanted to stagger the animations, or use different easings per control? This can very easily be done by making a new Options object, which provides greater control over bulk animation functions.</p>
+        <br>
+        <p>The Options (Options.cs) object provides members to control easings (including using an array of easings to cycle through), a delay before the animation starts, time between animations in bulk animate calls, and duration of animation. More information can be found <a href="/#Options">in the documentation</a>.</p>
+        <br>
+        <p>Let's just say we want to show and hide the labels by having them change their size, like the panel, but also have them stagger their animations by 100ms. We can create a new Options object and override the easing with your easing of choice, duration, delay (which we will set to 0), and interval of 100. This ends up looking like this:</p>
+        <p><span>await a.Resize(Helpers.SortCollectionByName(panel1.Controls), new Size(0, 0), new Options(Easings.SinInOut, 1000, 0, 100));</span></p>
+        <br>
+        <p>After mirroring that to the show panel side of the if statement (changing the new sizes appropriately), the WinForms app now should behave as expected.</p>
+      </div>
+    </section>
+    <div class="header">
+      <p>Additional Tips</p>
+    </div>
+    <section>
+      <div class="card doc">
+        <p>We've only shown the use of <span>await a.Method(...)</span> in this guide. In the event you cannot use a bulk animation call and need to animate several elements at the same time in the same code block, you can use a discard <span>_ = a.Method(...)</span> for each method you want to run alongside eachother, with the last one having an await instead.</p>
+      </div>
+    </section>
+    <br>
+  </div>
+  <footer>
+    <section>
+      <div>
+        <h3>More Stuff</h3>
+        <p><a href="https://sdproductions.github.io/p/about">About Us</a></p>
+        <p><a href="https://sdproductions.github.io/p/about#privacy">Privacy</a></p>
+        <p><a href="https://sdproductions.github.io/p/about#terms">Terms of Use</a></p>
+      </div>
+      <hr>
+      <div>
+        <h3>Contact</h3>
+        <p><a href="mailto:sdbagel@gmail.com">Email</a></p>
+        <p><a href="https://github.com/SDProductions">GitHub</a></p>
+        <p><a href="https://github.com/SDBagel">SDBagel</a></p>
+      </div>
+    </section>
+    <br>
+    <p>&#9400; SDProductions 2019</p>
+  </footer>
+</body>
+</html>

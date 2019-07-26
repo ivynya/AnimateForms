@@ -42,8 +42,8 @@ namespace AnimateForms
 
             while(true)
             {
-                await a.Resize(controls, eS, d, Easings.AllEasings);
-                
+                await a.Resize(controls, eS, new Options(Easings.AllEasings, d / 2));
+
                 await a.Move(controls, new Point(3, 159), new Point(0, -26), 
                     new Options(Easings.SinInOut, d / 2, 0, 200));
 
