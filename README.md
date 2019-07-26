@@ -1,6 +1,6 @@
 # AnimateForms
 
-![Travis (.com)](https://img.shields.io/travis/com/SDBagel/AnimateForms.svg?style=flat-square) ![GitHub All Releases](https://img.shields.io/github/downloads/SDBagel/AnimateForms/total.svg?style=flat-square)
+[![Travis (.com)](https://img.shields.io/travis/com/SDBagel/AnimateForms.svg?style=flat-square)](https://travis-ci.com/SDBagel/AnimateForms) ![GitHub All Releases](https://img.shields.io/github/downloads/SDBagel/AnimateForms/total.svg?style=flat-square)
 
 ![Nuget](https://img.shields.io/nuget/v/AnimateForms.svg?style=flat-square)  ![Nuget](https://img.shields.io/nuget/dt/AnimateForms.svg?label=nuget%20downloads&style=flat-square)
 
