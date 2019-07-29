@@ -40,28 +40,33 @@ namespace AnimateForms
 
             Control[] controls = Helpers.SortCollectionByName(parent.Controls);
 
+            Options recolorOptions = new Options(
+                controls: controls,
+                easings: Easings.AllEasings,
+                duration: d / 2);
+
+            Options moveOptions = new Options(
+                controls: controls,
+                easing: Easings.CubicInOut,
+                duration: d / 2,
+                interval: 200);
+
             while(true)
             {
-                await a.Resize(controls, eS, new Options(Easings.AllEasings, d / 2));
+                await a.Resize(new Options(controls, Easings.AllEasings, d), eS);
 
-                await a.Move(controls, new Point(3, 159), new Point(0, -26), 
-                    new Options(Easings.SinInOut, d / 2, 0, 200));
+                await a.Move(moveOptions, new Point(3, 159), new Point(0, -26));
 
                 Array.Reverse(rainbow);
-                await a.Recolor(controls, rainbow, d, Easings.CubicInOut);
+                await a.Recolor(recolorOptions, rainbow);
 
                 await a.Resize(controls, dS, d, Easings.AllEasings);
 
-                await a.Move(controls, new Point(3, 3), new Point(0, 26),
-                    new Options(Easings.QuintInOut, d / 2, 0, 200));
+                await a.Move(moveOptions, new Point(3, 3), new Point(0, 26));
 
                 Array.Reverse(rainbow);
-                await a.Recolor(controls, rainbow, d, Easings.CubicInOut);
+                await a.Recolor(recolorOptions, rainbow);
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
         }
     }
 }
