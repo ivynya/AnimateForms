@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,14 +10,23 @@ namespace AnimateForms.Animate
     public class Animate
     {
         public delegate int Function(float t, float b, float c, float d);
-        private bool isAnimating = false;
+        private readonly List<(string, string)> _animating = new List<(string, string)>();
 
         public async Task<bool> Resize(Control control, Size sizeTo, int duration, Function easing)
         {
+            if (_animating.Contains((control.Name, "resize")))
+                return false;
+            else
+                _animating.Add((control.Name, "resize"));
+
             Size size = control.Size;
             int heightDif = sizeTo.Height - size.Height;
             int widthDif = sizeTo.Width - size.Width;
-            if (widthDif == 0 && heightDif == 0) return false;
+            if (widthDif == 0 && heightDif == 0)
+            {
+                _animating.Remove((control.Name, "resize"));
+                return false;
+            }
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -30,6 +40,7 @@ namespace AnimateForms.Animate
                                         easing(time, size.Height, heightDif, duration));
             }
 
+            _animating.Remove((control.Name, "resize"));
             return true;
         }
 
@@ -65,10 +76,19 @@ namespace AnimateForms.Animate
 
         public async Task<bool> Move(Control control, Point moveTo, int duration, Function easing)
         {
+            if (_animating.Contains((control.Name, "move")))
+                return false;
+            else
+                _animating.Add((control.Name, "move"));
+
             Point location = control.Location;
             int yDif = moveTo.Y - location.Y;
             int xDif = moveTo.X - location.X;
-            if (yDif == 0 && xDif == 0) return false;
+            if (yDif == 0 && xDif == 0)
+            {
+                _animating.Remove((control.Name, "move"));
+                return false;
+            }
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -82,6 +102,7 @@ namespace AnimateForms.Animate
                                              easing(time, location.Y, yDif, duration));
             }
 
+            _animating.Remove((control.Name, "move"));
             return true;
         }
 
@@ -116,10 +137,19 @@ namespace AnimateForms.Animate
 
         public async Task<bool> Recolor(Control control, Color colorTo, int duration, Function easing, bool backColor = true)
         {
+            if (_animating.Contains((control.Name, "recolor")))
+                return false;
+            else
+                _animating.Add((control.Name, "recolor"));
+
             Color color;
             if (backColor) color = control.BackColor;
             else color = control.ForeColor;
-            if (color == colorTo) return false;
+            if (color == colorTo)
+            {
+                _animating.Remove((control.Name, "recolor"));
+                return false;
+            }
 
             int aDif = colorTo.A - color.A;
             int rDif = colorTo.R - color.R;
@@ -145,6 +175,7 @@ namespace AnimateForms.Animate
                     control.ForeColor = newColor;
             }
 
+            _animating.Remove((control.Name, "recolor"));
             return true;
         }
 
