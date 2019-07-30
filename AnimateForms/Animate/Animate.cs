@@ -44,23 +44,6 @@ namespace AnimateForms.Animate
             return true;
         }
 
-        public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function easing)
-        {
-            for (int i = 0; i < controls.Length - 1; i++)
-                _ = Resize(controls[i], sizeTo, duration, easing);
-
-            return await Resize(controls.Last(), sizeTo, duration, easing);
-        }
-
-        public async Task<bool> Resize(Control[] controls, Size sizeTo, int duration, Function[] easings)
-        {
-            for (int i = 0; i < controls.Length - 1; i++)
-                _ = Resize(controls[i], sizeTo, duration, easings[i % easings.Length]);
-
-            return await Resize(controls.Last(), sizeTo, duration, 
-                easings[(controls.Length - 1) % easings.Length]);
-        }
-
         public async Task<bool> Resize(Options o, Size sizeTo)
         {
             await Task.Delay(o.Delay);
@@ -104,19 +87,6 @@ namespace AnimateForms.Animate
 
             _animating.Remove((control.Name, "move"));
             return true;
-        }
-
-        public async Task<bool> Move(Control[] controls, Point moveTo, Point offset, int duration, Function easing)
-        {
-            Point destination = moveTo;
-            for (int i = 0; i < controls.Length - 1; i++)
-            {
-                _ = Move(controls[i], destination, duration, easing);
-                destination = new Point(moveTo.X + (offset.X * (i + 1)),
-                                        moveTo.Y + (offset.Y * (i + 1)));
-            }
-
-            return await Move(controls.Last(), destination, duration, easing);
         }
 
         public async Task<bool> Move(Options o, Point moveTo, Point offset)
@@ -179,21 +149,27 @@ namespace AnimateForms.Animate
             return true;
         }
 
-        public async Task<bool> Recolor(Control[] controls, Color colorTo, int duration, Function easing)
-        {
-            foreach (Control control in controls)
-                if (control != controls.Last())
-                    _ = Recolor(control, colorTo, duration, easing);
-
-            return await Recolor(controls.Last(), colorTo, duration, easing);
-        }
-
-        public async Task<bool> Recolor(Options o, Color[] colors)
+        public async Task<bool> Recolor(Options o, Color color, bool backColor = true)
         {
             await Task.Delay(o.Delay);
             for (int i = 0; i < o.Controls.Length - 1; i++)
             {
-                _ = Recolor(o.Controls[i], colors[i % colors.Length], o.Duration, o.Easings[i % o.Easings.Length]);
+                _ = Recolor(o.Controls[i], color, o.Duration,
+                    o.Easings[i % o.Easings.Length], backColor);
+                await Task.Delay(o.Interval);
+            }
+
+            return await Recolor(o.Controls.Last(), color, o.Duration, 
+                o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+        }
+
+        public async Task<bool> Recolor(Options o, Color[] colors, bool backColor = true)
+        {
+            await Task.Delay(o.Delay);
+            for (int i = 0; i < o.Controls.Length - 1; i++)
+            {
+                _ = Recolor(o.Controls[i], colors[i % colors.Length], o.Duration, 
+                    o.Easings[i % o.Easings.Length], backColor);
                 await Task.Delay(o.Interval);
             }
 

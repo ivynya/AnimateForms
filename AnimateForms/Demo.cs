@@ -20,14 +20,14 @@ namespace AnimateForms
 
         private async void Button1_Click(object sender, EventArgs e)
         {
-            await a.Resize(Helpers.SortCollectionByName(parent.Controls),
-                    eS, d, Easings.AllEasings);
+            await a.Resize(new Options(Helpers.SortCollectionByName(parent.Controls),
+                Easings.AllEasings, d), eS);
         }
 
         private async void Button2_Click(object sender, EventArgs e)
         {
-            await a.Resize(Helpers.SortCollectionByName(parent.Controls),
-                    dS, d, Easings.AllEasings);
+            await a.Resize(new Options(Helpers.SortCollectionByName(parent.Controls), 
+                Easings.AllEasings, d), dS);
         }
 
         private async void Button3_Click(object sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace AnimateForms
                 Array.Reverse(rainbow);
                 await a.Recolor(recolorOptions, rainbow);
 
-                await a.Resize(controls, dS, d, Easings.AllEasings);
+                await a.Resize(new Options(controls, Easings.AllEasings, d), dS);
 
                 await a.Move(moveOptions, new Point(3, 3), new Point(0, 26));
 
