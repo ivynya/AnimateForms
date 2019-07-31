@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -11,51 +12,6 @@ namespace AnimateForms.Animate
     {
         public delegate int Function(float t, float b, float c, float d);
         private readonly List<(string, string)> _animating = new List<(string, string)>();
-
-        public async Task<bool> Resize(Control control, Size sizeTo, int duration, Function easing)
-        {
-            if (_animating.Contains((control.Name, "resize")))
-                return false;
-            else
-                _animating.Add((control.Name, "resize"));
-
-            Size size = control.Size;
-            int heightDif = sizeTo.Height - size.Height;
-            int widthDif = sizeTo.Width - size.Width;
-            if (widthDif == 0 && heightDif == 0)
-            {
-                _animating.Remove((control.Name, "resize"));
-                return false;
-            }
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            while (stopwatch.ElapsedMilliseconds < duration)
-            {
-                await Task.Delay(1);
-                int time = (int)stopwatch.ElapsedMilliseconds;
-                if (time > duration) time = duration;
-
-                control.Size = new Size(easing(time, size.Width, widthDif, duration),
-                                        easing(time, size.Height, heightDif, duration));
-            }
-
-            _animating.Remove((control.Name, "resize"));
-            return true;
-        }
-
-        public async Task<bool> Resize(Options o, Size sizeTo)
-        {
-            await Task.Delay(o.Delay);
-            for (int i = 0; i < o.Controls.Length - 1; i++)
-            {
-                _ = Resize(o.Controls[i], sizeTo, o.Duration, o.Easings[i % o.Easings.Length]);
-                await Task.Delay(o.Interval);
-            }
-
-            return await Resize(o.Controls.Last(), sizeTo, o.Duration, 
-                o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
-        }
 
         public async Task<bool> Move(Control control, Point moveTo, int duration, Function easing)
         {
@@ -102,6 +58,43 @@ namespace AnimateForms.Animate
             }
 
             return await Move(o.Controls.Last(), destination, o.Duration,
+                o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+        }
+
+        public async Task<bool> MoveRelative(Control control, Point offset, int duration, Function easing)
+        {
+            Point prevPoint = new Point(0, 0);
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            while (stopwatch.ElapsedMilliseconds < duration)
+            {
+                await Task.Delay(1);
+                int time = (int)stopwatch.ElapsedMilliseconds;
+                if (time > duration) time = duration;
+
+                Point newPoint = new Point(easing(time, 0, offset.X, duration),
+                                           easing(time, 0, offset.Y, duration));
+
+                control.Location = new Point(control.Location.X + (newPoint.X - prevPoint.X),
+                                             control.Location.Y + (newPoint.Y - prevPoint.Y));
+
+                prevPoint = newPoint;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> MoveRelative(Options o, Point offset)
+        {
+            await Task.Delay(o.Delay);
+            for (int i = 0; i < o.Controls.Length - 1; i++)
+            {
+                _ = MoveRelative(o.Controls[i], offset, o.Duration, o.Easings[i % o.Easings.Length]);
+                await Task.Delay(o.Interval);
+            }
+
+            return await MoveRelative(o.Controls.Last(), offset, o.Duration,
                 o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
         }
 
@@ -175,6 +168,51 @@ namespace AnimateForms.Animate
 
             return await Recolor(o.Controls.Last(), colors[(o.Controls.Length - 1) % colors.Length],
                 o.Duration, o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+        }
+
+        public async Task<bool> Resize(Control control, Size sizeTo, int duration, Function easing)
+        {
+            if (_animating.Contains((control.Name, "resize")))
+                return false;
+            else
+                _animating.Add((control.Name, "resize"));
+
+            Size size = control.Size;
+            int heightDif = sizeTo.Height - size.Height;
+            int widthDif = sizeTo.Width - size.Width;
+            if (widthDif == 0 && heightDif == 0)
+            {
+                _animating.Remove((control.Name, "resize"));
+                return false;
+            }
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            while (stopwatch.ElapsedMilliseconds < duration)
+            {
+                await Task.Delay(1);
+                int time = (int)stopwatch.ElapsedMilliseconds;
+                if (time > duration) time = duration;
+
+                control.Size = new Size(easing(time, size.Width, widthDif, duration),
+                                        easing(time, size.Height, heightDif, duration));
+            }
+
+            _animating.Remove((control.Name, "resize"));
+            return true;
+        }
+
+        public async Task<bool> Resize(Options o, Size sizeTo)
+        {
+            await Task.Delay(o.Delay);
+            for (int i = 0; i < o.Controls.Length - 1; i++)
+            {
+                _ = Resize(o.Controls[i], sizeTo, o.Duration, o.Easings[i % o.Easings.Length]);
+                await Task.Delay(o.Interval);
+            }
+
+            return await Resize(o.Controls.Last(), sizeTo, o.Duration,
+                o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
         }
     }
 }

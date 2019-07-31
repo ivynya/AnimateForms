@@ -20,6 +20,8 @@ namespace AnimateForms
 
         private async void Button1_Click(object sender, EventArgs e)
         {
+            _ = a.MoveRelative(panel1, new Point(-200, 0), 1000, Easings.QuadOut);
+            await a.MoveRelative(panel1, new Point(0, -200), 1000, Easings.QuadIn);
             await a.Resize(new Options(Helpers.SortCollectionByName(parent.Controls),
                 Easings.AllEasings, d), eS);
         }
@@ -28,6 +30,8 @@ namespace AnimateForms
         {
             await a.Resize(new Options(Helpers.SortCollectionByName(parent.Controls), 
                 Easings.AllEasings, d), dS);
+            _ = a.MoveRelative(panel1, new Point(200, 0), 1000, Easings.QuadOut);
+            _ = a.MoveRelative(panel1, new Point(0, 200), 1000, Easings.QuadIn);
         }
 
         private async void Button3_Click(object sender, EventArgs e)
@@ -67,6 +71,11 @@ namespace AnimateForms
                 Array.Reverse(rainbow);
                 await a.Recolor(recolorOptions, rainbow);
             }
+        }
+
+        private void Panel1_LocationChanged(object sender, EventArgs e)
+        {
+            label8.Text = panel1.Location.ToString();
         }
     }
 }
