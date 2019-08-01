@@ -45,6 +45,23 @@ namespace AnimateForms.Animate
             return true;
         }
 
+        public async Task<bool> Move(Options o, Point moveTo)
+        {
+            await Task.Delay(o.Delay);
+            Point destination = moveTo;
+            for (int i = 0; i < o.Controls.Length - 1; i++)
+            {
+                _ = Move(o.Controls[i], destination, o.Duration, o.Easings[i % o.Easings.Length]);
+                destination = new Point(moveTo.X, moveTo.Y);
+                await Task.Delay(o.Interval);
+            }
+
+            bool success = await Move(o.Controls.Last(), destination, o.Duration,
+                                      o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            await Task.Delay(o.EndDelay);
+            return success;
+        }
+
         public async Task<bool> Move(Options o, Point moveTo, Point offset)
         {
             await Task.Delay(o.Delay);
@@ -57,8 +74,10 @@ namespace AnimateForms.Animate
                 await Task.Delay(o.Interval);
             }
 
-            return await Move(o.Controls.Last(), destination, o.Duration,
-                o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Move(o.Controls.Last(), destination, o.Duration,
+                                      o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            await Task.Delay(o.EndDelay);
+            return success;
         }
 
         public async Task<bool> MoveRelative(Control control, Point offset, int duration, Function easing)
@@ -94,8 +113,10 @@ namespace AnimateForms.Animate
                 await Task.Delay(o.Interval);
             }
 
-            return await MoveRelative(o.Controls.Last(), offset, o.Duration,
-                o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await MoveRelative(o.Controls.Last(), offset, o.Duration,
+                                              o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            await Task.Delay(o.EndDelay);
+            return success;
         }
 
         public async Task<bool> Recolor(Control control, Color colorTo, int duration, Function easing, bool backColor = true)
@@ -152,8 +173,10 @@ namespace AnimateForms.Animate
                 await Task.Delay(o.Interval);
             }
 
-            return await Recolor(o.Controls.Last(), color, o.Duration, 
-                o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Recolor(o.Controls.Last(), color, o.Duration, 
+                           o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            await Task.Delay(o.EndDelay);
+            return success;
         }
 
         public async Task<bool> Recolor(Options o, Color[] colors, bool backColor = true)
@@ -166,8 +189,10 @@ namespace AnimateForms.Animate
                 await Task.Delay(o.Interval);
             }
 
-            return await Recolor(o.Controls.Last(), colors[(o.Controls.Length - 1) % colors.Length],
-                o.Duration, o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Recolor(o.Controls.Last(), colors[(o.Controls.Length - 1) % colors.Length],
+                                         o.Duration, o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            await Task.Delay(o.EndDelay);
+            return success;
         }
 
         public async Task<bool> Resize(Control control, Size sizeTo, int duration, Function easing)
@@ -211,8 +236,10 @@ namespace AnimateForms.Animate
                 await Task.Delay(o.Interval);
             }
 
-            return await Resize(o.Controls.Last(), sizeTo, o.Duration,
-                o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Resize(o.Controls.Last(), sizeTo, o.Duration,
+                                        o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            await Task.Delay(o.EndDelay);
+            return success;
         }
     }
 }

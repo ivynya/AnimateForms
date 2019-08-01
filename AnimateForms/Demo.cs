@@ -20,6 +20,7 @@ namespace AnimateForms
 
         private async void Button1_Click(object sender, EventArgs e)
         {
+            bool success;
             _ = a.MoveRelative(panel1, new Point(-200, 0), 1000, Easings.QuadOut);
             await a.MoveRelative(panel1, new Point(0, -200), 1000, Easings.QuadIn);
             await a.Resize(new Options(Helpers.SortCollectionByName(parent.Controls),
