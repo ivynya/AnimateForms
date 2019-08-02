@@ -229,15 +229,36 @@ namespace AnimateForms.Animate
 
         public async Task<bool> Resize(Options o, Size sizeTo)
         {
+            double xMultiplier = 0;
+            double yMultiplier = 0;
+            switch (o.Alignment)
+            {
+                case "h-center": xMultiplier = 0.5; break;
+                case "right": xMultiplier = 1.0; break;
+                case "v-center": yMultiplier = 0.5; break;
+                case "bottom": yMultiplier = 1.0; break;
+                case "hv-center": xMultiplier = 0.5; yMultiplier = 0.5; break;
+            }
+
             await Task.Delay(o.Delay);
             for (int i = 0; i < o.Controls.Length - 1; i++)
             {
                 _ = Resize(o.Controls[i], sizeTo, o.Duration, o.Easings[i % o.Easings.Length]);
+                if (o.Alignment != "default")
+                    _ = MoveRelative(new Options(control: o.Controls[i], easing: o.Easings[i % o.Easings.Length], o.Duration),
+                                     new Point(-(int)Math.Round(xMultiplier * (sizeTo.Width - o.Controls[i].Width)),
+                                               -(int)Math.Round(yMultiplier * (sizeTo.Height - o.Controls[i].Height))));
+
                 await Task.Delay(o.Interval);
             }
 
+            if (o.Alignment != "default")
+                _ = MoveRelative(new Options(control: o.Controls.Last(), easing: o.Easings[(o.Controls.Length - 1) % o.Easings.Length], o.Duration),
+                                 new Point(-(int)Math.Round(xMultiplier * (sizeTo.Width - o.Controls.Last().Width)),
+                                           -(int)Math.Round(yMultiplier * (sizeTo.Height - o.Controls.Last().Height))));
             bool success = await Resize(o.Controls.Last(), sizeTo, o.Duration,
                                         o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+
             await Task.Delay(o.EndDelay);
             return success;
         }

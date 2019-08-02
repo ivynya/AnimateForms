@@ -7,7 +7,7 @@ namespace AnimateForms
 {
     public partial class Demo : Form
     {
-        private readonly int d = 3000;
+        private readonly int d = 1000;
         private Size eS = new Size(300, 20);
         private Size dS = new Size(20, 20);
 
@@ -20,19 +20,24 @@ namespace AnimateForms
 
         private async void Button1_Click(object sender, EventArgs e)
         {
-            bool success;
-            _ = a.MoveRelative(panel1, new Point(-200, 0), 1000, Easings.QuadOut);
-            await a.MoveRelative(panel1, new Point(0, -200), 1000, Easings.QuadIn);
-            await a.Resize(new Options(Helpers.SortCollectionByName(parent.Controls),
-                Easings.AllEasings, d), eS);
+            await a.Resize(
+                new Options {
+                    Controls = Helpers.SortCollectionByName(parent.Controls),
+                    Easings = Easings.AllEasings,
+                    Duration = d,
+                    Alignment = "h-center"
+                }, eS);
         }
 
         private async void Button2_Click(object sender, EventArgs e)
         {
-            await a.Resize(new Options(Helpers.SortCollectionByName(parent.Controls), 
-                Easings.AllEasings, d), dS);
-            _ = a.MoveRelative(panel1, new Point(200, 0), 1000, Easings.QuadOut);
-            _ = a.MoveRelative(panel1, new Point(0, 200), 1000, Easings.QuadIn);
+            await a.Resize(
+                new Options{
+                    Controls = Helpers.SortCollectionByName(parent.Controls),
+                    Easings = Easings.AllEasings,
+                    Duration = d,
+                    Alignment = "h-center"
+                }, dS);
         }
 
         private async void Button3_Click(object sender, EventArgs e)
@@ -56,6 +61,14 @@ namespace AnimateForms
                 duration: d / 2,
                 interval: 200);
 
+            Options resizeOptions = new Options
+            {
+                Controls = controls,
+                Easings = Easings.AllEasings,
+                Duration = d,
+                Alignment = "h-center"
+            };
+
             while(true)
             {
                 await a.Resize(new Options(controls, Easings.AllEasings, d), eS);
@@ -65,7 +78,7 @@ namespace AnimateForms
                 Array.Reverse(rainbow);
                 await a.Recolor(recolorOptions, rainbow);
 
-                await a.Resize(new Options(controls, Easings.AllEasings, d), dS);
+                await a.Resize(resizeOptions, dS);
 
                 await a.Move(moveOptions, new Point(3, 3), new Point(0, 26));
 
