@@ -245,7 +245,7 @@ namespace AnimateForms.Animate
             {
                 _ = Resize(o.Controls[i], sizeTo, o.Duration, o.Easings[i % o.Easings.Length]);
                 if (o.Alignment != "default")
-                    _ = MoveRelative(new Options(control: o.Controls[i], easing: o.Easings[i % o.Easings.Length], o.Duration),
+                    _ = MoveRelative(new Options(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration),
                                      new Point(-(int)Math.Round(xMultiplier * (sizeTo.Width - o.Controls[i].Width)),
                                                -(int)Math.Round(yMultiplier * (sizeTo.Height - o.Controls[i].Height))));
 
@@ -253,7 +253,7 @@ namespace AnimateForms.Animate
             }
 
             if (o.Alignment != "default")
-                _ = MoveRelative(new Options(control: o.Controls.Last(), easing: o.Easings[(o.Controls.Length - 1) % o.Easings.Length], o.Duration),
+                _ = MoveRelative(new Options(o.Controls.Last(), o.Easings[(o.Controls.Length - 1) % o.Easings.Length], o.Duration),
                                  new Point(-(int)Math.Round(xMultiplier * (sizeTo.Width - o.Controls.Last().Width)),
                                            -(int)Math.Round(yMultiplier * (sizeTo.Height - o.Controls.Last().Height))));
             bool success = await Resize(o.Controls.Last(), sizeTo, o.Duration,
