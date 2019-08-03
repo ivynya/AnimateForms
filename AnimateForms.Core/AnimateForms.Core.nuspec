@@ -3,7 +3,7 @@
   <metadata>
     <id>AnimateForms</id>
     <title>AnimateForms</title>
-    <version>1.0.0-alpha</version>
+    <version>1.1.0-alpha</version>
     <authors>SDBagel</authors>
     <owners>SDBagel</owners>
     <license type="expression">MIT</license>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A lightweight, asynchronous animation library for Windows Forms.</description>
     <summary>A lightweight async animation library for WinForms.</summary>
-    <releaseNotes>Moved to a simpler approach with designing library functions, which means breaking changes for how methods are called. This version introduces preventing overlapping animations which cause graphical glitches. This version also adds new options for existing animations, providing greater flexibility in work. Other improvements. See documentation for full details.</releaseNotes>
+    <releaseNotes>Apparently the last release was a duplicate of v0.1.1-alpha. This has been fixed to actually include the new features now.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Animation Library WindowsForms WinForms</tags>
   </metadata>

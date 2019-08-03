@@ -83,5 +83,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnimateForms\AnimateForms.csproj">
+      <Project>{A9D51588-EC0A-4589-AFDA-A1592CA4CE9D}</Project>
+      <Name>AnimateForms</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

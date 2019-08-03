@@ -1,13 +1,13 @@
-﻿using System;
+﻿using AnimateForms.Core;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using AnimateForms.Core;
 
 namespace NuGetDemo
 {
     public partial class Demo : Form
     {
-        private Animate a = new Animate();
+        private readonly Animate a = new Animate();
 
         public Demo()
         {
