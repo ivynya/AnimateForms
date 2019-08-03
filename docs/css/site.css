@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background-color: #f4f4f4;
+  background-color: #fff;
   margin: 0;
 }
 
@@ -15,6 +15,10 @@ body {
 
 hr {
   margin: 2rem 0;
+}
+
+br {
+  clear: both;
 }
 
 a {
@@ -46,6 +50,7 @@ nav {
   right: 0;
   height: 4rem;
   padding: 0 2rem;
+  z-index: 2;
 }
 
 nav img {
@@ -107,11 +112,38 @@ nav button:hover {
   width: 100%;
 }
 
+#content {
+  width: 90%;
+  margin: auto;
+}
+
+#outline {
+  display: none;
+  text-align: center;
+  overflow-y: scroll;
+  position: sticky;
+  top: 4rem;
+  height: 80vh;
+  width: 25%;
+}
+
+#outline .card {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#outline .card p {
+  margin: 1rem 0;
+}
+
+#documentation {
+  width: 100%;
+}
+
 .card {
-  background-color: #fff;
-  border-radius: 0.5rem;
   padding: 2rem;
-  margin-top: 1rem;
+  padding-top: 3rem;
 }
 
 .card button {
@@ -121,8 +153,8 @@ nav button:hover {
 }
 
 .card button:hover {
-  border-color: #93a3b1;
-  color: #78a1bb;
+  border-color: #000;
+  color: #424d63;
 }
 
 .card h2 {
@@ -161,6 +193,14 @@ footer > p {
     width: 30rem;
     margin: auto;
   }
+  #outline {
+    display: block;
+    float: left;
+  }
+  #documentation {
+    float: right;
+    width: 75%;
+  }
   nav {
     padding: 0 3rem;
   }
@@ -177,7 +217,7 @@ footer > p {
 
 @media screen and (min-width: 992px) {
   .container {
-    width: 80%;
+    width: 90%;
   }
   nav {
     padding: 0 8rem;

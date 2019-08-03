@@ -23,16 +23,12 @@
   </div>
   <div class="container">
     <div class="header">
-      <p>Overview & Info</p>
+      <p>Documentation</p>
     </div>
     <section>
       <div class="card">
-        <p><b>Documentation version: <span>v0.1.1-alpha</span></b></p>
-      </div>
-    </section>
-    <section>
-      <div class="card">
-        <p>This page includes relevant documentation and examples to AnimateForms, and is open source on GitHub. It is still WIP. An outline and information on the inner workings of the library will be added soon.</p>
+        <p><b>Documentation version: <span>v1.0.0-alpha</span></b></p>
+        <p><b>Need older versions? <a href="old/index">Check here.</a></b></p>
       </div>
     </section>
     <section>
@@ -88,236 +84,273 @@
         <a href="#Options"><button>View Members</button></a>
       </div>
     </section>
-    <div class="header">
-      <a name="Animate"></a>
-      <p>Animate.cs Members</p>
+  </div>
+  <br>
+  <div id="content">
+    <div id="outline">
+      <div class="header">
+        <p>Outline</p>
+      </div>
+      <div class="card">
+        <p><b><a href="#Introduction">Introduction</a></b></p>
+        <p><b><a href="#Animate">Animate.cs</a></b></p>
+        <p><a href="#Function">Function</a></p>
+        <p><a href="#Move">Move</a></p>
+        <p><a href="#MoveRelative">MoveRelative</a></p>
+        <p><a href="#Resize">Resize</a></p>
+        <p><a href="#Recolor">Recolor</a></p>
+        <br>
+        <p><b><a href="#Easings">Easings.cs</a></b></p>
+        <p><a href="#AllEasings">AllEasings</a></p>
+        <p><a href="#ImplementedEasings">Implemented</a></p>
+        <br>
+        <p><b><a href="#Helpers">Helpers.cs</a></b></p>
+        <p><a href="#CollectionToArray">CollectionToArray</a></p>
+        <p><a href="#SortCollectionByName">SortCollectionByName</a></p>
+        <br>
+        <p><b><a href="#Options">Options.cs</a></b></p>
+      </div>
     </div>
-    <section>
-      <div class="card doc">
-        <h2>Class Information</h2>
-        <h3>Instantiable</h3>
-        <p>To start using the animate functions, first declare an animator:</p>
-        <p><span>private Animate a = new Animate();</span></p>
-        <p>Then, any animated method is run as such:</p>
-        <p><span>await a.Method(parameters);</span></p>
-        <br>
-        <p><b>ProTip:</b> By specifying <span>await</span>, the method is run synchronously and will not allow code to continue before the method has finished executing. Instead, a discard can be used to run asynchronously:</p>
-        <p><span>_ = a.Method(parameters);</span></p>
+    <div id="documentation">
+      <div class="header">
+        <a name="Introduction"></a>
+        <p>Introduction</p>
       </div>
-    </section>
-    <section>
-      <a name="Function"></a>
-      <div class="card doc">
-        <h2>Function (delegate)</h2>
-        <h3>Input: float <span>t, b, c, d</span></h3>
-        <h3>Output: int</h3>
-        <p>Defines an easing function that takes an input time <b>t</b> (current frame), start value <b>b</b>, change in value <b>c</b>, and duration of animation <b>d</b> and returns an integer defining what the current position should be. In AnimateForms, duration and current time are both always in milliseconds.</p>
-        <br>
-        <p><b>ProTip #1:</b> You can use this delegate to define your own custom easing function, and plug it into any method for use.</p>
-        <p><b>ProTip #2:</b> The <a href="#Easings">Easings</a> class defines many preset static easing functions that can be used as a parameter for methods that need this delegate.</p>
-        <br>
-        <p><b>Example:</b> <span>Animate.Function f = Easings.Linear;</span></p>
+      <section>
+        <div class="card">
+          <p>AnimateForms is built around a single instantiable <a href="#Animate">Animate</a> class to call animations, with each animation (method, e.g. <a href="#Resize">Resize</a>) having a single "simple" form with "advanced" overloads as an option.</p>
+          <br>
+          <p>A method's "simple" form consists of the parameters <span>Control c, Function easing, int duration</span>, as well as any method-specific parameters needed, like <a href="#Move">Move</a>'s parameter <span>Point moveTo</span>. A method's "advanced" form consists of an <a href="#Options">Options</a> object as a parameter, and any method-specific parameters. The Options object is a flexible tool for calling animations and specifying more parameters, like <span>Delay</span>, and even specifying arrays of Controls or easings to use. See the <a href="#Options">Options</a> documentation for more info.</p>
+          <br>
+          <p><b>This documentation's included examples assume you have declared an <a href="#Animate">Animate</a> class named <span>a</span>.</b></p>
+        </div>
+      </section>
+      <div class="header">
+        <a name="Animate"></a>
+        <p>Animate.cs Members</p>
       </div>
-    </section>
-    <section>
-      <a name="Delay"></a>
-      <div class="card doc">
-        <h2>Delay</h2>
-        <h3>Input: int <span>duration</span></h3>
-        <h3>Output: bool</h3>
-        <p>Runs <span>await Task.Delay(duration);</span> where duration is in milliseconds. Returns true when done.</p>
-        <br>
-        <p><b>Example:</b> <span>await Animate.Delay(1000);</span></p>
-      </div>
-    </section>
-    <section>
-      <a name="Resize"></a>
-      <div class="card doc">
-        <h2>Resize</h2>
-        <h3>Input: Control <span>control</span>, Size <span>sizeTo</span>, int <span>duration</span>, Function <span>easing</span></h3>
-        <h3>Output: bool</h3>
-        <p>Resizes input <span>control</span> to input <span>sizeTo</span>, using the specified <span>duration</span>  and <span>easing</span> function. Returns true if animation completed and false if <span>sizeTo</span> is equal to current size.</p>
-        <br>
-        <p><b>See Also:</b></p>
-        <p><a href="#Function">Animate.Function</a></p>
-        <p><a href="#Options">Options</a></p>
-        <br>
-        <p><b>Examples:</b> </p>
-        <p><span>
-          Animate a = new Animate();</span></p>
-          <p><span>
-          _ = a.Resize(control, new Size(200, 20), 1000, Easings.Linear);</span></p>
-          <p><span>
-          _ = a.Resize(controls, new Size(200, 20), 1000, Easings.QuadIn);</span></p>
-          <p><span>
-          _ = a.Resize(controls, new Size(200, 20), 1000, Easings.AllEasings);</span></p>
-          <p><span>
-          _ = a.Resize(controls, new Size(200, 20), 1000, new Options(Easings.Linear, 1000, 0, 0));
-        </span></p>
-        <hr>
-        <h3>Overloads:</h3>
-        <p><b>Control[] controls, Size sizeTo, int duration, Function easing</b></p>
-        <p>Applies animation to an array of controls.</p>
-        <br>
-        <p><b>Control[] controls, Size sizeTo, int duration, Function[] easings</b></p>
-        <p>Applies animation to an array of controls, and cycles through an array of easings per control.</p>
-        <br>
-        <p><b>Control[] controls, Size sizeTo, Options o</b></p>
-        <p>Applies animation to an array of controls, using an <a href="#Options">Options</a> object for advanced control.</p>
-      </div>
-    </section>
-    <section>
-      <a name="Move"></a>
-      <div class="card doc">
-        <h2>Move</h2>
-        <h3>Input: Control <span>control</span>, Point <span>moveTo</span>, int <span>duration</span>, Function <span>easing</span></h3>
-        <h3>Output: bool</h3>
-        <p>Moves input <span>control</span> to point <span>moveTo</span>, using the specified <span>duration</span>  and <span>easing</span> function. Returns true if animation completed and false if <span>moveTo</span> is equal to current location.</p>
-        <br>
-        <p><b>See Also:</b></p>
-        <p><a href="#Function">Animate.Function</a></p>
-        <p><a href="#Options">Options</a></p>
-        <br>
-        <p><b>Examples:</b> </p>
-        <p><span>
-          Animate a = new Animate();</span></p>
-          <p><span>
-          _ = a.Move(control, new Point(200, 20), 1000, Easings.Linear);</span></p>
-          <p><span>
-          _ = a.Move(controls, new Point(200, 20), new Point(0, 30), 1000, Easings.QuadIn);</span></p>
-          <p><span>
-          _ = a.Move(controls, new Point(200, 20), new Point(0, 30), 1000, new Options(Easings.Linear, 1000, 0, 0));
-        </span></p>
-        <hr>
-        <h3>Overloads:</h3>
-        <p><b>Control[] controls, Point moveTo, Point offset, int duration, Function easing</b></p>
-        <p>Applies animation to an array of controls, and applying a stacking offset for each control's new location. An offset of (0, 0) will move all controls to the same point, while an offset of (0, 10) will stack each control vertically with 10 pixels between the top left corners.</p>
-        <br>
-        <p><b>Control[] controls, Point moveTo, Point offset, Options o</b></p>
-        <p>Applies animation to an array of controls, and applying a stacking offset for each control's new location. Uses an <a href="#Options">Options</a> object for advanced control.</p>
-      </div>
-    </section>
-    <section>
-      <a name="Recolor"></a>
-      <div class="card doc">
-        <h2>Recolor</h2>
-        <h3>Input: Control <span>control</span>, Color <span>colorTo</span>, int <span>duration</span>, Function <span>easing</span>, [bool <span>backColor</span> = true]</h3>
-        <h3>Output: bool</h3>
-        <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color.</p>
-        <br>
-        <p><b>Note:</b> Limitations currently means transitioning opacities appears jerky and not great.</p>
-        <br>
-        <p><b>See Also:</b></p>
-        <p><a href="#Function">Animate.Function</a></p>
-        <p><a href="#Options">Options</a></p>
-        <br>
-        <p><b>Examples:</b> </p>
-        <p><span>
-            Animate a = new Animate();</span></p>
+      <section>
+        <div class="card doc">
+          <h2>Class Information</h2>
+          <h3>Instantiable</h3>
+          <p>To start using the animate functions, first declare an animator:</p>
+          <p><span>private Animate a = new Animate();</span></p>
+          <p>Then, any animated method is run as such:</p>
+          <p><span>await a.Method(parameters);</span></p>
+          <br>
+          <p><b>ProTip #1:</b> By specifying <span>await</span>, the method is run synchronously and will not allow code to continue before the method has finished executing. Instead, a discard can be used to run asynchronously:</p>
+          <p><span>_ = a.Method(parameters);</span></p>
+          <p><b>ProTip #2:</b> Animate classes will block two animations of the same type on the same control (unless otherwise noted in documentation). This prevents jittery graphics as two animations try to happen at once. As such, only one Animate class should ever be declared in your code.</p>
+        </div>
+      </section>
+      <section>
+        <a name="Function"></a>
+        <div class="card doc">
+          <h2>Function (delegate)</h2>
+          <h3>Input: float <span>t, b, c, d</span></h3>
+          <h3>Output: int</h3>
+          <p>Defines an easing function that takes an input time <b>t</b> (current frame), start value <b>b</b>, change in value <b>c</b>, and duration of animation <b>d</b> and returns an integer defining what the current position should be. In AnimateForms, duration and current time are both always in milliseconds.</p>
+          <br>
+          <p><b>ProTip #1:</b> You can use this delegate to define your own custom easing function, and plug it into any method for use.</p>
+          <p><b>ProTip #2:</b> The <a href="#Easings">Easings</a> class defines many preset static easing functions that can be used as a parameter for methods that need this delegate.</p>
+          <br>
+          <p><b>Example:</b> <span>Animate.Function f = Easings.Linear;</span></p>
+        </div>
+      </section>
+      <section>
+        <a name="Move"></a>
+        <div class="card doc">
+          <h2>Move</h2>
+          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Point <span>moveTo</span></h3>
+          <h3>Output: bool</h3>
+          <p>Moves input <span>control</span> to point <span>moveTo</span>, using the specified <span>duration</span>  and <span>easing</span> function. Returns true if animation completed and false if either location is the same or another animation is already in progress.</p>
+          <br>
+          <p><b>See Also:</b></p>
+          <p><a href="#Function">Animate.Function</a></p>
+          <p><a href="#Options">Options</a></p>
+          <br>
+          <p><b>Examples:</b> </p>
             <p><span>
-            _ = a.Recolor(control, Color.FromArgb(200, 20), 1000, Easings.Linear);</span></p>
+            _ = a.Move(control, Easings.Linear, 1000, new Point(200, 20));</span></p>
             <p><span>
-            _ = a.Recolor(controls, Color.FromArgb(200, 20), 1000, Easings.QuadIn);</span></p>
-            <p><span>
-            _ = a.Recolor(controls, Color.FromArgb(200, 20), 1000, new Options(Easings.Linear, 1000, 0, 0));
+            _ = a.Move(new Options(), new Point(200, 20));
           </span></p>
-        <hr>
-        <h3>Overloads:</h3>
-        <p><b>Control[] controls, Color colorTo, int duration, Function easing</b></p>
-        <p>Applies animation to an array of controls.</p>
-        <br>
-        <p><b>Control[] controls, Color[] colors, int duration, Function easing</b></p>
-        <p>Applies animation to an array of controls, and cycles through an array of colors per control.</p>
-        <br>
-        <p><b>Control[] controls, Color[] colors, int duration, Function[] easings</b></p>
-        <p>Applies animation to an array of controls, and cycles through an array of colors and easings per control.</p>
-        <br>
-        <p><b>Control[] controls, Color[] colors, Options o</b></p>
-        <p>Applies animation to an array of controls, and cycles through an array of colors. Uses an options object for advanced options.</p>
+          <hr>
+          <h3>Overloads:</h3>
+          <p><b><a href="#Options">Options</a> o, Point moveTo</b></p>
+          <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
+          <br>
+          <p><b><a href="#Options">Options</a> o, Point moveTo, Point offset</b></p>
+          <p>Applies animation using an Options object. See the Options documentation for possible modifiers. If multiple controls are specified in the options, an offset will be applied per control (stacking them).</p>
+        </div>
+      </section>
+      <section>
+        <a name="MoveRelative"></a>
+        <div class="card doc">
+          <h2>MoveRelative</h2>
+          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Point <span>offset</span></h3>
+          <h3>Output: bool</h3>
+          <p>Similar to <a href="#Move">the standard Move animation</a>, however, the offset recursively applies to the current control's location rather than setting it directly. As such, AnimateForms will not block multiple instances of this method at the same time. This creates an effect similar to applying a vector force to a control, except the control will always be offset by the amounts entered.</p>
+          <br>
+          <p><b>ProTip:</b> Negative values can be entered in a <span>Point</span> object, and will make MoveRelative move the control up or left instead of down or right.</p>
+          <br>
+          <p><b>See Also:</b></p>
+          <p><a href="#Function">Animate.Function</a></p>
+          <p><a href="#Options">Options</a></p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            _ = a.MoveRelative(control, Easings.Linear, 1000, new Point(200, -20));</span></p>
+            <p><span>
+            _ = a.MoveRelative(new Options(), new Point(200, -20));
+          </span></p>
+          <hr>
+          <h3>Overloads:</h3>
+          <p><b><a href="#Options">Options</a> o, Point offset</b></p>
+          <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
+        </div>
+      </section>
+      <section>
+        <a name="Recolor"></a>
+        <div class="card doc">
+          <h2>Recolor</h2>
+          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Color <span>colorTo</span>, [bool <span>backColor</span> = true]</h3>
+          <h3>Output: bool</h3>
+          <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color, or if another Recolor is running on the same control already. <span>backColor</span> can be used to determine whether the BackColor or the ForeColor property of the control is changed.</p>
+          <br>
+          <p><b>Note:</b> Limitations currently means transitioning opacities appears flickery and not great.</p>
+          <br>
+          <p><b>See Also:</b></p>
+          <p><a href="#Function">Animate.Function</a></p>
+          <p><a href="#Options">Options</a></p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            _ = a.Recolor(control, Easings.Linear, 1000, Color.Blue);</span></p>
+            <p><span>
+            _ = a.Resize(new Options(), Color.Blue, false);
+          </span></p>
+          <hr>
+          <h3>Overloads:</h3>
+          <p><b><a href="#Options">Options</a> o, Color color, bool backColor = true</b></p>
+          <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
+          <br>
+          <p><b><a href="#Options">Options</a> o, Color[] colors, bool backColor = true</b></p>
+          <p>Applies animation using an Options object, cycling through an array of colors for each control. See the Options documentation for possible modifiers.</p>
+        </div>
+      </section>
+      <section>
+        <a name="Resize"></a>
+        <div class="card doc">
+          <h2>Resize</h2>
+          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Size <span>sizeTo</span></h3>
+          <h3>Output: bool</h3>
+          <p>Resizes input <span>control</span> to input <span>sizeTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>sizeTo</span> is equal to current size or another Resize is currently being run on the control.</p>
+          <br>
+          <p><b>See Also:</b></p>
+          <p><a href="#Function">Animate.Function</a></p>
+          <p><a href="#Options">Options</a></p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            _ = a.Resize(control, Easings.Linear, 1000, new Point(200, 200));</span></p>
+            <p><span>
+            _ = a.Resize(new Options(), new Size(200, 200));
+          </span></p>
+          <hr>
+          <h3>Overloads:</h3>
+          <p><b><a href="#Options">Options</a> o, Size sizeTo</b></p>
+          <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
+        </div>
+      </section>
+      <div class="header">
+        <a name="Easings"></a>
+        <p>Easings.cs Members</p>
       </div>
-    </section>
-    <div class="header">
-      <a name="Easings"></a>
-      <p>Easings.cs Members</p>
+      <section>
+        <a name="AllEasings"></a>
+        <div class="card doc">
+          <h2>AllEasings (static)</h2>
+          <h3>Output: Function[]</h3>
+          <p>A static Function[] of every easing provided, in case an array of every single easing was needed.</p>
+          <br>
+          <p><b>See Also:</b> <a href="#Function">Animate.Function</a></p>
+          <br>
+          <p><b>ProTip:</b> <a href="#Options">Options</a> objects can take multiple easings and multiple input controls, and supported animations will cycle through easings per control.</p>
+        </div>
+      </section>
+      <section>
+        <a name="ImplementedEasings"></a>
+        <div class="card doc">
+          <h2>Implemented Easings (static)</h2>
+          <p>All easings found on <a href="http://gizma.com/easing/">Gizma</a> have been implemented as static functions according to the delegate <a href="#Function">Animate.Function</a> and are listed below with their abbreviations that they appear with in the Easings class. Each easing type will have an <span>In</span>, <span>Out</span>, and an <span>InOut</span> variant (except Linear).</p>
+          <br>
+          <p><b>See Also:</b></p>
+          <p><a href="#Function">Animate.Function</a></p>
+          <p><a href="https://easings.net">https://easings.net</a> (for visual reference)</p>
+          <br>
+          <p>Linear - Easings.Linear</p>
+          <p>Quadratic - Easings.QuadXX</p>
+          <p>Cubic - Easings.CubicXX</p>
+          <p>Quartic - Easings.QuartXX</p>
+          <p>Quintic - Easings.QuintXX</p>
+          <p>Circular - Easings.CircXX</p>
+          <p>Exponential - Easings.ExpXX</p>
+          <p>Sinusoidal - Easings.SinXX</p>
+        </div>
+      </section>
+      <div class="header">
+        <a name="Helpers"></a>
+        <p>Helpers.cs Members</p>
+      </div>
+      <section>
+        <a name="CollectionToArray"></a>
+        <div class="card doc">
+          <h2>CollectionToArray (static)</h2>
+          <h3>Input: Control.ControlCollection <span>controlCollection</span></h3>
+          <h3>Output: Control[]</h3>
+          <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array for use in the animation functions.</p>
+          <br>
+          <p><b>ProTip:</b> ControlCollections seem to be organized randomly, and you should only use this function when the resulting order of the array doesn't matter.</p>
+        </div>
+      </section>
+      <section>
+        <a name="SortCollectionByName"></a>
+        <div class="card doc">
+          <h2>SortCollectionByName (static)</h2>
+          <h3>Input: Control.ControlCollection <span>controlCollection</span></h3>
+          <h3>Output: Control[]</h3>
+          <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array, which is sorted by the control's Name property in alphabetical order.</p>
+        </div>
+      </section>
+      <div class="header">
+        <a name="Options"></a>
+        <p>Options.cs Members</p>
+      </div>
+      <section>
+        <a name="Options"></a>
+        <div class="card doc">
+          <h2>Options</h2>
+          <h3>Parameters: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span></h3>
+          <h3>Optional Parameters: Control[] <span>controls</span>*, Function[] <span>easings</span>*, int <span>delay</span>, int <span>interval</span></h3>
+          <h3>Non-Constructor Paramters: int <span>endDelay</span></h3>
+          <p>An options object to allow greater control over some animation functions. It can be created by using a constructor with parameters or by setting each element individually. Currently, all animations will accept an options object and will process all parameters set in one, since the options are universal.</p>
+          <br>
+          <p><b>See Also:</b> <a href="#Function">Animate.Function</a></p>
+          <br>
+          <p><b>Easing:</b> Easing function to use. Default = Linear.</p>
+          <p><b>Duration:</b> Duration of animation, in milliseconds. Default = 1000ms.</p>
+          <p><b>Delay:</b> Delay before animation starts.** Default = 0ms.</p>
+          <p><b>EndDelay:</b> Delay after animation ends.** Default = 0ms.</p>
+          <p><b>Interval:</b> Time between animations executing in bulk animation commands. Default = 0ms.</p>
+          <br>
+          <p>*Single control and single functions that get passed in as parameters get parsed into an array by the Options object anyway.</p>
+          <p>**If this is specified and the animation returns or will return false, it will still wait for this amount of time.</p>
+          <br>
+        </div>
+      </section>
+      <br>
     </div>
-    <section>
-      <a name="AllEasings"></a>
-      <div class="card doc">
-        <h2>AllEasings (static)</h2>
-        <h3>Output: Function[]</h3>
-        <p>A static Function[] of every easing provided, in case an array of every single easing was needed.</p>
-        <br>
-        <p><b>See Also:</b> <a href="#Function">Animate.Function</a></p>
-        <br>
-        <p><b>ProTip:</b> Animate functions that take multiple easings and multiple input controls will cycle through easings per control.</p>
-      </div>
-    </section>
-    <section>
-      <a name="ImplementedEasings"></a>
-      <div class="card doc">
-        <h2>Implemented Easings (static)</h2>
-        <p>All easings found on <a href="http://gizma.com/easing/">Gizma</a> have been implemented as static functions according to the delegate <a href="#Function">Animate.Function</a> and are listed below with their abbreviations that they appear with in the Easings class. Each easing type will have an <span>In</span>, <span>Out</span>, and an <span>InOut</span> variant (except Linear).</p>
-        <br>
-        <p><b>See Also:</b></p>
-        <p><a href="#Function">Animate.Function</a></p>
-        <p><a href="https://easings.net">https://easings.net</a> (for visual reference)</p>
-        <br>
-        <p>Linear - Easings.Linear</p>
-        <p>Quadratic - Easings.QuadXX</p>
-        <p>Cubic - Easings.CubicXX</p>
-        <p>Quartic - Easings.QuartXX</p>
-        <p>Quintic - Easings.QuintXX</p>
-        <p>Circular - Easings.CircXX</p>
-        <p>Exponential - Easings.ExpXX</p>
-        <p>Sinusoidal - Easings.SinXX</p>
-      </div>
-    </section>
-    <div class="header">
-      <a name="Helpers"></a>
-      <p>Helpers.cs Members</p>
-    </div>
-    <section>
-      <a name="CollectionToArray"></a>
-      <div class="card doc">
-        <h2>CollectionToArray (static)</h2>
-        <h3>Input: Control.ControlCollection <span>controlCollection</span></h3>
-        <h3>Output: Control[]</h3>
-        <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array for use in the animation functions.</p>
-        <br>
-        <p><b>ProTip:</b> ControlCollections seem to be organized randomly, and you should only use this function when the resulting order of the array doesn't matter.</p>
-      </div>
-    </section>
-    <section>
-      <a name="SortCollectionByName"></a>
-      <div class="card doc">
-        <h2>SortCollectionByName (static)</h2>
-        <h3>Input: Control.ControlCollection <span>controlCollection</span></h3>
-        <h3>Output: Control[]</h3>
-        <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array, which is sorted by the control's Name property in alphabetical order.</p>
-      </div>
-    </section>
-    <div class="header">
-      <a name="Options"></a>
-      <p>Options.cs Members</p>
-    </div>
-    <section>
-      <a name="Options"></a>
-      <div class="card doc">
-        <h2>Options</h2>
-        <h3>Parameters: Function <span>easing</span>, int duration</h3>
-        <h3>Optional Parameters: Function[] <span>easings</span>*, int delay, int interval</h3>
-        <p>An options object to allow greater control over some animation functions.</p>
-        <br>
-        <p><b>See Also:</b> <a href="#Function">Animate.Function</a></p>
-        <br>
-        <p><b>Easing:</b> Easing function to use. Default = Linear.</p>
-        <p><b>Duration:</b> Duration of animation, in milliseconds. Default = 1000ms.</p>
-        <p><b>Delay:</b> Delay before animation starts. Default = 0ms.</p>
-        <p><b>Interval:</b> Time between animations executing in bulk animation commands. Default = 0ms.</p>
-        <br>
-        <p>*The Function and Function[] gets put into the same variable - there are not two variables in an options object for a singular and array of easings.</p>
-      </div>
-    </section>
     <br>
   </div>
   <footer>

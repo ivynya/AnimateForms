@@ -12,7 +12,7 @@ namespace AnimateForms.Core
         public delegate int Function(float t, float b, float c, float d);
         private readonly List<(string, string)> _animating = new List<(string, string)>();
 
-        public async Task<bool> Move(Control control, Point moveTo, int duration, Function easing)
+        public async Task<bool> Move(Control control, Function easing, int duration, Point moveTo)
         {
             if (_animating.Contains((control.Name, "move")))
                 return false;
@@ -48,15 +48,17 @@ namespace AnimateForms.Core
         {
             await Task.Delay(o.Delay);
             Point destination = moveTo;
-            for (int i = 0; i < o.Controls.Length - 1; i++)
+
+            int maxIndex = o.Controls.Length - 1;
+            for (int i = 0; i < maxIndex; i++)
             {
-                _ = Move(o.Controls[i], destination, o.Duration, o.Easings[i % o.Easings.Length]);
+                _ = Move(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, destination);
                 destination = new Point(moveTo.X, moveTo.Y);
                 await Task.Delay(o.Interval);
             }
 
-            bool success = await Move(o.Controls.Last(), destination, o.Duration,
-                                      o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Move(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
+                                      o.Duration, destination);
             await Task.Delay(o.EndDelay);
             return success;
         }
@@ -65,22 +67,25 @@ namespace AnimateForms.Core
         {
             await Task.Delay(o.Delay);
             Point destination = moveTo;
-            for (int i = 0; i < o.Controls.Length - 1; i++)
+
+            int maxIndex = o.Controls.Length - 1;
+            for (int i = 0; i < maxIndex; i++)
             {
-                _ = Move(o.Controls[i], destination, o.Duration, o.Easings[i % o.Easings.Length]);
+                _ = Move(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, destination);
                 destination = new Point(moveTo.X + (offset.X * (i + 1)),
                                         moveTo.Y + (offset.Y * (i + 1)));
                 await Task.Delay(o.Interval);
             }
 
-            bool success = await Move(o.Controls.Last(), destination, o.Duration,
-                                      o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Move(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
+                                      o.Duration, destination);
             await Task.Delay(o.EndDelay);
             return success;
         }
 
-        public async Task<bool> MoveRelative(Control control, Point offset, int duration, Function easing)
+        public async Task<bool> MoveRelative(Control control, Function easing, int duration, Point offset)
         {
+            if (offset.X == 0 && offset.Y == 0) return false;
             Point prevPoint = new Point(0, 0);
 
             Stopwatch stopwatch = new Stopwatch();
@@ -106,19 +111,21 @@ namespace AnimateForms.Core
         public async Task<bool> MoveRelative(Options o, Point offset)
         {
             await Task.Delay(o.Delay);
-            for (int i = 0; i < o.Controls.Length - 1; i++)
+
+            int maxIndex = o.Controls.Length - 1;
+            for (int i = 0; i < maxIndex; i++)
             {
-                _ = MoveRelative(o.Controls[i], offset, o.Duration, o.Easings[i % o.Easings.Length]);
+                _ = MoveRelative(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, offset);
                 await Task.Delay(o.Interval);
             }
 
-            bool success = await MoveRelative(o.Controls.Last(), offset, o.Duration,
-                                              o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await MoveRelative(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
+                                               o.Duration, offset);
             await Task.Delay(o.EndDelay);
             return success;
         }
 
-        public async Task<bool> Recolor(Control control, Color colorTo, int duration, Function easing, bool backColor = true)
+        public async Task<bool> Recolor(Control control, Function easing, int duration, Color colorTo, bool backColor = true)
         {
             if (_animating.Contains((control.Name, "recolor")))
                 return false;
@@ -165,15 +172,17 @@ namespace AnimateForms.Core
         public async Task<bool> Recolor(Options o, Color color, bool backColor = true)
         {
             await Task.Delay(o.Delay);
-            for (int i = 0; i < o.Controls.Length - 1; i++)
+
+            int maxIndex = o.Controls.Length - 1;
+            for (int i = 0; i < maxIndex; i++)
             {
-                _ = Recolor(o.Controls[i], color, o.Duration,
-                    o.Easings[i % o.Easings.Length], backColor);
+                _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, 
+                            color, backColor);
                 await Task.Delay(o.Interval);
             }
 
-            bool success = await Recolor(o.Controls.Last(), color, o.Duration,
-                           o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Recolor(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
+                                         o.Duration, color, backColor);
             await Task.Delay(o.EndDelay);
             return success;
         }
@@ -181,20 +190,22 @@ namespace AnimateForms.Core
         public async Task<bool> Recolor(Options o, Color[] colors, bool backColor = true)
         {
             await Task.Delay(o.Delay);
-            for (int i = 0; i < o.Controls.Length - 1; i++)
+
+            int maxIndex = o.Controls.Length - 1;
+            for (int i = 0; i < maxIndex; i++)
             {
-                _ = Recolor(o.Controls[i], colors[i % colors.Length], o.Duration,
-                    o.Easings[i % o.Easings.Length], backColor);
+                _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length],
+                            o.Duration, colors[i % colors.Length], backColor);
                 await Task.Delay(o.Interval);
             }
 
-            bool success = await Recolor(o.Controls.Last(), colors[(o.Controls.Length - 1) % colors.Length],
-                                         o.Duration, o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Recolor(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
+                                         o.Duration, colors[maxIndex % colors.Length], backColor);
             await Task.Delay(o.EndDelay);
             return success;
         }
 
-        public async Task<bool> Resize(Control control, Size sizeTo, int duration, Function easing)
+        public async Task<bool> Resize(Control control, Function easing, int duration, Size sizeTo)
         {
             if (_animating.Contains((control.Name, "resize")))
                 return false;
@@ -229,14 +240,16 @@ namespace AnimateForms.Core
         public async Task<bool> Resize(Options o, Size sizeTo)
         {
             await Task.Delay(o.Delay);
-            for (int i = 0; i < o.Controls.Length - 1; i++)
+
+            int maxIndex = o.Controls.Length - 1;
+            for (int i = 0; i < maxIndex; i++)
             {
-                _ = Resize(o.Controls[i], sizeTo, o.Duration, o.Easings[i % o.Easings.Length]);
+                _ = Resize(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, sizeTo);
                 await Task.Delay(o.Interval);
             }
 
-            bool success = await Resize(o.Controls.Last(), sizeTo, o.Duration,
-                                        o.Easings[(o.Controls.Length - 1) % o.Easings.Length]);
+            bool success = await Resize(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
+                                         o.Duration, sizeTo);
             await Task.Delay(o.EndDelay);
             return success;
         }
