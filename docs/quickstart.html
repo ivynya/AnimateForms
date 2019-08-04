@@ -12,8 +12,8 @@
   <header>
     <nav>
       <img src="img/ico.svg" alt="Logo">
-      <a href="https://github.com/SDBagel/AnimateForms">
-        <button>Back to Repository</button>
+      <a href="https://sdbagel.github.io/AnimateForms/">
+        <button>Back to Documentation</button>
       </a>
     </nav>
   </header>
@@ -27,8 +27,7 @@
     </div>
     <section>
       <div class="card">
-        <p><b>Quickstart guide version: <span>v0.1.1-alpha</span></b></p>
-        <p><b>This quickstart guide is currently out-of-date. It will be revised soon™.</b></p>
+        <p><b>Quickstart guide version: <span>v1.1.0-alpha</span></b></p>
         <br>
         <p>This guide covers, from scratch, making a new .NET Framework Windows Forms app and using AnimateForms in it. We will make a simple WinForms app that animates showing some information when the user clicks a button. Totally useless, but a good way to get to know how to use AnimateForms.</p>
       </div>
@@ -64,7 +63,7 @@
       <div class="card doc">
         <p>Installing AnimateForms can be done in multiple ways, but I recommend doing it through the NuGet Package Manager, either through the console or the GUI. After installing, add the using statement to the Form1.cs code file.</p>
         <br>
-        <p><b>Package Manager console:</b> <span>PM> Install-Package AnimateForms -Version 0.1.1-alpha</span></p>
+        <p><b>Package Manager console:</b> <span>PM> Install-Package AnimateForms -Version 1.1.0-alpha</span></p>
         <br>
         <p><b>Package Manager GUI:</b></p>
         <p>1) Tools > NuGet Package Manager > Manage NuGet Packages for Solution</p>
@@ -98,12 +97,14 @@
         <br>
         <p><span>private readonly Animate a = new Animate();</span></p>
         <br>
+        <p>This Animate class serves as an intermediary, ensuring less naming collisions between libraries, and also providing a few functions like preventing two animations of the same type acting on a single control at once. This prevents graphical glitches and unforeseen behaviour. Now, let's add our event handlers.</p>
+        <br>
         <p>The button control will serve as our toggle. Double click it in the designer to create a new event handler for when it is clicked. Then, we want to make it an async method. Don't worry, making a WinForms event handler async won't break anything, as long as the return is still void.</p>
         <br>
         <p><span>private <b>async</b> void Button1_Click(object sender, EventArgs e) { }</span></p>
         <br>
         <p>In this method, we want to check the state of the boolean, apply the animation, the toggle the boolean end. We can use a simple if else statement. If the panel is shown, we want to run the following snippet of code:</p>
-        <p><span>await a.Resize(panel1, new Size(0, 0), 1000, Easings.QuadInOut);</span></p>
+        <p><span>await a.Resize(panel1, Easings.QuadInOut, 1000, new Size(0, 0));</span></p>
         <p>This resizes the panel to be 0 pixels high and 0 pixels wide, essentially invisible and non-interactable. Optionally, you could also disable the panel after the await call has completed to prevent tab cycling to it. The duration of this is 1 second (1000ms) and uses the easing QuadInOut.</p>
         <br>
         <p>If the panel is not shown, run the same command, but use the expanded size, something like (300, 300).</p>
@@ -118,20 +119,18 @@
       <div class="card doc">
         <p>After the previous step, you have a working animation. You can click run to try it out for yourself. However, we will also cover using the options object and bulk animations in this guide.</p>
         <br>
-        <p>AnimateForms is capable of applying animations to Control arrays - as such, it is possible to execute an animation on a Control's child controls through the use of a helper function. In addition to animating the panel, we also want to animate the panel's child controls.</p>
+        <p>AnimateForms is capable of applying animations to arrays of Controls through an Options object - as such, it is possible to execute an animation on a Control's child controls through the use of a helper function. With this, we will animate the label controls in our application.</p>
         <br>
         <p>Let's start by adding the following to the <span>if (panelShown)</span> block. All of this code can simply be mirrored to the other side for the reverse animation. Before the previous <span>await a.Resize(...)</span> call, we can add another <span>await a.Resize(...)</span> directly after it. Await prevents the code from continuing before the function has returned a value, and so we know these two animations will play sequentially.</p>
         <br>
-        <p>As parameters, we want to plug in a Control[], but <span>panel1.Controls</span> returns a ControlCollection. We can use one of AnimateForms' helper functions to convert that into a sorted Control[] easily. Simply plug in Helpers.SortCollectionByName(panel1.Controls) as a parameter into the animate function.</p>
+        <p>AnimateForms animation methods are broken up into two categories - a basic variant taking the minimum amount of options, which we have been using so far, and a variant (sometimes multiple depending on method) that uses an Options object. The full documentation for it is <a href="https://sdbagel.github.io/AnimateForms/#Options">here</a>. Let's make a new Options object with <span>Options o = new Options();</span>. You can see the defaults it sets in the documentation. We can stick with the defaults, unless you want to change them. You can change them by declaring the Options object with <span>new Options { Parameter = value, ... }</span> or using a preset constructor provided. However, we must specify a Control[] to use. Options objects can also take single controls.</p>
         <br>
-        <p><span>await a.Resize(Helpers.SortCollectionByName(panel1.Controls), new Size(0, 0), 1000, Easings.QuadInOut);</span></p>
+        <p>We want to plug in a Control[], but <span>panel1.Controls</span> returns a ControlCollection. We can use one of AnimateForms' helper functions to convert that into a sorted Control[] easily. Simply plug in Helpers.SortCollectionByName(panel1.Controls) as a parameter into the Options constructor, or set <span>o.Controls = Helpers.SortCollectionByName(panel1.Controls)</span>.</p>
         <br>
-        <p>While this will work, what if we wanted to stagger the animations, or use different easings per control? This can very easily be done by making a new Options object, which provides greater control over bulk animation functions.</p>
+        <p>What if we wanted to stagger the animations, or use different easings per control? This can very easily be done by modifying our Options object later in the code or initializing it with the different parameters. See the documentation for all options. The Options class will give you control over delay, interval, targeting, easing(s), and more.</p>
         <br>
-        <p>The Options (Options.cs) object provides members to control easings (including using an array of easings to cycle through), a delay before the animation starts, time between animations in bulk animate calls, and duration of animation. More information can be found <a href="/#Options">in the documentation</a>.</p>
-        <br>
-        <p>Let's just say we want to show and hide the labels by having them change their size, like the panel, but also have them stagger their animations by 100ms. We can create a new Options object and override the easing with your easing of choice, duration, delay (which we will set to 0), and interval of 100. This ends up looking like this:</p>
-        <p><span>await a.Resize(Helpers.SortCollectionByName(panel1.Controls), new Size(0, 0), new Options(Easings.SinInOut, 1000, 0, 100));</span></p>
+        <p>Let's just say we want to show and hide the labels by having them change their size, like the panel, but also have them stagger their animations by 100ms. We can create a new Options object, apply target, override the easing with your easing of choice, duration, delay (which we will set to 0), and interval of 100. This ends up looking like this:</p>
+        <p><span>await a.Resize(new Options(Helpers.SortCollectionByName(panel1.Controls), Easings.SinInOut, 1000, 0, 100));</span></p>
         <br>
         <p>After mirroring that to the show panel side of the if statement (changing the new sizes appropriately), the WinForms app now should behave as expected.</p>
       </div>
