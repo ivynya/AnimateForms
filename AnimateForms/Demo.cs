@@ -7,7 +7,7 @@ namespace AnimateForms
 {
     public partial class Demo : Form
     {
-        private readonly int d = 1000;
+        private readonly int d = 2000;
         private Size eS = new Size(300, 20);
         private Size dS = new Size(20, 20);
 
@@ -90,6 +90,31 @@ namespace AnimateForms
         private void Panel1_LocationChanged(object sender, EventArgs e)
         {
             label8.Text = panel1.Location.ToString();
+        }
+
+        // Recolor RGB
+        private async void Button4_Click(object sender, EventArgs e)
+        {
+            await a.Recolor(panel8, Easings.Linear, d, Helpers.HSVtoRGB(
+                new Helpers.HSV { Hue = 180, Saturation = 1, Value = 1 }));
+        }
+
+        private async void Button6_Click(object sender, EventArgs e)
+        {
+            await a.Recolor(panel8, Easings.Linear, d, Color.FromArgb(255, 0, 0));
+        }
+
+        // Recolor HSV
+        private async void Button5_Click(object sender, EventArgs e)
+        {
+            await a.Recolor(panel9, Easings.Linear, d, 
+                new Helpers.HSV { Hue = 180, Saturation = 1, Value = 1 });
+        }
+
+        private async void Button7_Click(object sender, EventArgs e)
+        {
+            await a.Recolor(panel9, Easings.Linear, d, 
+                Helpers.RGBtoHSV(Color.FromArgb(255, 0, 0)));
         }
     }
 }

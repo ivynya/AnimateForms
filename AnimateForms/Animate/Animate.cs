@@ -180,7 +180,9 @@ namespace AnimateForms.Animate
             Helpers.HSV color;
             if (backColor) color = Helpers.RGBtoHSV(control.BackColor);
             else color = Helpers.RGBtoHSV(control.ForeColor);
-            if (color.Hue == colorTo.Hue)
+            if (color.Hue == colorTo.Hue && 
+                color.Hue == colorTo.Saturation && 
+                color.Value == colorTo.Value)
             {
                 _animating.Remove((control.Name, "recolor"));
                 return false;

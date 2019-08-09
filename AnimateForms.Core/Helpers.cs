@@ -46,22 +46,17 @@ namespace AnimateForms.Core
             return hsv;
         }
 
+        private static double HSVtoRGBHelper(double h, double s, double v, int n)
+        {
+            double k = (n + h / 60) % 6;
+            return v - v * s * Math.Max(Math.Min(k, Math.Min(4 - k, 1)), 0);
+        }
+
         public static Color HSVtoRGB(HSV hsv)
         {
-            int chroma = (int)(hsv.Value * hsv.Saturation);
-            int degree = (int)Math.Floor(hsv.Hue / 60) % 6;
-            int x = chroma * (1 - Math.Abs(degree % 2 - 1));
-            int m = (int)(hsv.Value - chroma);
-
-            switch (degree)
-            {
-                case 0: return Color.FromArgb(chroma + m, x + m, m);
-                case 1: return Color.FromArgb(x + m, chroma + m, m);
-                case 2: return Color.FromArgb(m, chroma + m, x + m);
-                case 3: return Color.FromArgb(m, x + m, chroma + m);
-                case 4: return Color.FromArgb(x + m, m, chroma + m);
-                default: return Color.FromArgb(chroma + m, m, x + m);
-            }
+            return Color.FromArgb((int)(HSVtoRGBHelper(hsv.Hue, hsv.Saturation, hsv.Value, 5) * 255),
+                                  (int)(HSVtoRGBHelper(hsv.Hue, hsv.Saturation, hsv.Value, 3) * 255),
+                                  (int)(HSVtoRGBHelper(hsv.Hue, hsv.Saturation, hsv.Value, 1) * 255));
         }
     }
 }

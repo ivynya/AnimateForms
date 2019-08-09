@@ -47,6 +47,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.parent = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -237,9 +243,9 @@
             this.parent.Controls.Add(this.panel6);
             this.parent.Controls.Add(this.panel4);
             this.parent.Controls.Add(this.panel5);
-            this.parent.Location = new System.Drawing.Point(70, 103);
+            this.parent.Location = new System.Drawing.Point(70, 100);
             this.parent.Name = "parent";
-            this.parent.Size = new System.Drawing.Size(350, 300);
+            this.parent.Size = new System.Drawing.Size(320, 200);
             this.parent.TabIndex = 9;
             // 
             // label8
@@ -251,11 +257,73 @@
             this.label8.TabIndex = 10;
             this.label8.Text = "label8";
             // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.Red;
+            this.panel8.Location = new System.Drawing.Point(500, 100);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(100, 100);
+            this.panel8.TabIndex = 11;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.Red;
+            this.panel9.Location = new System.Drawing.Point(628, 100);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(100, 100);
+            this.panel9.TabIndex = 12;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(500, 40);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 23);
+            this.button4.TabIndex = 13;
+            this.button4.Text = "Recolor RGB";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(628, 40);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 23);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "Recolor HSV";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(500, 236);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(100, 23);
+            this.button6.TabIndex = 15;
+            this.button6.Text = "RGB Back";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(628, 236);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(100, 23);
+            this.button7.TabIndex = 16;
+            this.button7.Text = "HSV Back";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
+            // 
             // Demo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 453);
+            this.ClientSize = new System.Drawing.Size(832, 453);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.panel9);
+            this.Controls.Add(this.panel8);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.parent);
             this.Controls.Add(this.button3);
@@ -304,6 +372,12 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel parent;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 
