@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>AnimateForms Prerelease</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../css/site.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <img src="../img/ico.svg" alt="Logo">
+      <a href="https://github.com/SDBagel/AnimateForms">
+        <button>Back to Repository</button>
+      </a>
+    </nav>
+  </header>
+  <div class="block-header">
+    <img src="../img/Code-Banner.png" alt="Banner with Code">
+    <h1>Upcoming Release</h1>
+  </div>
+  <div id="content">
+    <div class="header">
+      <p>Overview</p>
+    </div>
+    <section>
+      <div class="card">
+        <p>This page details the overview for the next (or current) release of AnimateForms. This allows me to start documenting changes I make earlier, and allows you to see what's changed in the next release. The documentation will only cover what has changed, and library functions that remain constant will remain in the current documentation page. Changes are highlighted in yellow. If you need the current documentation, click below. The prerelease version of AnimateForms is only available if you clone <a href="https://github.com/SDBagel/AnimateForms">the repository</a> and build a DLL yourself.</p>
+        <a href="../"><button>Take me to the current documentation!</button></a>
+      </div>
+    </section>
+    <div class="header">
+      <p>Changes</p>
+    </div>
+    <section>
+      <div class="card highlight">
+        <h2>Animate.cs</h2>
+        <p>Recolor now has overloads for HSV.</p>
+        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Animate.cs">
+          <button>View On GitHub</button></a>
+        <a href="#Animate"><button>View Changes</button></a>
+      </div>
+      <div class="card">
+        <h2>Easings.cs</h2>
+        <p>No changes.</p>
+        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Easings.cs">
+          <button>View On GitHub</button></a>
+        <a href="../#Easings"><button>View Docs</button></a>
+      </div>
+    </section>
+    <section>
+      <div class="card highlight">
+        <h2>Helpers.cs</h2>
+        <p>New RGBtoHSV and HSVtoRGB helper function and HSV helper structure.</p>
+        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Helpers.cs">
+          <button>View On GitHub</button></a>
+        <a href="#Helpers"><button>View Changes</button></a>
+      </div>
+      <div class="card">
+        <h2>Options.cs</h2>
+        <p>No changes.</p>
+        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Options.cs">
+          <button>View On GitHub</button></a>
+        <a href="../#Options"><button>View Docs</button></a>
+      </div>
+    </section>
+    <div id="outline">
+      <div class="header">
+        <p>Outline</p>
+      </div>
+      <div class="card">
+        <p><b><a href="#Animate">Animate.cs</a></b></p>
+        <p><a href="#Recolor">Recolor</a></p>
+        <br>
+        <p><b><a href="#Helpers">Helpers.cs</a></b></p>
+        <p><a href="#CollectionToArray">CollectionToArray</a></p>
+        <p><a href="#SortCollectionByName">SortCollectionByName</a></p>
+      </div>
+    </div>
+    <div id="documentation">
+      <div class="header">
+        <a name="Animate"></a>
+        <p>Animate.cs Members</p>
+      </div>
+      <section>
+        <a name="Recolor"></a>
+        <div class="card doc">
+          <h2>Recolor</h2>
+          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Color <span>colorTo</span>, [bool <span>backColor</span> = true]</h3>
+          <h3>Output: bool</h3>
+          <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color, or if another Recolor is running on the same control already. <span>backColor</span> can be used to determine whether the BackColor or the ForeColor property of the control is changed.</p>
+          <br>
+          <p><b>Note:</b> Limitations currently means transitioning opacities appears flickery and not great.</p>
+          <br>
+          <p><b>See Also:</b></p>
+          <p><a href="../#Function">Animate.Function</a></p>
+          <p><a href="../#Options">Options</a></p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            _ = a.Recolor(control, Easings.Linear, 1000, Color.Blue);</span></p>
+            <p><span>
+            _ = a.Resize(new Options(), Color.Blue, false);
+          </span></p>
+          <hr>
+          <h3>Overloads:</h3>
+          <div class="highlight">
+            <p><b>Input: Control control, Function easing, int duration, <a href="#HSV">HSV hsv</a>, [bool backColor = true]</b></p>
+            <p>Applies animation using an HSV color object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look.</p>
+          </div><br>
+          <p><b><a href="../#Options">Options</a> o, Color color, bool backColor = true</b></p>
+          <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
+          <br>
+          <p><b><a href="../#Options">Options</a> o, Color[] colors, bool backColor = true</b></p>
+          <p>Applies animation using an Options object, cycling through an array of colors for each control. See the Options documentation for possible modifiers.</p>
+        </div>
+      </section>
+      <div class="header">
+        <a name="Helpers"></a>
+        <p>Helpers.cs Members</p>
+      </div>
+      <section>
+        <a name="HSV"></a>
+        <div class="card doc highlight">
+          <h2>HSV (struct)</h2>
+          <h3>Input: double <span>Hue, Saturation, Value</span></h3>
+          <p>Holds an HSV color value for use by the <a href="#Recolor">Recolor</a> method or one of the <a href="#RGBtoHSV">RGBtoHSV</a> / <a href="#HSVtoRGB">HSVtoRGB</a> helper functions.</p>
+        </div>
+      </section>
+      <section>
+        <a name="RGBtoHSV"></a>
+        <div class="card doc highlight">
+          <h2>RGBtoHSV (static)</h2>
+          <h3>Input: Color <span>color</span></h3>
+          <h3>Output: <a href="#HSV">HSV</a></h3>
+          <p>Converts an RGB System.Drawing.Color <span>color</span> into an HSV object. If an alpha is provided, it will be ignored.</p>
+        </div>
+      </section>
+      <section>
+        <a name="HSVtoRGB"></a>
+        <div class="card doc highlight">
+          <h2>HSVtoRGB (static)</h2>
+          <h3>Input: <a href="#HSV">HSV</a> <span>hsv</span></h3>
+          <h3>Output: Color</h3>
+          <p>Converts an HSV object into a System.Drawing.Color RGB color.</p>
+        </div>
+      </section>
+      <br>
+    </div>
+    <br>
+  </div>
+  <footer>
+    <section>
+      <div>
+        <h3>More Stuff</h3>
+        <p><a href="https://sdproductions.github.io/p/about">About Us</a></p>
+        <p><a href="https://sdproductions.github.io/p/about#privacy">Privacy</a></p>
+        <p><a href="https://sdproductions.github.io/p/about#terms">Terms of Use</a></p>
+      </div>
+      <hr>
+      <div>
+        <h3>Contact</h3>
+        <p><a href="mailto:sdbagel@gmail.com">Email</a></p>
+        <p><a href="https://github.com/SDProductions">GitHub</a></p>
+        <p><a href="https://github.com/SDBagel">SDBagel</a></p>
+      </div>
+    </section>
+    <br>
+    <p>&#9400; SDProductions 2019</p>
+  </footer>
+</body>
+</html>

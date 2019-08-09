@@ -30,6 +30,10 @@ span {
   background-color: #f4f4f4;
 }
 
+.highlight {
+  background-color: #ffffcc;
+}
+
 button {
   box-shadow: none;
   border: solid 2px;
@@ -74,26 +78,29 @@ nav button:hover {
   position: relative;
   z-index: -1;
   min-width: 100%;
-  max-height: 10rem;
+  height: 25rem;
   overflow: hidden;
 }
 
-.block-header img {
+.block-header > img {
+  filter: blur(4px);
   min-width: 100%;
+  min-height: 25rem;
 }
 
 .block-header h1 {
-  background-color: #f4f4f4;
-  border-radius: 2rem;
-  color: #78a1bb;
-  padding: 0.8rem;
-  width: 14rem;
-  margin: auto;
-  text-align: center;
+  padding: 0.5rem;
   position: absolute;
-  top: 50%;
   left: 0;
   right: 0;
+  top: 40%;
+  font-size: 3rem;
+  width: 18rem;
+  margin: auto;
+  text-align: center;
+  color: #32292f;
+  background-color: #fff;
+  border-radius: 0.5rem;
 }
 
 .header {
@@ -164,6 +171,7 @@ nav button:hover {
 
 .card p {
   color: #424d63bb;
+  font-size: 1.2rem;
   margin: 0.2rem 0;
 }
 
@@ -181,13 +189,17 @@ footer > p {
 
 @media screen and (min-width: 400px) {
   .block-header h1 {
-    width: 20rem;
+    width: 80%;
   }
 }
 
 @media screen and (min-width: 600px) {
   .block-header {
-    max-height: 14rem;
+    height: 20rem;
+  }
+  .block-header h1 {
+    top: 45%;
+    width: 35rem;
   }
   .container {
     width: 30rem;
@@ -228,8 +240,8 @@ footer > p {
     flex: 1 1;
   }
   .card {
-    margin: 1rem;
-    width: 100%;
+    margin: 1rem auto;
+    width: 70%;
     text-align: center;
   }
   .doc {
