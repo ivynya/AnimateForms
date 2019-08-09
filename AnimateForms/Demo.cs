@@ -108,7 +108,7 @@ namespace AnimateForms
         private async void Button5_Click(object sender, EventArgs e)
         {
             await a.Recolor(panel9, Easings.Linear, d, 
-                new Helpers.HSV { Hue = 180, Saturation = 1, Value = 1 });
+                new Helpers.HSV(180, 1, 1));
         }
 
         private async void Button7_Click(object sender, EventArgs e)

@@ -90,7 +90,7 @@
           <h2>Recolor</h2>
           <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Color <span>colorTo</span>, [bool <span>backColor</span> = true]</h3>
           <h3>Output: bool</h3>
-          <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color, or if another Recolor is running on the same control already. <span>backColor</span> can be used to determine whether the BackColor or the ForeColor property of the control is changed.</p>
+          <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color, or if another Recolor is running on the same control already. <span>backColor</span> can be used to determine whether the BackColor or the ForeColor property of the control is changed. This function supports using an <a href="#HSV">HSV color object</a> in place of an ARGB color.</p>
           <br>
           <p><b>Note:</b> Limitations currently means transitioning opacities appears flickery and not great.</p>
           <br>
@@ -107,14 +107,22 @@
           <hr>
           <h3>Overloads:</h3>
           <div class="highlight">
-            <p><b>Input: Control control, Function easing, int duration, <a href="#HSV">HSV hsv</a>, [bool backColor = true]</b></p>
-            <p>Applies animation using an HSV color object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look.</p>
+            <p><b>Input: Control control, Function easing, int duration, <a href="#HSV">Helpers.HSV hsv</a>, [bool backColor = true]</b></p>
+            <p>Applies animation using an HSV color object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look to the transition.</p>
           </div><br>
-          <p><b><a href="../#Options">Options</a> o, Color color, bool backColor = true</b></p>
+          <p><b><a href="../#Options">Options</a> o, Color color, [bool backColor = true]</b></p>
           <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
           <br>
-          <p><b><a href="../#Options">Options</a> o, Color[] colors, bool backColor = true</b></p>
+          <p><b><a href="../#Options">Options</a> o, Color[] colors, [bool backColor = true]</b></p>
           <p>Applies animation using an Options object, cycling through an array of colors for each control. See the Options documentation for possible modifiers.</p>
+          <br>
+          <div class="highlight">
+            <p><b><a href="../#Options">Options</a> o, <a href="#HSV">Helpers.HSV color</a>, [bool backColor = true]</b></p>
+            <p>Applies animation using an HSV color and an Options object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look to the transition.</p>
+            <br>
+            <p><b><a href="../#Options">Options</a> o, <a href="#HSV">Helpers.HSV colors</a>, [bool backColor = true]</b></p>
+            <p>Applies animation using an Options object, cycling through an array of HSV colors for each control. See the Options documentation for possible modifiers.</p>
+          </div><br>
         </div>
       </section>
       <div class="header">
@@ -125,8 +133,15 @@
         <a name="HSV"></a>
         <div class="card doc highlight">
           <h2>HSV (struct)</h2>
-          <h3>Input: double <span>Hue, Saturation, Value</span></h3>
+          <h3>Parameters: double <span>Hue, Saturation, Value</span></h3>
           <p>Holds an HSV color value for use by the <a href="#Recolor">Recolor</a> method or one of the <a href="#RGBtoHSV">RGBtoHSV</a> / <a href="#HSVtoRGB">HSVtoRGB</a> helper functions.</p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            var hsv = new Helpers.HSV(180, 0.5f, 0.5f);</span></p>
+            <p><span>
+            var hsv = new Helpers.HSV { Hue = 180, Saturation = 1, Value = 1 };
+          </span></p>
         </div>
       </section>
       <section>

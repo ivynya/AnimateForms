@@ -10,10 +10,18 @@ namespace AnimateForms.Animate
     {
         public struct HSV
         {
+            public HSV(float h, float s, float v)
+            {
+                Hue = h;
+                Saturation = s;
+                Value = v;
+            }
+
             public float Hue;
             public float Saturation;
             public float Value;
         }
+
 
         public static Control[] CollectionToArray(Control.ControlCollection controlCollection)
         {
