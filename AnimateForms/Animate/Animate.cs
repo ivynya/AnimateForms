@@ -170,6 +170,52 @@ namespace AnimateForms.Animate
             return true;
         }
 
+        public async Task<bool> Recolor(Control control, Function easing, int duration, Helpers.HSV colorTo, bool backColor = true)
+        {
+            if (_animating.Contains((control.Name, "recolor")))
+                return false;
+            else
+                _animating.Add((control.Name, "recolor"));
+
+            Helpers.HSV color;
+            if (backColor) color = Helpers.RGBtoHSV(control.BackColor);
+            else color = Helpers.RGBtoHSV(control.ForeColor);
+            if (color.Hue == colorTo.Hue)
+            {
+                _animating.Remove((control.Name, "recolor"));
+                return false;
+            }
+
+            int hDif = (int)(colorTo.Hue - color.Hue);
+            int sDif = (int)(colorTo.Saturation - color.Saturation);
+            int vDif = (int)(colorTo.Value - color.Value);
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            while (stopwatch.ElapsedMilliseconds < duration)
+            {
+                await Task.Delay(1);
+                int time = (int)stopwatch.ElapsedMilliseconds;
+                if (time > duration) time = duration;
+
+                Helpers.HSV newHSV = new Helpers.HSV
+                {
+                    Hue = easing(time, color.Hue, hDif, duration),
+                    Saturation = easing(time, color.Saturation, sDif, duration),
+                    Value = easing(time, color.Value, vDif, duration)
+                };
+                Color newColor = Helpers.HSVtoRGB(newHSV);
+
+                if (backColor)
+                    control.BackColor = newColor;
+                else
+                    control.ForeColor = newColor;
+            }
+
+            _animating.Remove((control.Name, "recolor"));
+            return true;
+        }
+
         public async Task<bool> Recolor(Options o, Color color, bool backColor = true)
         {
             await Task.Delay(o.Delay);
