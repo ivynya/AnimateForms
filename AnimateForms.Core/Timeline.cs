@@ -8,7 +8,7 @@ namespace AnimateForms.Animate
     {
         private readonly List<ToRun> _queue = new List<ToRun>();
 
-        private struct ToRun
+        internal struct ToRun
         {
             internal Func<Task<bool>> func;
             internal bool shouldAwait;

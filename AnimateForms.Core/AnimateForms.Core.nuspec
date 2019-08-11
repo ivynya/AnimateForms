@@ -3,7 +3,7 @@
   <metadata>
     <id>AnimateForms</id>
     <title>AnimateForms</title>
-    <version>1.1.0-alpha</version>
+    <version>1.2.0-alpha</version>
     <authors>SDBagel</authors>
     <owners>SDBagel</owners>
     <license type="expression">MIT</license>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A lightweight, asynchronous animation library for Windows Forms.</description>
     <summary>A lightweight async animation library for WinForms.</summary>
-    <releaseNotes>Apparently the last release was a duplicate of v0.1.1-alpha. This has been fixed to actually include the new features now.</releaseNotes>
+    <releaseNotes>Added HSV recolor, HSV/RGB to/from conversions, and Timelining. Read the documentation for usage.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>Animation Library WindowsForms WinForms</tags>
   </metadata>

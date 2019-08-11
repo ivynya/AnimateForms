@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>AnimateForms v1.2.0a</title>
+  <title>AnimateForms v1.1.0a</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,400&display=swap" rel="stylesheet">
@@ -27,9 +27,9 @@
     </div>
     <section>
       <div class="card">
-        <p><b>Documentation version: <span>v1.2.0-alpha</span></b></p><br>
-        <p><b>Need older versions? <a href="old/">Check here.</a></b></p>
-        <p><b>What's new from v1.1.0a? <a href="new/">Check here.</a></b></p>
+        <p><b>Documentation version: <span>v1.1.0-alpha</span></b></p><br>
+        <p><b>Need other versions? <a href="old/">Check here.</a></b></p>
+        <p><b>Want to see what's coming next? <a href="new/">Check here.</a></b></p>
       </div>
     </section>
     <section>
@@ -85,15 +85,6 @@
         <a href="#Options"><button>View Members</button></a>
       </div>
     </section>
-    <section>
-      <div class="card">
-        <h2>Timeline.cs</h2>
-        <p>Instantiable queue of animations. Can be repeatedly executed.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Timeline.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Timeline"><button>View Members</button></a>
-      </div>
-    </section>
   </div>
   <br>
   <div id="content">
@@ -116,17 +107,9 @@
         <br>
         <p><b><a href="#Helpers">Helpers.cs</a></b></p>
         <p><a href="#CollectionToArray">CollectionToArray</a></p>
-        <p><a href="#HSV">HSV</a></p>
-        <p><a href="#HSVtoRGB">HSVtoRGB</a></p>
-        <p><a href="#RGBtoHSV">RGBtoHSV</a></p>
         <p><a href="#SortCollectionByName">SortCollectionByName</a></p>
         <br>
         <p><b><a href="#Options">Options.cs</a></b></p>
-        <br>
-        <p><b><a href="#Timeline">Timeline.cs</a></b></p>
-        <p><a href="#Add">Add</a></p>
-        <p><a href="#Remove">Remove</a></p>
-        <p><a href="#Execute">Execute</a></p>
       </div>
     </div>
     <div id="documentation">
@@ -234,13 +217,13 @@
           <h2>Recolor</h2>
           <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Color <span>colorTo</span>, [bool <span>backColor</span> = true]</h3>
           <h3>Output: bool</h3>
-          <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color, or if another Recolor is running on the same control already. <span>backColor</span> can be used to determine whether the BackColor or the ForeColor property of the control is changed. This function supports using an <a href="#HSV">HSV color object</a> in place of an ARGB color.</p>
+          <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color, or if another Recolor is running on the same control already. <span>backColor</span> can be used to determine whether the BackColor or the ForeColor property of the control is changed.</p>
           <br>
           <p><b>Note:</b> Limitations currently means transitioning opacities appears flickery and not great.</p>
           <br>
           <p><b>See Also:</b></p>
-          <p><a href="../#Function">Animate.Function</a></p>
-          <p><a href="../#Options">Options</a></p>
+          <p><a href="#Function">Animate.Function</a></p>
+          <p><a href="#Options">Options</a></p>
           <br>
           <p><b>Examples:</b> </p>
             <p><span>
@@ -250,21 +233,11 @@
           </span></p>
           <hr>
           <h3>Overloads:</h3>
-          <p><b>Input: Control control, Function easing, int duration, <a href="#HSV">Helpers.HSV hsv</a>, [bool backColor = true]</b></p>
-          <p>Applies animation using an HSV color object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look to the transition.</p>
-          <br>
-          <p><b><a href="../#Options">Options</a> o, Color color, [bool backColor = true]</b></p>
+          <p><b><a href="#Options">Options</a> o, Color color, bool backColor = true</b></p>
           <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
           <br>
-          <p><b><a href="../#Options">Options</a> o, Color[] colors, [bool backColor = true]</b></p>
+          <p><b><a href="#Options">Options</a> o, Color[] colors, bool backColor = true</b></p>
           <p>Applies animation using an Options object, cycling through an array of colors for each control. See the Options documentation for possible modifiers.</p>
-          <br>
-          <p><b><a href="../#Options">Options</a> o, <a href="#HSV">Helpers.HSV color</a>, [bool backColor = true]</b></p>
-          <p>Applies animation using an HSV color and an Options object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look to the transition.</p>
-          <br>
-          <p><b><a href="../#Options">Options</a> o, <a href="#HSV">Helpers.HSV colors</a>, [bool backColor = true]</b></p>
-          <p>Applies animation using an Options object, cycling through an array of HSV colors for each control. See the Options documentation for possible modifiers.</p>
-          <br>
         </div>
       </section>
       <section>
@@ -343,39 +316,6 @@
         </div>
       </section>
       <section>
-        <a name="HSV"></a>
-        <div class="card doc">
-          <h2>HSV (struct)</h2>
-          <h3>Parameters: double <span>Hue, Saturation, Value</span></h3>
-          <p>Holds an HSV color value for use by the <a href="#Recolor">Recolor</a> method or one of the <a href="#RGBtoHSV">RGBtoHSV</a> / <a href="#HSVtoRGB">HSVtoRGB</a> helper functions. Has a constructor so it can be called inline cleanly.</p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            var hsv = new Helpers.HSV(180, 0.5f, 0.5f);</span></p>
-            <p><span>
-            var hsv = new Helpers.HSV { Hue = 180, Saturation = 1, Value = 1 };
-          </span></p>
-        </div>
-      </section>
-      <section>
-        <a name="HSVtoRGB"></a>
-        <div class="card doc">
-          <h2>HSVtoRGB (static)</h2>
-          <h3>Input: <a href="#HSV">HSV</a> <span>hsv</span></h3>
-          <h3>Output: Color</h3>
-          <p>Converts an HSV object into a System.Drawing.Color RGB color.</p>
-        </div>
-      </section>
-      <section>
-        <a name="RGBtoHSV"></a>
-        <div class="card doc">
-          <h2>RGBtoHSV (static)</h2>
-          <h3>Input: Color <span>color</span></h3>
-          <h3>Output: <a href="#HSV">HSV</a></h3>
-          <p>Converts an RGB System.Drawing.Color <span>color</span> into an HSV object. If an alpha is provided, it will be ignored.</p>
-        </div>
-      </section>
-      <section>
         <a name="SortCollectionByName"></a>
         <div class="card doc">
           <h2>SortCollectionByName (static)</h2>
@@ -407,76 +347,6 @@
           <br>
           <p>*Single control and single functions that get passed in as parameters get parsed into an array by the Options object anyway.</p>
           <p>**If this is specified and the animation returns or will return false, it will still wait for this amount of time.</p>
-          <br>
-        </div>
-      </section>
-      <div class="header">
-        <a name="Timeline"></a>
-        <p>Timeline.cs Members</p>
-      </div>
-      <section>
-        <div class="card doc">
-          <h2>Class Information</h2>
-          <h3>Instantiable</h3>
-          <p>Timelines are instantiable objects that can store a list of animations to run later. Instantiate with:</p>
-          <p><span>private readonly Timeline t = new Timeline();</span></p>
-          <br>
-          <p>Then, add animations with the following:</p>
-          <p><span>t.Add(() => a.Method(...));</span></p>
-          <br>
-          <p>Timelines can queue anything that returns a Task&lt;bool&gt;. As such, you can write your own custom functions to run in them.</p>
-          <br>
-          <p>When you wish to execute the timeline, use the following. Timelines can be reused, and are useful if there is a sequence of animations that need to be called repeatedly.</p>
-          <p><span>await t.Execute();</span></p>
-          <br>
-          <p><b>ProTip #1:</b> Like other animate functions, a discard <span>_ = t.Execute();</span> can be used to run the timeline without blocking code.</p>
-        </div>
-      </section>
-      <section>
-        <a name="Add"></a>
-        <div class="card doc">
-          <h2>Add</h2>
-          <h3>Input: Func&lt;Task&lt;bool&gt;&gt; <span>func</span>, [bool shouldAwait = true]</h3>
-          <p>Adds an animation to the timeline. Use a lambda to provide the function to add it. The animation added can be removed using the <a href="#Remove">Remove</a> method and the index of the animation added. Should await means the animation should run using an <span>await</span> tag - if this is set false, it will run using a discard <span>_ =</span> instead causing it to happen at the same time as the next animation in queue. This can cause issues as if the animations are of the same type, the second will be rejected.</p>
-          <br>
-          <p><b>ProTip:</b> You can add your own function to a timeline so long as it returns Task&lt;bool&gt;.</p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            t.Add(() => a.Move(moveOptions, new Point(0, 0)));</span></p>
-          <br>
-        </div>
-      </section>
-      <section>
-        <a name="Remove"></a>
-        <div class="card doc">
-          <h2>Remove</h2>
-          <h3>Input: int <span>index</span></h3>
-          <p>Calls RemoveAt(int index) on the private List of functions within the Timeline object. May throw an ArgumentOutOfBounds exception.</p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            t.Remove(3);</span></p>
-            <p><span>
-            t.Remove(0, 3);
-          </span></p>
-          <hr>
-          <h3>Overloads:</h3>
-          <p><b>int index, int count</b></p>
-          <p>Calls RemoveRange on the list instead, with index and count like normal.</p>
-          <br>
-        </div>
-      </section>
-      <section>
-        <a name="Execute"></a>
-        <div class="card doc">
-          <h2>Execute</h2>
-          <h3>Input: [bool discardAfterRun = false]</h3>
-          <p>Runs every action added to the Timeline object. It will await every single call. If discardAfterRun is set to true, after an animation is played, it will be removed from the Timeline object, effectively resetting the Timeline object.</p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            t.Execute();</span></p>
           <br>
         </div>
       </section>
