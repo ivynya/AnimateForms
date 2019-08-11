@@ -251,6 +251,42 @@ namespace AnimateForms.Core
             return success;
         }
 
+        public async Task<bool> Recolor(Options o, Helpers.HSV color, bool backColor = true)
+        {
+            await Task.Delay(o.Delay);
+
+            int maxIndex = o.Controls.Length - 1;
+            for (int i = 0; i < maxIndex; i++)
+            {
+                _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length],
+                            o.Duration, color, backColor);
+                await Task.Delay(o.Interval);
+            }
+
+            bool success = await Recolor(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
+                                         o.Duration, color, backColor);
+            await Task.Delay(o.EndDelay);
+            return success;
+        }
+
+        public async Task<bool> Recolor(Options o, Helpers.HSV[] colors, bool backColor = true)
+        {
+            await Task.Delay(o.Delay);
+
+            int maxIndex = o.Controls.Length - 1;
+            for (int i = 0; i < maxIndex; i++)
+            {
+                _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length],
+                            o.Duration, colors[i % colors.Length], backColor);
+                await Task.Delay(o.Interval);
+            }
+
+            bool success = await Recolor(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
+                                         o.Duration, colors[maxIndex % colors.Length], backColor);
+            await Task.Delay(o.EndDelay);
+            return success;
+        }
+
         public async Task<bool> Resize(Control control, Function easing, int duration, Size sizeTo)
         {
             if (_animating.Contains((control.Name, "resize")))

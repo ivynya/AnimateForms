@@ -27,7 +27,7 @@
     </div>
     <section>
       <div class="card">
-        <p>This page details the overview for the next (or current) release of AnimateForms. This allows me to start documenting changes I make earlier, and allows you to see what's changed in the next release. The documentation will only cover what has changed, and library functions that remain constant will remain in the current documentation page. Changes are highlighted in yellow. If you need the current documentation, click below. The prerelease version of AnimateForms is only available if you clone <a href="https://github.com/SDBagel/AnimateForms">the repository</a> and build a DLL yourself.</p>
+        <p>This page details the overview for the next (or current) release of AnimateForms. This allows me to start documenting changes I make earlier, and allows you to see what's changed in the next release. The documentation will only cover what has changed, and library functions that remain constant will remain in the current documentation page. Changes are highlighted in yellow. Additions are highlighted in green. If you need the current documentation, click below. The prerelease version of AnimateForms is only available if you clone <a href="https://github.com/SDBagel/AnimateForms">the repository</a> and build a DLL yourself.</p>
         <a href="../"><button>Take me to the current documentation!</button></a>
       </div>
     </section>
@@ -66,6 +66,15 @@
         <a href="../#Options"><button>View Docs</button></a>
       </div>
     </section>
+    <section>
+      <div class="card addition">
+        <h2>Timeline.cs</h2>
+        <p>Instantiable queue of animations. Can be repeatedly executed.</p>
+        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Timeline.cs">
+          <button>View On GitHub</button></a>
+        <a href="#Timeline"><button>View Members</button></a>
+      </div>
+    </section>
     <div id="outline">
       <div class="header">
         <p>Outline</p>
@@ -75,8 +84,14 @@
         <p><a href="#Recolor">Recolor</a></p>
         <br>
         <p><b><a href="#Helpers">Helpers.cs</a></b></p>
-        <p><a href="#CollectionToArray">CollectionToArray</a></p>
-        <p><a href="#SortCollectionByName">SortCollectionByName</a></p>
+        <p><a href="#HSV">HSV</a></p>
+        <p><a href="#RGBtoHSV">RGBtoHSV</a></p>
+        <p><a href="#HSVtoRGB">HSVtoRGB</a></p>
+        <br>
+        <p><b><a href="#Timeline">Timeline.cs</a></b></p>
+        <p><a href="#Add">Add</a></p>
+        <p><a href="#Remove">Remove</a></p>
+        <p><a href="#Execute">Execute</a></p>
       </div>
     </div>
     <div id="documentation">
@@ -106,7 +121,7 @@
           </span></p>
           <hr>
           <h3>Overloads:</h3>
-          <div class="highlight">
+          <div class="addition">
             <p><b>Input: Control control, Function easing, int duration, <a href="#HSV">Helpers.HSV hsv</a>, [bool backColor = true]</b></p>
             <p>Applies animation using an HSV color object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look to the transition.</p>
           </div><br>
@@ -116,7 +131,7 @@
           <p><b><a href="../#Options">Options</a> o, Color[] colors, [bool backColor = true]</b></p>
           <p>Applies animation using an Options object, cycling through an array of colors for each control. See the Options documentation for possible modifiers.</p>
           <br>
-          <div class="highlight">
+          <div class="addition">
             <p><b><a href="../#Options">Options</a> o, <a href="#HSV">Helpers.HSV color</a>, [bool backColor = true]</b></p>
             <p>Applies animation using an HSV color and an Options object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look to the transition.</p>
             <br>
@@ -131,10 +146,10 @@
       </div>
       <section>
         <a name="HSV"></a>
-        <div class="card doc highlight">
+        <div class="card doc addition">
           <h2>HSV (struct)</h2>
           <h3>Parameters: double <span>Hue, Saturation, Value</span></h3>
-          <p>Holds an HSV color value for use by the <a href="#Recolor">Recolor</a> method or one of the <a href="#RGBtoHSV">RGBtoHSV</a> / <a href="#HSVtoRGB">HSVtoRGB</a> helper functions.</p>
+          <p>Holds an HSV color value for use by the <a href="#Recolor">Recolor</a> method or one of the <a href="#RGBtoHSV">RGBtoHSV</a> / <a href="#HSVtoRGB">HSVtoRGB</a> helper functions. Has a constructor so it can be called inline cleanly.</p>
           <br>
           <p><b>Examples:</b> </p>
             <p><span>
@@ -146,7 +161,7 @@
       </section>
       <section>
         <a name="RGBtoHSV"></a>
-        <div class="card doc highlight">
+        <div class="card doc addition">
           <h2>RGBtoHSV (static)</h2>
           <h3>Input: Color <span>color</span></h3>
           <h3>Output: <a href="#HSV">HSV</a></h3>
@@ -155,11 +170,80 @@
       </section>
       <section>
         <a name="HSVtoRGB"></a>
-        <div class="card doc highlight">
+        <div class="card doc addition">
           <h2>HSVtoRGB (static)</h2>
           <h3>Input: <a href="#HSV">HSV</a> <span>hsv</span></h3>
           <h3>Output: Color</h3>
           <p>Converts an HSV object into a System.Drawing.Color RGB color.</p>
+        </div>
+      </section>
+      <div class="header">
+        <a name="Timeline"></a>
+        <p>Timeline.cs Members</p>
+      </div>
+      <section>
+        <div class="card doc addition">
+          <h2>Class Information</h2>
+          <h3>Instantiable</h3>
+          <p>Timelines are instantiable objects that can store a list of animations to run later. Instantiate with:</p>
+          <p><span>private readonly Timeline t = new Timeline();</span></p>
+          <br>
+          <p>Then, add animations with the following:</p>
+          <p><span>t.Add(() => a.Method(...));</span></p>
+          <br>
+          <p>Timelines can queue anything that returns a Task&lt;bool&gt;. As such, you can write your own custom functions to run in them.</p>
+          <br>
+          <p>When you wish to execute the timeline, use the following. Timelines can be reused, and are useful if there is a sequence of animations that need to be called repeatedly.</p>
+          <p><span>await t.Execute();</span></p>
+          <br>
+          <p><b>ProTip #1:</b> Like other animate functions, a discard <span>_ = t.Execute();</span> can be used to run the timeline without blocking code.</p>
+        </div>
+      </section>
+      <section>
+        <a name="Add"></a>
+        <div class="card doc addition">
+          <h2>Add</h2>
+          <h3>Input: Func&lt;Task&lt;bool&gt;&gt; <span>func</span></h3>
+          <p>Adds an animation to the timeline. Use a lambda to provide the function to add it. The animation added can be removed using the <a href="#Remove">Remove</a> method and the index of the animation added.</p>
+          <br>
+          <p><b>ProTip:</b> You can add your own function to a timeline so long as it returns Task&lt;bool&gt;.</p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            t.Add(() => a.Move(moveOptions, new Point(0, 0)));</span></p>
+          <br>
+        </div>
+      </section>
+      <section>
+        <a name="Remove"></a>
+        <div class="card doc addition">
+          <h2>Remove</h2>
+          <h3>Input: int <span>index</span></h3>
+          <p>Calls RemoveAt(int index) on the private List of functions within the Timeline object. May throw an ArgumentOutOfBounds exception.</p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            t.Remove(3);</span></p>
+            <p><span>
+            t.Remove(0, 3);
+          </span></p>
+          <hr>
+          <h3>Overloads:</h3>
+          <p><b>int index, int count</b></p>
+          <p>Calls RemoveRange on the list instead, with index and count like normal.</p>
+          <br>
+        </div>
+      </section>
+      <section>
+        <a name="Execute"></a>
+        <div class="card doc addition">
+          <h2>Execute</h2>
+          <p>Runs every action added to the Timeline object. It will await every single call.</p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            t.Execute();</span></p>
+          <br>
         </div>
       </section>
       <br>

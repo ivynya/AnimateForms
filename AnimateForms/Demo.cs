@@ -69,7 +69,11 @@ namespace AnimateForms
                 Alignment = "h-center"
             };
 
-            while(true)
+            Timeline t = new Timeline();
+            t.Add(() => a.Move(moveOptions, new Point(0, 0)));
+            await t.Execute();
+
+            while (true)
             {
                 await a.Resize(new Options(controls, Easings.AllEasings, d), eS);
 
