@@ -6,11 +6,21 @@ namespace AnimateForms.Animate
 {
     public class Timeline
     {
-        private readonly List<Func<Task<bool>>> _queue = new List<Func<Task<bool>>>();
+        private readonly List<ToRun> _queue = new List<ToRun>();
 
-        public void Add(Func<Task<bool>> func)
+        internal struct ToRun
         {
-            _queue.Add(func);
+            internal Func<Task<bool>> func;
+            internal bool shouldAwait;
+        }
+
+        public void Add(Func<Task<bool>> func, bool shouldAwait = true)
+        {
+            _queue.Add(new ToRun
+            {
+                func = func,
+                shouldAwait = shouldAwait
+            });
         }
 
         public void Remove(int index)
@@ -23,10 +33,17 @@ namespace AnimateForms.Animate
             _queue.RemoveRange(index, count);
         }
 
-        public async Task Execute()
+        public async Task Execute(bool discardAfterRun = false)
         {
-            for (int i = 0; i < _queue.Count; i++)
-                await _queue[i].Invoke();
+            foreach (ToRun action in _queue)
+            {
+                if (action.shouldAwait)
+                    await action.func.Invoke();
+                else
+                    _ = action.func.Invoke();
+
+                if (discardAfterRun) _queue.Remove(action);
+            }
         }
     }
 }

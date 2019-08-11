@@ -203,8 +203,8 @@
         <a name="Add"></a>
         <div class="card doc addition">
           <h2>Add</h2>
-          <h3>Input: Func&lt;Task&lt;bool&gt;&gt; <span>func</span></h3>
-          <p>Adds an animation to the timeline. Use a lambda to provide the function to add it. The animation added can be removed using the <a href="#Remove">Remove</a> method and the index of the animation added.</p>
+          <h3>Input: Func&lt;Task&lt;bool&gt;&gt; <span>func</span>, [bool shouldAwait = true]</h3>
+          <p>Adds an animation to the timeline. Use a lambda to provide the function to add it. The animation added can be removed using the <a href="#Remove">Remove</a> method and the index of the animation added. Should await means the animation should run using an <span>await</span> tag - if this is set false, it will run using a discard <span>_ =</span> instead causing it to happen at the same time as the next animation in queue. This can cause issues as if the animations are of the same type, the second will be rejected.</p>
           <br>
           <p><b>ProTip:</b> You can add your own function to a timeline so long as it returns Task&lt;bool&gt;.</p>
           <br>
@@ -238,7 +238,8 @@
         <a name="Execute"></a>
         <div class="card doc addition">
           <h2>Execute</h2>
-          <p>Runs every action added to the Timeline object. It will await every single call.</p>
+          <h3>Input: [bool discardAfterRun = false]</h3>
+          <p>Runs every action added to the Timeline object. It will await every single call. If discardAfterRun is set to true, after an animation is played, it will be removed from the Timeline object, effectively resetting the Timeline object.</p>
           <br>
           <p><b>Examples:</b> </p>
             <p><span>
