@@ -27,7 +27,7 @@
     </div>
     <section>
       <div class="card">
-        <p>What's changed since v1.1.0 to v1.2.0? Find out here! Changes are highlighted in yellow and additions are highlighted in green. The full documentation also includes the things listed here.</p>
+        <p>What's changed since v1.1.0 to v1.3.0? Find out here! Changes are highlighted in yellow and additions are highlighted in green. The full documentation also includes the things listed here.</p>
         <a href="../"><button>Take me to the full documentation!</button></a>
       </div>
     </section>
@@ -81,6 +81,7 @@
       </div>
       <div class="card">
         <p><b><a href="#Animate">Animate.cs</a></b></p>
+        <p><a href="#Function">Function</a></p>
         <p><a href="#Recolor">Recolor</a></p>
         <br>
         <p><b><a href="#Helpers">Helpers.cs</a></b></p>
@@ -99,6 +100,20 @@
         <a name="Animate"></a>
         <p>Animate.cs Members</p>
       </div>
+      <section>
+        <a name="Function"></a>
+        <div class="card doc">
+          <h2>Function (delegate)</h2>
+          <h3>Input: float <span>t, b, c, d</span></h3>
+          <h3 class="highlight">Output: float (v1.3.0a)</h3>
+          <p>Defines an easing function that takes an input time <b>t</b> (current frame), start value <b>b</b>, change in value <b>c</b>, and duration of animation <b>d</b> and returns a float defining what the current position should be. In AnimateForms, duration and current time are both always in milliseconds.</p>
+          <br>
+          <p><b>ProTip #1:</b> You can use this delegate to define your own custom easing function, and plug it into any method for use.</p>
+          <p><b>ProTip #2:</b> The <a href="#Easings">Easings</a> class defines many preset static easing functions that can be used as a parameter for methods that need this delegate.</p>
+          <br>
+          <p><b>Example:</b> <span>Animate.Function f = Easings.Linear;</span></p>
+        </div>
+      </section>
       <section>
         <a name="Recolor"></a>
         <div class="card doc">
