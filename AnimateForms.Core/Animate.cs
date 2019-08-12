@@ -9,7 +9,8 @@ namespace AnimateForms.Core
 {
     public class Animate
     {
-        public delegate int Function(float t, float b, float c, float d);
+
+        public delegate float Function(float t, float b, float c, float d);
         private readonly List<(string, string)> _animating = new List<(string, string)>();
 
         public async Task<bool> Move(Control control, Function easing, int duration, Point moveTo)
@@ -36,8 +37,8 @@ namespace AnimateForms.Core
                 int time = (int)stopwatch.ElapsedMilliseconds;
                 if (time > duration) time = duration;
 
-                control.Location = new Point(easing(time, location.X, xDif, duration),
-                                             easing(time, location.Y, yDif, duration));
+                control.Location = new Point((int)easing(time, location.X, xDif, duration),
+                                             (int)easing(time, location.Y, yDif, duration));
             }
 
             _animating.Remove((control.Name, "move"));
@@ -96,8 +97,8 @@ namespace AnimateForms.Core
                 int time = (int)stopwatch.ElapsedMilliseconds;
                 if (time > duration) time = duration;
 
-                Point newPoint = new Point(easing(time, 0, offset.X, duration),
-                                           easing(time, 0, offset.Y, duration));
+                Point newPoint = new Point((int)easing(time, 0, offset.X, duration),
+                                           (int)easing(time, 0, offset.Y, duration));
 
                 control.Location = new Point(control.Location.X + (newPoint.X - prevPoint.X),
                                              control.Location.Y + (newPoint.Y - prevPoint.Y));
@@ -155,10 +156,10 @@ namespace AnimateForms.Core
                 if (time > duration) time = duration;
 
                 Color newColor;
-                newColor = Color.FromArgb(easing(time, color.A, aDif, duration),
-                                          easing(time, color.R, rDif, duration),
-                                          easing(time, color.G, gDif, duration),
-                                          easing(time, color.B, bDif, duration));
+                newColor = Color.FromArgb((int)easing(time, color.A, aDif, duration),
+                                          (int)easing(time, color.R, rDif, duration),
+                                          (int)easing(time, color.G, gDif, duration),
+                                          (int)easing(time, color.B, bDif, duration));
                 if (backColor)
                     control.BackColor = newColor;
                 else
@@ -179,15 +180,17 @@ namespace AnimateForms.Core
             Helpers.HSV color;
             if (backColor) color = Helpers.RGBtoHSV(control.BackColor);
             else color = Helpers.RGBtoHSV(control.ForeColor);
-            if (color.Hue == colorTo.Hue)
+            if (color.Hue == colorTo.Hue &&
+                color.Hue == colorTo.Saturation &&
+                color.Value == colorTo.Value)
             {
                 _animating.Remove((control.Name, "recolor"));
                 return false;
             }
 
             int hDif = (int)(colorTo.Hue - color.Hue);
-            int sDif = (int)(colorTo.Saturation - color.Saturation);
-            int vDif = (int)(colorTo.Value - color.Value);
+            float sDif = colorTo.Saturation - color.Saturation;
+            float vDif = colorTo.Value - color.Value;
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -222,7 +225,7 @@ namespace AnimateForms.Core
             int maxIndex = o.Controls.Length - 1;
             for (int i = 0; i < maxIndex; i++)
             {
-                _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, 
+                _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration,
                             color, backColor);
                 await Task.Delay(o.Interval);
             }
@@ -311,8 +314,8 @@ namespace AnimateForms.Core
                 int time = (int)stopwatch.ElapsedMilliseconds;
                 if (time > duration) time = duration;
 
-                control.Size = new Size(easing(time, size.Width, widthDif, duration),
-                                        easing(time, size.Height, heightDif, duration));
+                control.Size = new Size((int)easing(time, size.Width, widthDif, duration),
+                                        (int)easing(time, size.Height, heightDif, duration));
             }
 
             _animating.Remove((control.Name, "resize"));
