@@ -13,146 +13,146 @@ namespace AnimateForms.Animate
 
         // Easing equations pulled from http://gizma.com/easing/
 
-        public static int Linear(float t, float b, float c, float d)
+        public static float Linear(float t, float b, float c, float d)
         {
-            return (int)Math.Round(c * t / d + b);
+            return (float)(c * t / d + b);
         }
 
-        public static int QuadIn(float t, float b, float c, float d)
-        {
-            t /= d;
-            return (int)Math.Round(c * t * t + b);
-        }
-
-        public static int QuadOut(float t, float b, float c, float d)
+        public static float QuadIn(float t, float b, float c, float d)
         {
             t /= d;
-            return (int)Math.Round(-c * t * (t - 2) + b);
+            return (float)(c * t * t + b);
         }
 
-        public static int QuadInOut(float t, float b, float c, float d)
+        public static float QuadOut(float t, float b, float c, float d)
+        {
+            t /= d;
+            return (float)(-c * t * (t - 2) + b);
+        }
+
+        public static float QuadInOut(float t, float b, float c, float d)
         {
             t /= d / 2;
-            if (t < 1) return (int)Math.Round(c / 2 * t * t + b);
+            if (t < 1) return (float)(c / 2 * t * t + b);
             t--;
-            return (int)Math.Round(-c / 2 * (t * (t - 2) - 1) + b);
+            return (float)(-c / 2 * (t * (t - 2) - 1) + b);
         }
 
-        public static int CubicIn(float t, float b, float c, float d)
+        public static float CubicIn(float t, float b, float c, float d)
         {
             t /= d;
-            return (int)Math.Round(c * t * t * t + b);
+            return (float)(c * t * t * t + b);
         }
 
-        public static int CubicOut(float t, float b, float c, float d)
+        public static float CubicOut(float t, float b, float c, float d)
         {
             t /= d;
             t--;
-            return (int)Math.Round(c * (t * t * t + 1) + b);
+            return (float)(c * (t * t * t + 1) + b);
         }
 
-        public static int CubicInOut(float t, float b, float c, float d)
+        public static float CubicInOut(float t, float b, float c, float d)
         {
             t /= d / 2;
-            if (t < 1) return (int)Math.Round(c / 2 * t * t * t + b);
+            if (t < 1) return (float)(c / 2 * t * t * t + b);
             t -= 2;
-            return (int)Math.Round(c / 2 * (t * t * t + 2) + b);
+            return (float)(c / 2 * (t * t * t + 2) + b);
         }
 
-        public static int QuartIn(float t, float b, float c, float d)
+        public static float QuartIn(float t, float b, float c, float d)
         {
             t /= d;
-            return (int)Math.Round(c * t * t * t * t + b);
+            return (float)(c * t * t * t * t + b);
         }
 
-        public static int QuartOut(float t, float b, float c, float d)
+        public static float QuartOut(float t, float b, float c, float d)
         {
             t /= d;
             t--;
-            return (int)Math.Round(-c * (t * t * t * t - 1) + b);
+            return (float)(-c * (t * t * t * t - 1) + b);
         }
 
-        public static int QuartInOut(float t, float b, float c, float d)
+        public static float QuartInOut(float t, float b, float c, float d)
         {
             t /= d / 2;
-            if (t < 1) return (int)Math.Round(c / 2 * t * t * t * t + b);
+            if (t < 1) return (float)(c / 2 * t * t * t * t + b);
             t -= 2;
-            return (int)Math.Round(-c / 2 * (t * t * t * t - 2) + b);
+            return (float)(-c / 2 * (t * t * t * t - 2) + b);
         }
 
-        public static int QuintIn(float t, float b, float c, float d)
+        public static float QuintIn(float t, float b, float c, float d)
         {
             t /= d;
-            return (int)Math.Round(c * t * t * t * t * t + b);
+            return (float)(c * t * t * t * t * t + b);
         }
 
-        public static int QuintOut(float t, float b, float c, float d)
+        public static float QuintOut(float t, float b, float c, float d)
         {
             t /= d;
             t--;
-            return (int)Math.Round(c * (t * t * t * t * t + 1) + b);
+            return (float)(c * (t * t * t * t * t + 1) + b);
         }
 
-        public static int QuintInOut(float t, float b, float c, float d)
+        public static float QuintInOut(float t, float b, float c, float d)
         {
             t /= d / 2;
-            if (t < 1) return (int)Math.Round(c / 2 * t * t * t * t * t + b);
+            if (t < 1) return (float)(c / 2 * t * t * t * t * t + b);
             t -= 2;
-            return (int)Math.Round(c / 2 * (t * t * t * t * t + 2) + b);
+            return (float)(c / 2 * (t * t * t * t * t + 2) + b);
         }
 
-        public static int SinIn(float t, float b, float c, float d)
+        public static float SinIn(float t, float b, float c, float d)
         {
-            return (int)Math.Round(-c * Math.Cos(t / d * (Math.PI / 2)) + c + b);
+            return (float)(-c * Math.Cos(t / d * (Math.PI / 2)) + c + b);
         }
 
-        public static int SinOut(float t, float b, float c, float d)
+        public static float SinOut(float t, float b, float c, float d)
         {
-            return (int)Math.Round(c * Math.Sin(t / d * (Math.PI / 2)) + b);
+            return (float)(c * Math.Sin(t / d * (Math.PI / 2)) + b);
         }
 
-        public static int SinInOut(float t, float b, float c, float d)
+        public static float SinInOut(float t, float b, float c, float d)
         {
-            return (int)Math.Round(-c / 2 * (Math.Cos(Math.PI * t / d) - 1) + b);
+            return (float)(-c / 2 * (Math.Cos(Math.PI * t / d) - 1) + b);
         }
 
-        public static int ExpIn(float t, float b, float c, float d)
+        public static float ExpIn(float t, float b, float c, float d)
         {
-            return (int)Math.Round(c * Math.Pow(2, 10 * (t / d - 1)) + b);
+            return (float)(c * Math.Pow(2, 10 * (t / d - 1)) + b);
         }
 
-        public static int ExpOut(float t, float b, float c, float d)
+        public static float ExpOut(float t, float b, float c, float d)
         {
-            return (int)Math.Round(c * (-Math.Pow(2, -10 * t / d) + 1) + b);
+            return (float)(c * (-Math.Pow(2, -10 * t / d) + 1) + b);
         }
 
-        public static int ExpInOut(float t, float b, float c, float d)
-        {
-            t /= d / 2;
-            if (t < 1) return (int)Math.Round(c / 2 * Math.Pow(2, 10 * (t - 1)) + b);
-            t--;
-            return (int)Math.Round(c / 2 * (-Math.Pow(2, -10 * t) + 2) + b);
-        }
-
-        public static int CircIn(float t, float b, float c, float d)
-        {
-            t /= d;
-            return (int)Math.Round(-c * (Math.Sqrt(1 - t * t) - 1) + b);
-        }
-
-        public static int CircOut(float t, float b, float c, float d)
-        {
-            t /= d;
-            t--;
-            return (int)Math.Round(c * Math.Sqrt(1 - t * t) + b);
-        }
-
-        public static int CircInOut(float t, float b, float c, float d)
+        public static float ExpInOut(float t, float b, float c, float d)
         {
             t /= d / 2;
-            if (t < 1) return (int)Math.Round(-c / 2 * (Math.Sqrt(1 - t * t) - 1) + b);
+            if (t < 1) return (float)(c / 2 * Math.Pow(2, 10 * (t - 1)) + b);
+            t--;
+            return (float)(c / 2 * (-Math.Pow(2, -10 * t) + 2) + b);
+        }
+
+        public static float CircIn(float t, float b, float c, float d)
+        {
+            t /= d;
+            return (float)(-c * (Math.Sqrt(1 - t * t) - 1) + b);
+        }
+
+        public static float CircOut(float t, float b, float c, float d)
+        {
+            t /= d;
+            t--;
+            return (float)(c * Math.Sqrt(1 - t * t) + b);
+        }
+
+        public static float CircInOut(float t, float b, float c, float d)
+        {
+            t /= d / 2;
+            if (t < 1) return (float)(-c / 2 * (Math.Sqrt(1 - t * t) - 1) + b);
             t -= 2;
-            return (int)Math.Round(c / 2 * (Math.Sqrt(1 - t * t) + 1) + b);
+            return (float)(c / 2 * (Math.Sqrt(1 - t * t) + 1) + b);
         }
     }
 }

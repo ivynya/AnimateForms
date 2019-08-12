@@ -47,8 +47,8 @@ namespace AnimateForms.Animate
             HSV hsv = new HSV
             {
                 Hue = rgb.GetHue(),
-                Saturation = (max == 0) ? 0 : 1 - (1 * min / max),
-                Value = max / 255
+                Saturation = (max == 0) ? 0 : 1f - (1f * min / max),
+                Value = max / 255f
             };
 
             return hsv;
@@ -56,8 +56,8 @@ namespace AnimateForms.Animate
 
         private static double HSVtoRGBHelper(double h, double s, double v, int n)
         {
-            double k = (n + h / 60) % 6;
-            return v - v * s * Math.Max(Math.Min(k, Math.Min(4 - k, 1)), 0);
+            double k = (n + h / 60d) % 6;
+            return v - v * s * Math.Max(Math.Min(k, Math.Min(4d - k, 1d)), 0);
         }
 
         public static Color HSVtoRGB(HSV hsv)
