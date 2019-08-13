@@ -9,7 +9,6 @@ namespace AnimateForms.Core
 {
     public class Animate
     {
-
         public delegate float Function(float t, float b, float c, float d);
         private readonly List<(string, string)> _animating = new List<(string, string)>();
 

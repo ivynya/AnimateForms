@@ -15,19 +15,19 @@ namespace AnimateForms.Animate
 
         public static float Linear(float t, float b, float c, float d)
         {
-            return (float)(c * t / d + b);
+            return c * t / d + b;
         }
 
         public static float QuadIn(float t, float b, float c, float d)
         {
             t /= d;
-            return (float)(c * t * t + b);
+            return c * t * t + b;
         }
 
         public static float QuadOut(float t, float b, float c, float d)
         {
             t /= d;
-            return (float)(-c * t * (t - 2) + b);
+            return -c * t * (t - 2) + b;
         }
 
         public static float QuadInOut(float t, float b, float c, float d)
@@ -35,20 +35,20 @@ namespace AnimateForms.Animate
             t /= d / 2;
             if (t < 1) return (float)(c / 2 * t * t + b);
             t--;
-            return (float)(-c / 2 * (t * (t - 2) - 1) + b);
+            return -c / 2 * (t * (t - 2) - 1) + b;
         }
 
         public static float CubicIn(float t, float b, float c, float d)
         {
             t /= d;
-            return (float)(c * t * t * t + b);
+            return c * t * t * t + b;
         }
 
         public static float CubicOut(float t, float b, float c, float d)
         {
             t /= d;
             t--;
-            return (float)(c * (t * t * t + 1) + b);
+            return c * (t * t * t + 1) + b;
         }
 
         public static float CubicInOut(float t, float b, float c, float d)
@@ -56,49 +56,49 @@ namespace AnimateForms.Animate
             t /= d / 2;
             if (t < 1) return (float)(c / 2 * t * t * t + b);
             t -= 2;
-            return (float)(c / 2 * (t * t * t + 2) + b);
+            return c / 2 * (t * t * t + 2) + b;
         }
 
         public static float QuartIn(float t, float b, float c, float d)
         {
             t /= d;
-            return (float)(c * t * t * t * t + b);
+            return c * t * t * t * t + b;
         }
 
         public static float QuartOut(float t, float b, float c, float d)
         {
             t /= d;
             t--;
-            return (float)(-c * (t * t * t * t - 1) + b);
+            return -c * (t * t * t * t - 1) + b;
         }
 
         public static float QuartInOut(float t, float b, float c, float d)
         {
             t /= d / 2;
-            if (t < 1) return (float)(c / 2 * t * t * t * t + b);
+            if (t < 1) return c / 2 * t * t * t * t + b;
             t -= 2;
-            return (float)(-c / 2 * (t * t * t * t - 2) + b);
+            return -c / 2 * (t * t * t * t - 2) + b;
         }
 
         public static float QuintIn(float t, float b, float c, float d)
         {
             t /= d;
-            return (float)(c * t * t * t * t * t + b);
+            return c * t * t * t * t * t + b;
         }
 
         public static float QuintOut(float t, float b, float c, float d)
         {
             t /= d;
             t--;
-            return (float)(c * (t * t * t * t * t + 1) + b);
+            return c * (t * t * t * t * t + 1) + b;
         }
 
         public static float QuintInOut(float t, float b, float c, float d)
         {
             t /= d / 2;
-            if (t < 1) return (float)(c / 2 * t * t * t * t * t + b);
+            if (t < 1) return c / 2 * t * t * t * t * t + b;
             t -= 2;
-            return (float)(c / 2 * (t * t * t * t * t + 2) + b);
+            return c / 2 * (t * t * t * t * t + 2) + b;
         }
 
         public static float SinIn(float t, float b, float c, float d)
