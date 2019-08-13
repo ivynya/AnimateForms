@@ -1,8 +1,6 @@
 # AnimateForms
 
-[![Travis (.com)](https://img.shields.io/travis/com/SDBagel/AnimateForms.svg?style=flat-square)](https://travis-ci.com/SDBagel/AnimateForms) [![GitHub All Releases](https://img.shields.io/github/downloads/SDBagel/AnimateForms/total.svg?style=flat-square)](https://github.com/SDBagel/AnimateForms/releases)
-
-[![Nuget](https://img.shields.io/nuget/v/AnimateForms.svg?style=flat-square)](https://www.nuget.org/packages/AnimateForms/)  [![Nuget](https://img.shields.io/nuget/dt/AnimateForms.svg?label=nuget%20downloads&style=flat-square)](https://www.nuget.org/packages/AnimateForms/)
+[![Travis (.com)](https://img.shields.io/travis/com/SDBagel/AnimateForms.svg?style=flat-square)](https://travis-ci.com/SDBagel/AnimateForms) [![Nuget](https://img.shields.io/nuget/v/AnimateForms.svg?style=flat-square)](https://www.nuget.org/packages/AnimateForms/)  [![Nuget](https://img.shields.io/nuget/dt/AnimateForms.svg?label=nuget%20downloads&style=flat-square)](https://www.nuget.org/packages/AnimateForms/)
 
 AnimateForms is a lightweight, async library for Windows Forms that provides an easy to use API. This library is inspired by the JS library [anime.js](https://animejs.com), and aims to implement some basic features similar to or functionally equivalent to that library.
 
@@ -12,7 +10,7 @@ Complete code documentation is available [here](https://sdbagel.github.io/Animat
 
 A beginner's quickstart guide can be found [here](https://sdbagel.github.io/AnimateForms/Quickstart/). This covers creating a new WinForms project, installing the library, and putting together a small application using AnimateForms and the tools it offers. 
 
-A version number will appear at the top of both pages - this is the version that they are updated to, and downloading a newer version of the library may result in unexpected behaviour.
+Version numbers are marked on the documentation. Older versions of documentation are available [here](https://sdbagel.github.io/AnimateForms/old).
 
 # What's Next
 
