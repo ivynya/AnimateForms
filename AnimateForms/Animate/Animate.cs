@@ -13,19 +13,28 @@ namespace AnimateForms.Animate
         public delegate float Function(float t, float b, float c, float d);
         private readonly List<(string, string)> _animating = new List<(string, string)>();
 
+        public static event EventHandler OnAnimationComplete;
+
+        private static Task HandleAnimationEnd(Options o)
+        {
+            OnAnimationComplete?.Invoke(null, null);
+            return Task.CompletedTask;
+        }
+
+        private static readonly string _moveName = "Move";
         public async Task<bool> Move(Control control, Function easing, int duration, Point moveTo)
         {
-            if (_animating.Contains((control.Name, "move")))
+            if (_animating.Contains((control.Name, _moveName)))
                 return false;
             else
-                _animating.Add((control.Name, "move"));
+                _animating.Add((control.Name, _moveName));
 
             Point location = control.Location;
             int yDif = moveTo.Y - location.Y;
             int xDif = moveTo.X - location.X;
             if (yDif == 0 && xDif == 0)
             {
-                _animating.Remove((control.Name, "move"));
+                _animating.Remove((control.Name, _moveName));
                 return false;
             }
 
@@ -41,7 +50,7 @@ namespace AnimateForms.Animate
                                              (int)easing(time, location.Y, yDif, duration));
             }
 
-            _animating.Remove((control.Name, "move"));
+            _animating.Remove((control.Name, _moveName));
             return true;
         }
 
@@ -126,19 +135,20 @@ namespace AnimateForms.Animate
             return success;
         }
 
+        private static readonly string _recolorName = "Recolor";
         public async Task<bool> Recolor(Control control, Function easing, int duration, Color colorTo, bool backColor = true)
         {
-            if (_animating.Contains((control.Name, "recolor")))
+            if (_animating.Contains((control.Name, _recolorName)))
                 return false;
             else
-                _animating.Add((control.Name, "recolor"));
+                _animating.Add((control.Name, _recolorName));
 
             Color color;
             if (backColor) color = control.BackColor;
             else color = control.ForeColor;
             if (color == colorTo)
             {
-                _animating.Remove((control.Name, "recolor"));
+                _animating.Remove((control.Name, _recolorName));
                 return false;
             }
 
@@ -166,16 +176,16 @@ namespace AnimateForms.Animate
                     control.ForeColor = newColor;
             }
 
-            _animating.Remove((control.Name, "recolor"));
+            _animating.Remove((control.Name, _recolorName));
             return true;
         }
 
         public async Task<bool> Recolor(Control control, Function easing, int duration, Helpers.HSV colorTo, bool backColor = true)
         {
-            if (_animating.Contains((control.Name, "recolor")))
+            if (_animating.Contains((control.Name, _recolorName)))
                 return false;
             else
-                _animating.Add((control.Name, "recolor"));
+                _animating.Add((control.Name, _recolorName));
 
             Helpers.HSV color;
             if (backColor) color = Helpers.RGBtoHSV(control.BackColor);
@@ -184,7 +194,7 @@ namespace AnimateForms.Animate
                 color.Hue == colorTo.Saturation && 
                 color.Value == colorTo.Value)
             {
-                _animating.Remove((control.Name, "recolor"));
+                _animating.Remove((control.Name, _recolorName));
                 return false;
             }
 
@@ -214,7 +224,7 @@ namespace AnimateForms.Animate
                     control.ForeColor = newColor;
             }
 
-            _animating.Remove((control.Name, "recolor"));
+            _animating.Remove((control.Name, _recolorName));
             return true;
         }
 
@@ -290,19 +300,20 @@ namespace AnimateForms.Animate
             return success;
         }
 
+        private static readonly string _resizeName = "Resize";
         public async Task<bool> Resize(Control control, Function easing, int duration, Size sizeTo)
         {
-            if (_animating.Contains((control.Name, "resize")))
+            if (_animating.Contains((control.Name, _resizeName)))
                 return false;
             else
-                _animating.Add((control.Name, "resize"));
+                _animating.Add((control.Name, _resizeName));
 
             Size size = control.Size;
             int heightDif = sizeTo.Height - size.Height;
             int widthDif = sizeTo.Width - size.Width;
             if (widthDif == 0 && heightDif == 0)
             {
-                _animating.Remove((control.Name, "resize"));
+                _animating.Remove((control.Name, _resizeName));
                 return false;
             }
 
@@ -318,7 +329,7 @@ namespace AnimateForms.Animate
                                         (int)easing(time, size.Height, heightDif, duration));
             }
 
-            _animating.Remove((control.Name, "resize"));
+            _animating.Remove((control.Name, _resizeName));
             return true;
         }
 
