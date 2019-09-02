@@ -10,11 +10,11 @@ namespace AnimateForms.Animate
 
         private struct ToRun
         {
-            internal Func<Task<bool>> func;
+            internal Func<Task> func;
             internal bool shouldAwait;
         }
 
-        public void Add(Func<Task<bool>> func, bool shouldAwait = true)
+        public void Add(Func<Task> func, bool shouldAwait = true)
         {
             _queue.Add(new ToRun
             {
