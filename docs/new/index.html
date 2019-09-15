@@ -50,8 +50,7 @@
       </div>
       <div class="card">
         <p><b><a href="#Animate">Animate.cs</a></b></p>
-        <p><a href="#Function">Function</a></p>
-        <p><a href="#Recolor">Recolor</a></p>
+        <p><a href="#Resize">Resize</a></p>
       </div>
     </div>
     <div id="documentation">
@@ -73,6 +72,34 @@
           <p><b>ProTip #1:</b> By specifying <span>await</span>, the method is run synchronously and will not allow code to continue before the method has finished executing. Instead, a discard can be used to run asynchronously:</p>
           <p><span>_ = a.Method(parameters);</span></p>
           <p><b>ProTip #2:</b> Animate classes will block two animations of the same type on the same control (unless otherwise noted in documentation). This prevents jittery graphics as two animations try to happen at once. As such, only one Animate class should ever be declared in your code.</p>
+        </div>
+      </section>
+      <section>
+        <a name="Resize"></a>
+        <div class="card doc">
+          <h2>Resize</h2>
+          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Size <span>sizeTo</span></h3>
+          <h3>Output: bool</h3>
+          <p>Resizes input <span>control</span> to input <span>sizeTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>sizeTo</span> is equal to current size or another Resize is currently being run on the control.</p>
+          <br>
+          <p><b>See Also:</b></p>
+          <p><a href="#Function">Animate.Function</a></p>
+          <p><a href="#Options">Options</a></p>
+          <br>
+          <p><b>Examples:</b> </p>
+            <p><span>
+            _ = a.Resize(control, Easings.Linear, 1000, new Point(200, 200));</span></p>
+            <p><span>
+            _ = a.Resize(new Options(), new Size(200, 200));
+          </span></p>
+          <hr>
+          <h3>Overloads:</h3>
+          <p><b><a href="#Options">Options</a> o, Size sizeTo</b></p>
+          <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
+          <div class="addition">
+            <p><b><a href="#Options">Options</a> o, int? width = null, int? height = null</b></p>
+            <p>Resizes controls while preserving a dimension. E.g. if height was left null but width was set to 0, all controls selected by the options would animate to 0px wide while preserving their individual heights.</p>
+          </div>
         </div>
       </section>
       <br>

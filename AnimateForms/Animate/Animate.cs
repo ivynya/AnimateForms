@@ -328,5 +328,40 @@ namespace AnimateForms.Animate
             await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
+
+        public async Task Resize(Options o, int? width = null, int? height = null)
+        {
+            double xMultiplier = 0;
+            double yMultiplier = 0;
+            switch (o.Alignment)
+            {
+                case "h-center": xMultiplier = 0.5; break;
+                case "right": xMultiplier = 1.0; break;
+                case "v-center": yMultiplier = 0.5; break;
+                case "bottom": yMultiplier = 1.0; break;
+                case "hv-center": xMultiplier = 0.5; yMultiplier = 0.5; break;
+            }
+
+            await Task.Delay(o.Delay);
+
+            Size sizeTo;
+            for (int i = 0; i < o.Controls.Length; i++)
+            {
+                sizeTo = o.Controls[i].Size;
+                if (width != null) sizeTo.Width = width.Value;
+                if (height != null) sizeTo.Height = height.Value;
+
+                _ = Resize(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, sizeTo);
+                if (o.Alignment != "default")
+                    _ = MoveRelative(new Options(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration),
+                                     new Point(-(int)Math.Round(xMultiplier * (sizeTo.Width - o.Controls[i].Width)),
+                                               -(int)Math.Round(yMultiplier * (sizeTo.Height - o.Controls[i].Height))));
+
+                await Task.Delay(o.Interval);
+            }
+
+            await Task.Delay(o.Duration + o.EndDelay);
+            OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
+        }
     }
 }
