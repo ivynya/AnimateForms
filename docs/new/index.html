@@ -13,7 +13,7 @@
     <nav>
       <img src="../img/ico.svg" alt="Logo">
       <a href="https://github.com/SDBagel/AnimateForms">
-        <button>Back to Repository</button>
+        <button>Repository</button>
       </a>
     </nav>
   </header>
@@ -27,8 +27,8 @@
     </div>
     <section>
       <div class="card">
-        <p>What's changed since v1.1.0 to v1.3.x? Find out here! Changes are highlighted in yellow and additions are highlighted in green. The full documentation also includes the things listed here.</p>
-        <a href="../"><button>Take me to the full documentation!</button></a>
+        <p>What's upcoming for v1.4.0a? Changes are highlighted in yellow and additions are highlighted in green.</p>
+        <a href="../"><button>Take me to the current documentation!</button></a>
       </div>
     </section>
     <div class="header">
@@ -37,44 +37,13 @@
     <section>
       <div class="card highlight">
         <h2>Animate.cs</h2>
-        <p>Recolor now has overloads for HSV.</p>
+        <p>Behavioural and feature updates.</p>
         <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Animate.cs">
           <button>View On GitHub</button></a>
         <a href="#Animate"><button>View Changes</button></a>
       </div>
-      <div class="card">
-        <h2>Easings.cs</h2>
-        <p>No changes.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Easings.cs">
-          <button>View On GitHub</button></a>
-        <a href="../#Easings"><button>View Docs</button></a>
-      </div>
     </section>
-    <section>
-      <div class="card highlight">
-        <h2>Helpers.cs</h2>
-        <p>New RGBtoHSV and HSVtoRGB helper function and HSV helper structure.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Helpers.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Helpers"><button>View Changes</button></a>
-      </div>
-      <div class="card">
-        <h2>Options.cs</h2>
-        <p>No changes.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Options.cs">
-          <button>View On GitHub</button></a>
-        <a href="../#Options"><button>View Docs</button></a>
-      </div>
-    </section>
-    <section>
-      <div class="card addition">
-        <h2>Timeline.cs</h2>
-        <p>Instantiable queue of animations. Can be repeatedly executed.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Timeline.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Timeline"><button>View Members</button></a>
-      </div>
-    </section>
+    <br>
     <div id="outline">
       <div class="header">
         <p>Outline</p>
@@ -83,16 +52,6 @@
         <p><b><a href="#Animate">Animate.cs</a></b></p>
         <p><a href="#Function">Function</a></p>
         <p><a href="#Recolor">Recolor</a></p>
-        <br>
-        <p><b><a href="#Helpers">Helpers.cs</a></b></p>
-        <p><a href="#HSV">HSV</a></p>
-        <p><a href="#RGBtoHSV">RGBtoHSV</a></p>
-        <p><a href="#HSVtoRGB">HSVtoRGB</a></p>
-        <br>
-        <p><b><a href="#Timeline">Timeline.cs</a></b></p>
-        <p><a href="#Add">Add</a></p>
-        <p><a href="#Remove">Remove</a></p>
-        <p><a href="#Execute">Execute</a></p>
       </div>
     </div>
     <div id="documentation">
@@ -101,165 +60,19 @@
         <p>Animate.cs Members</p>
       </div>
       <section>
-        <a name="Function"></a>
         <div class="card doc">
-          <h2>Function (delegate)</h2>
-          <h3>Input: float <span>t, b, c, d</span></h3>
-          <h3 class="highlight">Output: float (v1.3.0a)</h3>
-          <p>Defines an easing function that takes an input time <b>t</b> (current frame), start value <b>b</b>, change in value <b>c</b>, and duration of animation <b>d</b> and returns a float defining what the current position should be. In AnimateForms, duration and current time are both always in milliseconds.</p>
-          <br>
-          <p><b>ProTip #1:</b> You can use this delegate to define your own custom easing function, and plug it into any method for use.</p>
-          <p><b>ProTip #2:</b> The <a href="#Easings">Easings</a> class defines many preset static easing functions that can be used as a parameter for methods that need this delegate.</p>
-          <br>
-          <p><b>Example:</b> <span>Animate.Function f = Easings.Linear;</span></p>
-        </div>
-      </section>
-      <section>
-        <a name="Recolor"></a>
-        <div class="card doc">
-          <h2>Recolor</h2>
-          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Color <span>colorTo</span>, [bool <span>backColor</span> = true]</h3>
-          <h3>Output: bool</h3>
-          <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color, or if another Recolor is running on the same control already. <span>backColor</span> can be used to determine whether the BackColor or the ForeColor property of the control is changed. This function supports using an <a href="#HSV">HSV color object</a> in place of an ARGB color.</p>
-          <br>
-          <p><b>Note:</b> Limitations currently means transitioning opacities appears flickery and not great.</p>
-          <br>
-          <p><b>See Also:</b></p>
-          <p><a href="../#Function">Animate.Function</a></p>
-          <p><a href="../#Options">Options</a></p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            _ = a.Recolor(control, Easings.Linear, 1000, Color.Blue);</span></p>
-            <p><span>
-            _ = a.Resize(new Options(), Color.Blue, false);
-          </span></p>
-          <hr>
-          <h3>Overloads:</h3>
-          <div class="addition">
-            <p><b>Input: Control control, Function easing, int duration, <a href="#HSV">Helpers.HSV hsv</a>, [bool backColor = true]</b></p>
-            <p>Applies animation using an HSV color object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look to the transition.</p>
-          </div><br>
-          <p><b><a href="../#Options">Options</a> o, Color color, [bool backColor = true]</b></p>
-          <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
-          <br>
-          <p><b><a href="../#Options">Options</a> o, Color[] colors, [bool backColor = true]</b></p>
-          <p>Applies animation using an Options object, cycling through an array of colors for each control. See the Options documentation for possible modifiers.</p>
-          <br>
-          <div class="addition">
-            <p><b><a href="../#Options">Options</a> o, <a href="#HSV">Helpers.HSV color</a>, [bool backColor = true]</b></p>
-            <p>Applies animation using an HSV color and an Options object. This is provided by the <a href="#Helpers">Helpers</a> class and results in a different look to the transition.</p>
-            <br>
-            <p><b><a href="../#Options">Options</a> o, <a href="#HSV">Helpers.HSV colors</a>, [bool backColor = true]</b></p>
-            <p>Applies animation using an Options object, cycling through an array of HSV colors for each control. See the Options documentation for possible modifiers.</p>
-          </div><br>
-        </div>
-      </section>
-      <div class="header">
-        <a name="Helpers"></a>
-        <p>Helpers.cs Members</p>
-      </div>
-      <section>
-        <a name="HSV"></a>
-        <div class="card doc addition">
-          <h2>HSV (struct)</h2>
-          <h3>Parameters: double <span>Hue, Saturation, Value</span></h3>
-          <p>Holds an HSV color value for use by the <a href="#Recolor">Recolor</a> method or one of the <a href="#RGBtoHSV">RGBtoHSV</a> / <a href="#HSVtoRGB">HSVtoRGB</a> helper functions. Has a constructor so it can be called inline cleanly.</p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            var hsv = new Helpers.HSV(180, 0.5f, 0.5f);</span></p>
-            <p><span>
-            var hsv = new Helpers.HSV { Hue = 180, Saturation = 1, Value = 1 };
-          </span></p>
-        </div>
-      </section>
-      <section>
-        <a name="RGBtoHSV"></a>
-        <div class="card doc addition">
-          <h2>RGBtoHSV (static)</h2>
-          <h3>Input: Color <span>color</span></h3>
-          <h3>Output: <a href="#HSV">HSV</a></h3>
-          <p>Converts an RGB System.Drawing.Color <span>color</span> into an HSV object. If an alpha is provided, it will be ignored.</p>
-        </div>
-      </section>
-      <section>
-        <a name="HSVtoRGB"></a>
-        <div class="card doc addition">
-          <h2>HSVtoRGB (static)</h2>
-          <h3>Input: <a href="#HSV">HSV</a> <span>hsv</span></h3>
-          <h3>Output: Color</h3>
-          <p>Converts an HSV object into a System.Drawing.Color RGB color.</p>
-        </div>
-      </section>
-      <div class="header">
-        <a name="Timeline"></a>
-        <p>Timeline.cs Members</p>
-      </div>
-      <section>
-        <div class="card doc addition">
           <h2>Class Information</h2>
           <h3>Instantiable</h3>
-          <p>Timelines are instantiable objects that can store a list of animations to run later. Instantiate with:</p>
-          <p><span>private readonly Timeline t = new Timeline();</span></p>
+          <p>To start using the animate functions, first declare an animator:</p>
+          <p><span>private Animate a = new Animate();</span></p>
+          <p>Then, any animated method is run as such:</p>
+          <p><span>await a.Method(parameters);</span></p>
           <br>
-          <p>Then, add animations with the following:</p>
-          <p><span>t.Add(() => a.Method(...));</span></p>
+          <p class="highlight">AnimateForms used to return <span>false</span> if the animate call would result in nothing happening (e.g. moving a control to (0, 0) when it was already there). However, if it was called using an options object as a parameter, it would still follow through with the pre/post end delays, following through with the actual animation delay depending on the last control in the Options object. This could potentially result in erratic behaviour in certain edge cases, and so it has been modified so calls using Options must always complete their delay, interval, duration, end sequences. This comes with some performance benefits as well.</p>
           <br>
-          <p>Timelines can queue anything that returns a Task&lt;bool&gt;. As such, you can write your own custom functions to run in them.</p>
-          <br>
-          <p>When you wish to execute the timeline, use the following. Timelines can be reused, and are useful if there is a sequence of animations that need to be called repeatedly.</p>
-          <p><span>await t.Execute();</span></p>
-          <br>
-          <p><b>ProTip #1:</b> Like other animate functions, a discard <span>_ = t.Execute();</span> can be used to run the timeline without blocking code.</p>
-        </div>
-      </section>
-      <section>
-        <a name="Add"></a>
-        <div class="card doc addition">
-          <h2>Add</h2>
-          <h3>Input: Func&lt;Task&lt;bool&gt;&gt; <span>func</span>, [bool shouldAwait = true]</h3>
-          <p>Adds an animation to the timeline. Use a lambda to provide the function to add it. The animation added can be removed using the <a href="#Remove">Remove</a> method and the index of the animation added. Should await means the animation should run using an <span>await</span> tag - if this is set false, it will run using a discard <span>_ =</span> instead causing it to happen at the same time as the next animation in queue. This can cause issues as if the animations are of the same type, the second will be rejected.</p>
-          <br>
-          <p><b>ProTip:</b> You can add your own function to a timeline so long as it returns Task&lt;bool&gt;.</p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            t.Add(() => a.Move(moveOptions, new Point(0, 0)));</span></p>
-          <br>
-        </div>
-      </section>
-      <section>
-        <a name="Remove"></a>
-        <div class="card doc addition">
-          <h2>Remove</h2>
-          <h3>Input: int <span>index</span></h3>
-          <p>Calls RemoveAt(int index) on the private List of functions within the Timeline object. May throw an ArgumentOutOfBounds exception.</p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            t.Remove(3);</span></p>
-            <p><span>
-            t.Remove(0, 3);
-          </span></p>
-          <hr>
-          <h3>Overloads:</h3>
-          <p><b>int index, int count</b></p>
-          <p>Calls RemoveRange on the list instead, with index and count like normal.</p>
-          <br>
-        </div>
-      </section>
-      <section>
-        <a name="Execute"></a>
-        <div class="card doc addition">
-          <h2>Execute</h2>
-          <h3>Input: [bool discardAfterRun = false]</h3>
-          <p>Runs every action added to the Timeline object. It will await every single call. If discardAfterRun is set to true, after an animation is played, it will be removed from the Timeline object, effectively resetting the Timeline object.</p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            t.Execute();</span></p>
-          <br>
+          <p><b>ProTip #1:</b> By specifying <span>await</span>, the method is run synchronously and will not allow code to continue before the method has finished executing. Instead, a discard can be used to run asynchronously:</p>
+          <p><span>_ = a.Method(parameters);</span></p>
+          <p><b>ProTip #2:</b> Animate classes will block two animations of the same type on the same control (unless otherwise noted in documentation). This prevents jittery graphics as two animations try to happen at once. As such, only one Animate class should ever be declared in your code.</p>
         </div>
       </section>
       <br>

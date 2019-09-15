@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -53,17 +52,14 @@ namespace AnimateForms.Animate
             await Task.Delay(o.Delay);
             Point destination = moveTo;
 
-            int maxIndex = o.Controls.Length - 1;
-            for (int i = 0; i < maxIndex; i++)
+            for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = Move(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, destination);
                 destination = new Point(moveTo.X, moveTo.Y);
                 await Task.Delay(o.Interval);
             }
 
-            await Move(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
-                       o.Duration, destination);
-            await Task.Delay(o.EndDelay);
+            await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
 
@@ -72,8 +68,7 @@ namespace AnimateForms.Animate
             await Task.Delay(o.Delay);
             Point destination = moveTo;
 
-            int maxIndex = o.Controls.Length - 1;
-            for (int i = 0; i < maxIndex; i++)
+            for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = Move(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, destination);
                 destination = new Point(moveTo.X + (offset.X * (i + 1)),
@@ -81,9 +76,7 @@ namespace AnimateForms.Animate
                 await Task.Delay(o.Interval);
             }
 
-            await Move(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
-                       o.Duration, destination);
-            await Task.Delay(o.EndDelay);
+            await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
 
@@ -116,16 +109,13 @@ namespace AnimateForms.Animate
         {
             await Task.Delay(o.Delay);
 
-            int maxIndex = o.Controls.Length - 1;
-            for (int i = 0; i < maxIndex; i++)
+            for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = MoveRelative(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, offset);
                 await Task.Delay(o.Interval);
             }
 
-            await MoveRelative(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
-                               o.Duration, offset);
-            await Task.Delay(o.EndDelay);
+            await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
 
@@ -222,17 +212,14 @@ namespace AnimateForms.Animate
         {
             await Task.Delay(o.Delay);
 
-            int maxIndex = o.Controls.Length - 1;
-            for (int i = 0; i < maxIndex; i++)
+            for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration,
                             color, backColor);
                 await Task.Delay(o.Interval);
             }
 
-            await Recolor(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
-                          o.Duration, color, backColor);
-            await Task.Delay(o.EndDelay);
+            await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
 
@@ -240,17 +227,14 @@ namespace AnimateForms.Animate
         {
             await Task.Delay(o.Delay);
 
-            int maxIndex = o.Controls.Length - 1;
-            for (int i = 0; i < maxIndex; i++)
+            for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length],
                             o.Duration, colors[i % colors.Length], backColor);
                 await Task.Delay(o.Interval);
             }
 
-            await Recolor(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
-                          o.Duration, colors[maxIndex % colors.Length], backColor);
-            await Task.Delay(o.EndDelay);
+            await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
 
@@ -258,17 +242,14 @@ namespace AnimateForms.Animate
         {
             await Task.Delay(o.Delay);
 
-            int maxIndex = o.Controls.Length - 1;
-            for (int i = 0; i < maxIndex; i++)
+            for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length],
                             o.Duration, color, backColor);
                 await Task.Delay(o.Interval);
             }
 
-            await Recolor(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
-                          o.Duration, color, backColor);
-            await Task.Delay(o.EndDelay);
+            await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
 
@@ -276,17 +257,14 @@ namespace AnimateForms.Animate
         {
             await Task.Delay(o.Delay);
 
-            int maxIndex = o.Controls.Length - 1;
-            for (int i = 0; i < maxIndex; i++)
+            for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = Recolor(o.Controls[i], o.Easings[i % o.Easings.Length],
                             o.Duration, colors[i % colors.Length], backColor);
                 await Task.Delay(o.Interval);
             }
 
-            await Recolor(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length],
-                          o.Duration, colors[maxIndex % colors.Length], backColor);
-            await Task.Delay(o.EndDelay);
+            await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
 
@@ -336,8 +314,7 @@ namespace AnimateForms.Animate
 
             await Task.Delay(o.Delay);
 
-            int maxIndex = o.Controls.Length - 1;
-            for (int i = 0; i < maxIndex; i++)
+            for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = Resize(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, sizeTo);
                 if (o.Alignment != "default")
@@ -348,13 +325,7 @@ namespace AnimateForms.Animate
                 await Task.Delay(o.Interval);
             }
 
-            if (o.Alignment != "default")
-                _ = MoveRelative(new Options(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length], o.Duration),
-                                 new Point(-(int)Math.Round(xMultiplier * (sizeTo.Width - o.Controls.Last().Width)),
-                                           -(int)Math.Round(yMultiplier * (sizeTo.Height - o.Controls.Last().Height))));
-            await Resize(o.Controls.Last(), o.Easings[maxIndex % o.Easings.Length], o.Duration, sizeTo);
-
-            await Task.Delay(o.EndDelay);
+            await Task.Delay(o.Duration + o.EndDelay);
             OnAnimationComplete?.Invoke(o.Controls, new EventArgs());
         }
     }
