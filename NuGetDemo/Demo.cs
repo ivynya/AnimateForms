@@ -21,7 +21,7 @@ namespace NuGetDemo
 
         private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://sdbagel.github.io/AnimateForms/Quickstart");
+            System.Diagnostics.Process.Start("https://sdbagel.github.io/AnimateForms/quickstart");
         }
 
         private async void Button1_Click(object sender, EventArgs e)

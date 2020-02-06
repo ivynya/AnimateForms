@@ -43,19 +43,24 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.AnimateFormsLogo = new System.Windows.Forms.Panel();
+            this.LogoPanelTop = new System.Windows.Forms.Panel();
+            this.LogoPanelBottom = new System.Windows.Forms.Panel();
+            this.LogoPanelLeft = new System.Windows.Forms.Panel();
+            this.AnimateFormsLogo.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.panel1.Location = new System.Drawing.Point(21, 296);
+            this.panel1.Location = new System.Drawing.Point(21, 358);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(30, 30);
             this.panel1.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(20, 263);
+            this.button1.Location = new System.Drawing.Point(20, 325);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 27);
             this.button1.TabIndex = 1;
@@ -67,11 +72,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Trebuchet MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(15, 9);
+            this.label1.Location = new System.Drawing.Point(119, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(486, 36);
+            this.label1.Size = new System.Drawing.Size(455, 36);
             this.label1.TabIndex = 2;
-            this.label1.Text = "NuGet Demo Application v1.1.0-alpha";
+            this.label1.Text = "AnimateForms v1.3.2a Nuget Demo";
             // 
             // linkLabel1
             // 
@@ -79,7 +84,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel1.LinkColor = System.Drawing.Color.CadetBlue;
-            this.linkLabel1.Location = new System.Drawing.Point(17, 56);
+            this.linkLabel1.Location = new System.Drawing.Point(121, 71);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(166, 23);
             this.linkLabel1.TabIndex = 3;
@@ -90,7 +95,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(176, 263);
+            this.button2.Location = new System.Drawing.Point(176, 325);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 27);
             this.button2.TabIndex = 4;
@@ -104,7 +109,7 @@
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel2.LinkColor = System.Drawing.Color.CadetBlue;
-            this.linkLabel2.Location = new System.Drawing.Point(215, 56);
+            this.linkLabel2.Location = new System.Drawing.Point(311, 71);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(178, 23);
             this.linkLabel2.TabIndex = 5;
@@ -115,7 +120,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(176, 100);
+            this.button3.Location = new System.Drawing.Point(176, 162);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(150, 27);
             this.button3.TabIndex = 8;
@@ -125,7 +130,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(20, 100);
+            this.button4.Location = new System.Drawing.Point(20, 162);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(150, 27);
             this.button4.TabIndex = 7;
@@ -136,14 +141,14 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.panel2.Location = new System.Drawing.Point(21, 133);
+            this.panel2.Location = new System.Drawing.Point(21, 195);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(30, 30);
             this.panel2.TabIndex = 6;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(176, 342);
+            this.button5.Location = new System.Drawing.Point(176, 404);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(150, 27);
             this.button5.TabIndex = 11;
@@ -153,7 +158,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(20, 342);
+            this.button6.Location = new System.Drawing.Point(20, 404);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(150, 27);
             this.button6.TabIndex = 10;
@@ -164,14 +169,14 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.panel3.Location = new System.Drawing.Point(21, 375);
+            this.panel3.Location = new System.Drawing.Point(21, 437);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(30, 30);
             this.panel3.TabIndex = 9;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(176, 180);
+            this.button7.Location = new System.Drawing.Point(176, 242);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(150, 27);
             this.button7.TabIndex = 14;
@@ -181,7 +186,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(21, 180);
+            this.button8.Location = new System.Drawing.Point(21, 242);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(150, 27);
             this.button8.TabIndex = 13;
@@ -192,16 +197,54 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.panel4.Location = new System.Drawing.Point(22, 213);
+            this.panel4.Location = new System.Drawing.Point(22, 275);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(30, 30);
             this.panel4.TabIndex = 12;
+            // 
+            // AnimateFormsLogo
+            // 
+            this.AnimateFormsLogo.BackColor = System.Drawing.Color.FloralWhite;
+            this.AnimateFormsLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AnimateFormsLogo.Controls.Add(this.LogoPanelLeft);
+            this.AnimateFormsLogo.Controls.Add(this.LogoPanelBottom);
+            this.AnimateFormsLogo.Controls.Add(this.LogoPanelTop);
+            this.AnimateFormsLogo.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.AnimateFormsLogo.Location = new System.Drawing.Point(15, 15);
+            this.AnimateFormsLogo.Name = "AnimateFormsLogo";
+            this.AnimateFormsLogo.Size = new System.Drawing.Size(80, 80);
+            this.AnimateFormsLogo.TabIndex = 15;
+            // 
+            // LogoPanelTop
+            // 
+            this.LogoPanelTop.BackColor = System.Drawing.Color.Moccasin;
+            this.LogoPanelTop.Location = new System.Drawing.Point(30, 0);
+            this.LogoPanelTop.Name = "LogoPanelTop";
+            this.LogoPanelTop.Size = new System.Drawing.Size(50, 55);
+            this.LogoPanelTop.TabIndex = 0;
+            // 
+            // LogoPanelBottom
+            // 
+            this.LogoPanelBottom.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.LogoPanelBottom.Location = new System.Drawing.Point(30, 55);
+            this.LogoPanelBottom.Name = "LogoPanelBottom";
+            this.LogoPanelBottom.Size = new System.Drawing.Size(50, 25);
+            this.LogoPanelBottom.TabIndex = 1;
+            // 
+            // LogoPanelLeft
+            // 
+            this.LogoPanelLeft.BackColor = System.Drawing.Color.LightSalmon;
+            this.LogoPanelLeft.Location = new System.Drawing.Point(0, 20);
+            this.LogoPanelLeft.Name = "LogoPanelLeft";
+            this.LogoPanelLeft.Size = new System.Drawing.Size(30, 40);
+            this.LogoPanelLeft.TabIndex = 1;
             // 
             // Demo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 433);
+            this.ClientSize = new System.Drawing.Size(942, 673);
+            this.Controls.Add(this.AnimateFormsLogo);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.panel4);
@@ -219,6 +262,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Demo";
             this.Text = "Demo";
+            this.AnimateFormsLogo.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,6 +285,10 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel AnimateFormsLogo;
+        private System.Windows.Forms.Panel LogoPanelTop;
+        private System.Windows.Forms.Panel LogoPanelLeft;
+        private System.Windows.Forms.Panel LogoPanelBottom;
     }
 }
 

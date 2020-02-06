@@ -138,6 +138,22 @@ nav button:hover {
   width: 25%;
 }
 
+#outline::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#outline::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#outline::-webkit-scrollbar-thumb {
+  background-color: #abc;
+  border-radius: 10px;
+  -webkit-box-shadow: rgba(0,0,0,.12) 0 3px 13px 1px;
+}
+
 #outline .card {
   margin: 0;
   padding: 0;
