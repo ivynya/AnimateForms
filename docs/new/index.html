@@ -42,6 +42,13 @@
           <button>View On GitHub</button></a>
         <a href="#Animate"><button>View Changes</button></a>
       </div>
+      <div class="card highlight">
+        <h2>Helpers.cs</h2>
+        <p>API change for code clarity.</p>
+        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Helpers.cs">
+          <button>View On GitHub</button></a>
+        <a href="#Helpers"><button>View Members</button></a>
+      </div>
     </section>
     <br>
     <div id="outline">
@@ -51,6 +58,12 @@
       <div class="card">
         <p><b><a href="#Animate">Animate.cs</a></b></p>
         <p><a href="#Resize">Resize</a></p>
+        <br>
+        <p><b><a href="#Helpers">Helpers.cs</a></b></p>
+        <p><a href="#CollectionToArray">CollectionToArray</a></p>
+        <p><a href="#HSVtoRGB">HSVtoRGB</a></p>
+        <p><a href="#RGBtoHSV">RGBtoHSV</a></p>
+        <p><a href="#SortCollectionByName">SortCollectionByName</a></p>
       </div>
     </div>
     <div id="documentation">
@@ -103,6 +116,55 @@
         </div>
       </section>
       <br>
+      <div class="header">
+        <a name="Helpers"></a>
+        <p>Helpers.cs Members</p>
+      </div>
+      <section class="highlight">
+        <div class="card doc">
+          <h2>Class Information</h2>
+          <h3>Static</h3>
+          <p>The Helpers class is a static class containing useful methods relating to, but not necessary to AnimateForms. In v1.4.0a, Helper methods like <a href="#CollectionToArray">CollectionToArray</a> will be renamed to shorter things like <span>ToArray</span> and be converted to extension methods for their respective inputs. Their function will remain the same. If desired, extension methods can be called using the old method, passing in an argument into the method.</p>
+        </div>
+      </section>
+      <section>
+        <a name="CollectionToArray"></a>
+        <div class="card doc">
+          <h2 class="highlight">ToArray (static, extension: Control.ControlCollection)</h2>
+          <h3 class="highlight">Extension: <span>controlCollection.ToArray();</span></h3 class="highlight">
+          <h3>Output: Control[]</h3>
+          <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array for use in the animation functions.</p>
+          <br>
+          <p><b>ProTip:</b> ControlCollections seem to be organized randomly, and you should only use this function when the resulting order of the array doesn't matter.</p>
+        </div>
+      </section>
+      <section>
+        <a name="HSVtoRGB"></a>
+        <div class="card doc">
+          <h2 class="highlight">ToRGB (static, extension: <a href="#HSV">HSV</a>)</h2 class="highlight">
+          <h3 class="highlight">Extension: <span>hsv.ToRGB();</span></h3 class="highlight">
+          <h3>Output: System.Drawing.Color</h3>
+          <p>Converts an HSV object into a System.Drawing.Color RGB color.</p>
+        </div>
+      </section>
+      <section>
+        <a name="RGBtoHSV"></a>
+        <div class="card doc">
+          <h2 class="highlight">ToHSV (static, extension: System.Drawing.Color)</h2 class="highlight">
+          <h3 class="highlight">Extension: <span>color.ToHSV();</span></h3 class="highlight">
+          <h3>Output: <a href="#HSV">HSV</a></h3>
+          <p>Converts an RGB System.Drawing.Color <span>color</span> into an HSV object. If an alpha is provided, it will be ignored.</p>
+        </div>
+      </section>
+      <section>
+        <a name="SortCollectionByName"></a>
+        <div class="card doc">
+          <h2 class="highlight">SortByName (static, extension: Control.ControlCollection)</h2 class="highlight">
+          <h3 class="highlight">Extension: <span>controlCollection.SortByName();</span></h3 class="highlight">
+          <h3>Output: Control[]</h3>
+          <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array, which is sorted by the control's Name property in alphabetical order.</p>
+        </div>
+      </section>
     </div>
     <br>
   </div>

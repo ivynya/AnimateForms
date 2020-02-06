@@ -168,8 +168,8 @@ namespace AnimateForms.Animate
             else _animating.Add((control.Name, _recolorName));
 
             Helpers.HSV color;
-            if (backColor) color = Helpers.RGBtoHSV(control.BackColor);
-            else color = Helpers.RGBtoHSV(control.ForeColor);
+            if (backColor) color = Helpers.ToHSV(control.BackColor);
+            else color = Helpers.ToHSV(control.ForeColor);
             if (color.Hue == colorTo.Hue && 
                 color.Hue == colorTo.Saturation && 
                 color.Value == colorTo.Value)
@@ -196,7 +196,7 @@ namespace AnimateForms.Animate
                     Saturation = easing(time, color.Saturation, sDif, duration),
                     Value = easing(time, color.Value, vDif, duration)
                 };
-                Color newColor = Helpers.HSVtoRGB(newHSV);
+                Color newColor = Helpers.ToRGB(newHSV);
 
                 if (backColor)
                     control.BackColor = newColor;

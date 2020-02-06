@@ -23,13 +23,13 @@ namespace AnimateForms.Animate
         }
 
 
-        public static Control[] CollectionToArray(Control.ControlCollection controlCollection)
+        public static Control[] ToArray(this Control.ControlCollection controlCollection)
         {
             IEnumerable<Control> controls = controlCollection.OfType<Control>();
             return controls.ToArray();
         }
 
-        public static Control[] SortCollectionByName(Control.ControlCollection controlCollection)
+        public static Control[] SortByName(this Control.ControlCollection controlCollection)
         {
             IEnumerable<Control> controls = controlCollection.OfType<Control>();
             Control[] controlsArray = controls.ToArray();
@@ -39,7 +39,7 @@ namespace AnimateForms.Animate
             return controlsArray;
         }
 
-        public static HSV RGBtoHSV(Color rgb)
+        public static HSV ToHSV(this Color rgb)
         {
             int max = Math.Max(rgb.R, Math.Max(rgb.G, rgb.B));
             int min = Math.Min(rgb.R, Math.Min(rgb.G, rgb.B));
@@ -60,7 +60,7 @@ namespace AnimateForms.Animate
             return v - v * s * Math.Max(Math.Min(k, Math.Min(4d - k, 1d)), 0);
         }
 
-        public static Color HSVtoRGB(HSV hsv)
+        public static Color ToRGB(this HSV hsv)
         {
             return Color.FromArgb((int)(HSVtoRGBHelper(hsv.Hue, hsv.Saturation, hsv.Value, 5) * 255),
                                   (int)(HSVtoRGBHelper(hsv.Hue, hsv.Saturation, hsv.Value, 3) * 255),
