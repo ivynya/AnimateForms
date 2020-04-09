@@ -37,10 +37,20 @@ namespace AnimateForms.Animate
 
         public Control[] Controls { get; set; }
         public Function[] Easings { get; set; } = { Linear };
-        public string Alignment { get; set; } = "default";
+        public Alignment Alignment { get; set; } = Alignment.Default;
         public int Duration { get; set; } = 1000;
         public int Delay { get; set; } = 0;
         public int EndDelay { get; set; } = 0;
         public int Interval { get; set; } = 0;
+    }
+
+    public enum Alignment
+    {
+        Default,
+        HorizontalCenter,
+        VerticalCenter,
+        AbsoluteCenter,
+        Right,
+        Bottom
     }
 }

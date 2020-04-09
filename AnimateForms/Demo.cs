@@ -25,7 +25,7 @@ namespace AnimateForms
                     Controls = parent.Controls.SortByName(),
                     Easings = Easings.AllEasings,
                     Duration = d,
-                    Alignment = "h-center"
+                    Alignment = Alignment.HorizontalCenter
                 }, eS);
         }
 
@@ -36,7 +36,7 @@ namespace AnimateForms
                     Controls = parent.Controls.SortByName(),
                     Easings = Easings.AllEasings,
                     Duration = d,
-                    Alignment = "h-center"
+                    Alignment = Alignment.HorizontalCenter
                 }, dS);
         }
 
@@ -66,7 +66,7 @@ namespace AnimateForms
                 Controls = controls,
                 Easings = Easings.AllEasings,
                 Duration = d,
-                Alignment = "h-center"
+                Alignment = Alignment.HorizontalCenter
             };
 
             Timeline t = new Timeline();

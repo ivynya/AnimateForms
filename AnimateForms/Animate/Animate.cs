@@ -305,11 +305,11 @@ namespace AnimateForms.Animate
             double yMultiplier = 0;
             switch (o.Alignment)
             {
-                case "h-center": xMultiplier = 0.5; break;
-                case "right": xMultiplier = 1.0; break;
-                case "v-center": yMultiplier = 0.5; break;
-                case "bottom": yMultiplier = 1.0; break;
-                case "hv-center": xMultiplier = 0.5; yMultiplier = 0.5; break;
+                case Alignment.HorizontalCenter: xMultiplier = 0.5; break;
+                case Alignment.Right: xMultiplier = 1.0; break;
+                case Alignment.VerticalCenter: yMultiplier = 0.5; break;
+                case Alignment.Bottom: yMultiplier = 1.0; break;
+                case Alignment.AbsoluteCenter: xMultiplier = 0.5; yMultiplier = 0.5; break;
             }
 
             await Task.Delay(o.Delay);
@@ -317,7 +317,7 @@ namespace AnimateForms.Animate
             for (int i = 0; i < o.Controls.Length; i++)
             {
                 _ = Resize(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, sizeTo);
-                if (o.Alignment != "default")
+                if (o.Alignment != Alignment.Default)
                     _ = MoveRelative(new Options(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration),
                                      new Point(-(int)Math.Round(xMultiplier * (sizeTo.Width - o.Controls[i].Width)),
                                                -(int)Math.Round(yMultiplier * (sizeTo.Height - o.Controls[i].Height))));
@@ -335,11 +335,11 @@ namespace AnimateForms.Animate
             double yMultiplier = 0;
             switch (o.Alignment)
             {
-                case "h-center": xMultiplier = 0.5; break;
-                case "right": xMultiplier = 1.0; break;
-                case "v-center": yMultiplier = 0.5; break;
-                case "bottom": yMultiplier = 1.0; break;
-                case "hv-center": xMultiplier = 0.5; yMultiplier = 0.5; break;
+                case Alignment.HorizontalCenter: xMultiplier = 0.5; break;
+                case Alignment.Right: xMultiplier = 1.0; break;
+                case Alignment.VerticalCenter: yMultiplier = 0.5; break;
+                case Alignment.Bottom: yMultiplier = 1.0; break;
+                case Alignment.AbsoluteCenter: xMultiplier = 0.5; yMultiplier = 0.5; break;
             }
 
             await Task.Delay(o.Delay);
@@ -352,7 +352,7 @@ namespace AnimateForms.Animate
                 if (height != null) sizeTo.Height = height.Value;
 
                 _ = Resize(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration, sizeTo);
-                if (o.Alignment != "default")
+                if (o.Alignment != Alignment.Default)
                     _ = MoveRelative(new Options(o.Controls[i], o.Easings[i % o.Easings.Length], o.Duration),
                                      new Point(-(int)Math.Round(xMultiplier * (sizeTo.Width - o.Controls[i].Width)),
                                                -(int)Math.Round(yMultiplier * (sizeTo.Height - o.Controls[i].Height))));

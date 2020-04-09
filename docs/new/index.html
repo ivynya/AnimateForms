@@ -49,6 +49,13 @@
           <button>View On GitHub</button></a>
         <a href="#Helpers"><button>View Members</button></a>
       </div>
+      <div class="card highlight">
+        <h2>Options.cs</h2>
+        <p>Added new alignment option for resizing controls.</p>
+        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Options.cs">
+          <button>View On GitHub</button></a>
+        <a href="#Options"><button>View Members</button></a>
+      </div>
     </section>
     <br>
     <div id="outline">
@@ -64,6 +71,9 @@
         <p><a href="#HSVtoRGB">HSVtoRGB</a></p>
         <p><a href="#RGBtoHSV">RGBtoHSV</a></p>
         <p><a href="#SortCollectionByName">SortCollectionByName</a></p>
+        <br>
+        <p><b><a href="#Options">Options.cs</a></b></p>
+        <p><a href="#Alignment">Alignment</a></p>
       </div>
     </div>
     <div id="documentation">
@@ -163,6 +173,48 @@
           <h3 class="highlight">Extension: <span>controlCollection.SortByName();</span></h3 class="highlight">
           <h3>Output: Control[]</h3>
           <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array, which is sorted by the control's Name property in alphabetical order.</p>
+        </div>
+      </section>
+      <div class="header">
+        <a name="Options"></a>
+        <p>Options.cs Members</p>
+      </div>
+      <section>
+        <a name="Options"></a>
+        <div class="card doc">
+          <h2>Options</h2>
+          <h3>Parameters: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span></h3>
+          <h3>Optional Parameters: Control[] <span>controls</span>*, Function[] <span>easings</span>*, int <span>delay</span>, int <span>interval</span></h3>
+          <h3>Non-Constructor Paramters: int <span>endDelay</span></h3>
+          <p>An options object to allow greater control over some animation functions. It can be created by using a constructor with parameters or by setting each element individually. Currently, all animations will accept an options object and will process all parameters set in one, since the options are universal.</p>
+          <br>
+          <p><b>See Also:</b> <a href="#Function">Animate.Function</a></p>
+          <br>
+          <p class="addition"><b>Alignment:</b> Uses the <a href="#Alignment">Alignment enumerable</a>. Determines transform origin of control for resizing.</p>
+          <p><b>Easing:</b> Easing function to use. Default = Linear.</p>
+          <p><b>Duration:</b> Duration of animation, in milliseconds. Default = 1000ms.</p>
+          <p><b>Delay:</b> Delay before animation starts.** Default = 0ms.</p>
+          <p><b>EndDelay:</b> Delay after animation ends.** Default = 0ms.</p>
+          <p><b>Interval:</b> Time between animations executing in bulk animation commands. Default = 0ms.</p>
+          <br>
+          <p>*Single control and single functions that get passed in as parameters get parsed into an array by the Options object anyway.</p>
+          <p>**If this is specified and the animation returns or will return false, it will still wait for this amount of time.</p>
+          <br>
+        </div>
+      </section>
+      <section class="addition">
+        <a name="Alignment"></a>
+        <div class="card doc">
+          <h2>Alignment</h2>
+          <h3><b>Enumerable</b>></h3>
+          <p>An enumerable that determines the control's transform origin during resize.</p>
+          <br>
+          <p>Default - Top left aligned (default)</p>
+          <p>HorizontalCenter - Aligned to the top and horizontally centered</p>
+          <p>VerticalCenter - Aligned to the left and vertically centered</p>
+          <p>AbsoluteCenter - Aligned to the very middle of the control</p>
+          <p>Right - Top right aligned</p>
+          <p>Bottom - Bottom left aligned</p>
         </div>
       </section>
     </div>
