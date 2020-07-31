@@ -2,18 +2,21 @@
 <html>
 <head>
   <title>AnimateForms v1.3.2a</title>
+  <meta name="description" content="AnimateForms is a lightweight, asynchronous Windows Forms animation library. Use it to build your next WinForms project today.">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="lib/flexcore.min.css">
   <link rel="stylesheet" type="text/css" href="css/site.css">
 </head>
 <body>
   <header>
-    <nav>
+    <nav class="flex-row align-center">
       <img src="img/ico.svg" alt="Logo">
+      <span class="nav-spacer"></span>
       <a href="https://github.com/SDBagel/AnimateForms">
-        <button>Repository</button>
+        <button>GitHub</button>
       </a>
     </nav>
   </header>
@@ -21,144 +24,131 @@
     <img src="img/Code-Banner.png" alt="Banner with Code">
     <h1>AnimateForms</h1>
   </div>
-  <div class="container">
-    <div class="header">
-      <p>Documentation</p>
+  <div class="container-wide">
+    <div class="flex-column align-center">
+      <p><b>Documentation version: <code>v1.3.2-alpha</code></b></p>
+      <p><b><a href="old/">Need older documentation?</a> | <a href="new/">What's next in v1.4.0a?</a></b></p>
     </div>
-    <section>
-      <div class="card">
-        <p><b>Documentation version: <span>v1.3.2-alpha</span></b></p><br>
-        <p><b>Need older versions? <a href="old/">Check here.</a></b></p>
-        <p><b>What's coming next in v1.4.0a? <a href="new/">Check here.</a></b></p>
-      </div>
-    </section>
-    <section>
-      <div class="card">
+    <br>
+    <section class="flex-smart flex-list">
+      <div class="card flex">
         <h2>Preproduction Warning</h2>
-        <p>SDProductions does not recommend the 'plug and play' use of this library in production environments yet. Edge case issues may not be covered. Please also test your software before deploying. You have been warned.</p>
+        <p>While this library is mostly stable, I don't recommend the use of it in production. You have been warned.</p>
       </div>
-      <div class="card">
+      <div class="card flex">
         <h2>Examples & Demos</h2>
-        <p>Examples are included with each documented item, if deemed necessary. A basic demo application highlighting some functionality has been released.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/releases">
-          <button>Download On GitHub</button></a>
+        <p>Example snippets are included in this documentation. <a href="https://github.com/SDBagel/AnimateForms/releases">A basic demo app is available on GitHub.</a></p>
       </div>
-      <div class="card">
+      <div class="card flex">
         <h2>Pro Tips</h2>
-        <p>This page includes the best ways to make your code janky, but functional. New to AnimateForms? No worries! Check out our quickstart guide to get yourself up and running.</p>
-        <a href="quickstart">
-          <button>Quickstart Guide</button></a>
+        <p>New to AnimateForms? No worries! <a href="quickstart">Check out our quickstart guide</a> to get yourself up and running.</p>
       </div>
     </section>
+    <br>
     <div class="header">
-      <p>Classes Included</p>
+      <h2>Included Classes</h2>
     </div>
-    <section>
-      <div class="card">
-        <h2>Animate.cs</h2>
-        <p>An instantiable (but only one is needed) class to facilitate with animation.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Animate.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Animate"><button>View Members</button></a>
+    <section class="flex-smart flex-list">
+      <div class="card flex">
+        <div class="flex-row justify-between">
+          <h2>Animate.cs</h2>
+          <a href="#Animate">View Docs</a>
+        </div>
+        <p>An instantiable class to facilitate with animating WinForms controls.</p>
       </div>
-      <div class="card">
-        <h2>Easings.cs</h2>
-        <p>Static class with all easing functions from <a href="http://gizma.com/easing/">Gizma</a>.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Easings.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Easings"><button>View Members</button></a>
+      <div class="card flex">
+        <div class="flex-row justify-between">
+          <h2>Easings.cs</h2>
+          <a href="#Easings">View Docs</a>
+        </div>
+        <p>Static class with all easing functions from <a href="http://gizma.com/easing/">gizma.com</a>.</p>
       </div>
-    </section>
-    <section>
-      <div class="card">
-        <h2>Helpers.cs</h2>
+      <div class="card flex">
+        <div class="flex-row justify-between">
+          <h2>Helpers.cs</h2>
+          <a href="#Helpers">View Docs</a>
+        </div>
         <p>Static class with functions to assist with using the API.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Helpers.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Helpers"><button>View Members</button></a>
-      </div>
-      <div class="card">
-        <h2>Options.cs</h2>
-        <p>Instantiable options class to assist with using the API.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Options.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Options"><button>View Members</button></a>
       </div>
     </section>
-    <section>
-      <div class="card">
-        <h2>Timeline.cs</h2>
-        <p>Instantiable queue of animations. Can be repeatedly executed.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Timeline.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Timeline"><button>View Members</button></a>
+    <br>
+    <section class="flex-smart flex-list">
+      <div class="card flex">
+        <div class="flex-row justify-between">
+          <h2>Options.cs</h2>
+          <a href="#Options">View Docs</a>
+        </div>
+        <p>Instantiable options class to assist with using the API.</p>
+      </div>
+      <div class="card flex">
+        <div class="flex-row justify-between">
+          <h2>Timeline.cs</h2>
+          <a href="#Timeline">View Docs</a>
+        </div>
+        <p>Instantiable queue of animations. Can be reused.</p>
       </div>
     </section>
   </div>
   <br>
-  <div id="content">
-    <div id="outline">
-      <div class="header">
-        <p>Outline</p>
-      </div>
-      <div class="card">
-        <p><b><a href="#Introduction">Introduction</a></b></p>
-        <p><b><a href="#Animate">Animate.cs</a></b></p>
-        <p><a href="#Function">Function</a></p>
-        <p><a href="#Move">Move</a></p>
-        <p><a href="#MoveRelative">MoveRelative</a></p>
-        <p><a href="#Recolor">Recolor</a></p>
-        <p><a href="#Resize">Resize</a></p>
-        <br>
-        <p><b><a href="#Easings">Easings.cs</a></b></p>
-        <p><a href="#AllEasings">AllEasings</a></p>
-        <p><a href="#ImplementedEasings">Implemented</a></p>
-        <br>
-        <p><b><a href="#Helpers">Helpers.cs</a></b></p>
-        <p><a href="#CollectionToArray">CollectionToArray</a></p>
-        <p><a href="#HSV">HSV</a></p>
-        <p><a href="#HSVtoRGB">HSVtoRGB</a></p>
-        <p><a href="#RGBtoHSV">RGBtoHSV</a></p>
-        <p><a href="#SortCollectionByName">SortCollectionByName</a></p>
-        <br>
-        <p><b><a href="#Options">Options.cs</a></b></p>
-        <br>
-        <p><b><a href="#Timeline">Timeline.cs</a></b></p>
-        <p><a href="#Add">Add</a></p>
-        <p><a href="#Remove">Remove</a></p>
-        <p><a href="#Execute">Execute</a></p>
-        <br>
-      </div>
+  <div class="container-wide flex-smart">
+    <div id="outline" class="flex-column flex-list">
+      <h2>Outline</h2>
+      <b><a href="#Introduction">Introduction</a></b>
+      <b><a href="#Animate">Animate.cs</a></b>
+      <a href="#Function">Function</a>
+      <a href="#Move">Move</a>
+      <a href="#MoveRelative">MoveRelative</a>
+      <a href="#Recolor">Recolor</a>
+      <a href="#Resize">Resize</a>
+      <br>
+      <b><a href="#Easings">Easings.cs</a></b>
+      <a href="#AllEasings">AllEasings</a>
+      <a href="#ImplementedEasings">Implemented</a>
+      <br>
+      <b><a href="#Helpers">Helpers.cs</a></b>
+      <a href="#CollectionToArray">CollectionToArray</a>
+      <a href="#HSV">HSV</a>
+      <a href="#HSVtoRGB">HSVtoRGB</a>
+      <a href="#RGBtoHSV">RGBtoHSV</a>
+      <a href="#SortCollectionByName">SortCollectionByName</a>
+      <br>
+      <b><a href="#Options">Options.cs</a></b>
+      <br>
+      <b><a href="#Timeline">Timeline.cs</a></b>
+      <a href="#Add">Add</a>
+      <a href="#Remove">Remove</a>
+      <a href="#Execute">Execute</a>
+      <br>
     </div>
-    <div id="documentation">
+    <div class="flex flex-column flex-list">
       <div class="header">
         <a name="Introduction"></a>
-        <p>Introduction</p>
+        <h2>Introduction</h2>
       </div>
       <section>
         <div class="card">
           <p>AnimateForms is built around a single instantiable <a href="#Animate">Animate</a> class to call animations, with each animation (method, e.g. <a href="#Resize">Resize</a>) having a single "simple" form with "advanced" overloads as an option.</p>
           <br>
-          <p>A method's "simple" form consists of the parameters <span>Control c, Function easing, int duration</span>, as well as any method-specific parameters needed, like <a href="#Move">Move</a>'s parameter <span>Point moveTo</span>. A method's "advanced" form consists of an <a href="#Options">Options</a> object as a parameter, and any method-specific parameters. The Options object is a flexible tool for calling animations and specifying more parameters, like <span>Delay</span>, and even specifying arrays of Controls or easings to use. See the <a href="#Options">Options</a> documentation for more info.</p>
+          <p>A method's "simple" form consists of the parameters <code>Control c, Function easing, int duration</code>, as well as any method-specific parameters needed, like <a href="#Move">Move</a>'s parameter <code>Point moveTo</code>. A method's "advanced" form consists of an <a href="#Options">Options</a> object as a parameter, and any method-specific parameters. The Options object is a flexible tool for calling animations and specifying more parameters, like <code>Delay</code>, and even specifying arrays of Controls or easings to use. See the <a href="#Options">Options</a> documentation for more info.</p>
           <br>
-          <p><b>This documentation's included examples assume you have declared an <a href="#Animate">Animate</a> class named <span>a</span>.</b></p>
+          <p><b>This documentation's included examples assume you have declared an <a href="#Animate">Animate</a> class named <code>a</code>.</b></p>
         </div>
       </section>
       <div class="header">
         <a name="Animate"></a>
-        <p>Animate.cs Members</p>
+        <h2>Animate.cs Members</h2>
       </div>
       <section>
         <div class="card doc">
           <h2>Class Information</h2>
           <h3>Instantiable</h3>
           <p>To start using the animate functions, first declare an animator:</p>
-          <p><span>private Animate a = new Animate();</span></p>
+          <p><code>private Animate a = new Animate();</code></p>
           <p>Then, any animated method is run as such:</p>
-          <p><span>await a.Method(parameters);</span></p>
+          <p><code>await a.Method(parameters);</code></p>
           <br>
-          <p><b>ProTip #1:</b> By specifying <span>await</span>, the method is run synchronously and will not allow code to continue before the method has finished executing. Instead, a discard can be used to run asynchronously:</p>
-          <p><span>_ = a.Method(parameters);</span></p>
+          <p><b>ProTip #1:</b> By specifying <code>await</code>, the method is run synchronously and will not allow code to continue before the method has finished executing. Instead, a discard can be used to run asynchronously:</p>
+          <p><code>_ = a.Method(parameters);</code></p>
           <p><b>ProTip #2:</b> Animate classes will block two animations of the same type on the same control (unless otherwise noted in documentation). This prevents jittery graphics as two animations try to happen at once. As such, only one Animate class should ever be declared in your code.</p>
         </div>
       </section>
@@ -166,34 +156,34 @@
         <a name="Function"></a>
         <div class="card doc">
           <h2>Function (delegate)</h2>
-          <h3>Input: float <span>t, b, c, d</span></h3>
+          <h3>Input: float <code>t, b, c, d</code></h3>
           <h3>Output: int</h3>
           <p>Defines an easing function that takes an input time <b>t</b> (current frame), start value <b>b</b>, change in value <b>c</b>, and duration of animation <b>d</b> and returns an integer defining what the current position should be. In AnimateForms, duration and current time are both always in milliseconds.</p>
           <br>
           <p><b>ProTip #1:</b> You can use this delegate to define your own custom easing function, and plug it into any method for use.</p>
           <p><b>ProTip #2:</b> The <a href="#Easings">Easings</a> class defines many preset static easing functions that can be used as a parameter for methods that need this delegate.</p>
           <br>
-          <p><b>Example:</b> <span>Animate.Function f = Easings.Linear;</span></p>
+          <p><b>Example:</b> <code>Animate.Function f = Easings.Linear;</code></p>
         </div>
       </section>
       <section>
         <a name="Move"></a>
         <div class="card doc">
           <h2>Move</h2>
-          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Point <span>moveTo</span></h3>
+          <h3>Input: Control <code>control</code>, Function <code>easing</code>, int <code>duration</code>, Point <code>moveTo</code></h3>
           <h3>Output: bool</h3>
-          <p>Moves input <span>control</span> to point <span>moveTo</span>, using the specified <span>duration</span>  and <span>easing</span> function. Returns true if animation completed and false if either location is the same or another animation is already in progress.</p>
+          <p>Moves input <code>control</code> to point <code>moveTo</code>, using the specified <code>duration</code>  and <code>easing</code> function. Returns true if animation completed and false if either location is the same or another animation is already in progress.</p>
           <br>
           <p><b>See Also:</b></p>
           <p><a href="#Function">Animate.Function</a></p>
           <p><a href="#Options">Options</a></p>
           <br>
           <p><b>Examples:</b> </p>
-            <p><span>
-            _ = a.Move(control, Easings.Linear, 1000, new Point(200, 20));</span></p>
-            <p><span>
+            <p><code>
+            _ = a.Move(control, Easings.Linear, 1000, new Point(200, 20));</code></p>
+            <p><code>
             _ = a.Move(new Options(), new Point(200, 20));
-          </span></p>
+          </code></p>
           <hr>
           <h3>Overloads:</h3>
           <p><b><a href="#Options">Options</a> o, Point moveTo</b></p>
@@ -207,22 +197,22 @@
         <a name="MoveRelative"></a>
         <div class="card doc">
           <h2>MoveRelative</h2>
-          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Point <span>offset</span></h3>
+          <h3>Input: Control <code>control</code>, Function <code>easing</code>, int <code>duration</code>, Point <code>offset</code></h3>
           <h3>Output: bool</h3>
           <p>Similar to <a href="#Move">the standard Move animation</a>, however, the offset recursively applies to the current control's location rather than setting it directly. As such, AnimateForms will not block multiple instances of this method at the same time. This creates an effect similar to applying a vector force to a control, except the control will always be offset by the amounts entered.</p>
           <br>
-          <p><b>ProTip:</b> Negative values can be entered in a <span>Point</span> object, and will make MoveRelative move the control up or left instead of down or right.</p>
+          <p><b>ProTip:</b> Negative values can be entered in a <code>Point</code> object, and will make MoveRelative move the control up or left instead of down or right.</p>
           <br>
           <p><b>See Also:</b></p>
           <p><a href="#Function">Animate.Function</a></p>
           <p><a href="#Options">Options</a></p>
           <br>
           <p><b>Examples:</b> </p>
-            <p><span>
-            _ = a.MoveRelative(control, Easings.Linear, 1000, new Point(200, -20));</span></p>
-            <p><span>
+            <p><code>
+            _ = a.MoveRelative(control, Easings.Linear, 1000, new Point(200, -20));</code></p>
+            <p><code>
             _ = a.MoveRelative(new Options(), new Point(200, -20));
-          </span></p>
+          </code></p>
           <hr>
           <h3>Overloads:</h3>
           <p><b><a href="#Options">Options</a> o, Point offset</b></p>
@@ -233,9 +223,9 @@
         <a name="Recolor"></a>
         <div class="card doc">
           <h2>Recolor</h2>
-          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Color <span>colorTo</span>, [bool <span>backColor</span> = true]</h3>
+          <h3>Input: Control <code>control</code>, Function <code>easing</code>, int <code>duration</code>, Color <code>colorTo</code>, [bool <code>backColor</code> = true]</h3>
           <h3>Output: bool</h3>
-          <p>Recolors input <span>control</span> to the specified ARGB color <span>colorTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>colorTo</span> is equal to current color, or if another Recolor is running on the same control already. <span>backColor</span> can be used to determine whether the BackColor or the ForeColor property of the control is changed. This function supports using an <a href="#HSV">HSV color object</a> in place of an ARGB color.</p>
+          <p>Recolors input <code>control</code> to the specified ARGB color <code>colorTo</code>, using the specified <code>duration</code> and <code>easing</code> function. Returns true if animation completed and false if <code>colorTo</code> is equal to current color, or if another Recolor is running on the same control already. <code>backColor</code> can be used to determine whether the BackColor or the ForeColor property of the control is changed. This function supports using an <a href="#HSV">HSV color object</a> in place of an ARGB color.</p>
           <br>
           <p><b>Note:</b> Limitations currently means transitioning opacities appears flickery and not great.</p>
           <br>
@@ -244,11 +234,11 @@
           <p><a href="../#Options">Options</a></p>
           <br>
           <p><b>Examples:</b> </p>
-            <p><span>
-            _ = a.Recolor(control, Easings.Linear, 1000, Color.Blue);</span></p>
-            <p><span>
+            <p><code>
+            _ = a.Recolor(control, Easings.Linear, 1000, Color.Blue);</code></p>
+            <p><code>
             _ = a.Resize(new Options(), Color.Blue, false);
-          </span></p>
+          </code></p>
           <hr>
           <h3>Overloads:</h3>
           <p><b>Input: Control control, Function easing, int duration, <a href="#HSV">Helpers.HSV hsv</a>, [bool backColor = true]</b></p>
@@ -272,20 +262,20 @@
         <a name="Resize"></a>
         <div class="card doc">
           <h2>Resize</h2>
-          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Size <span>sizeTo</span></h3>
+          <h3>Input: Control <code>control</code>, Function <code>easing</code>, int <code>duration</code>, Size <code>sizeTo</code></h3>
           <h3>Output: bool</h3>
-          <p>Resizes input <span>control</span> to input <span>sizeTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>sizeTo</span> is equal to current size or another Resize is currently being run on the control.</p>
+          <p>Resizes input <code>control</code> to input <code>sizeTo</code>, using the specified <code>duration</code> and <code>easing</code> function. Returns true if animation completed and false if <code>sizeTo</code> is equal to current size or another Resize is currently being run on the control.</p>
           <br>
           <p><b>See Also:</b></p>
           <p><a href="#Function">Animate.Function</a></p>
           <p><a href="#Options">Options</a></p>
           <br>
           <p><b>Examples:</b> </p>
-            <p><span>
-            _ = a.Resize(control, Easings.Linear, 1000, new Point(200, 200));</span></p>
-            <p><span>
+            <p><code>
+            _ = a.Resize(control, Easings.Linear, 1000, new Point(200, 200));</code></p>
+            <p><code>
             _ = a.Resize(new Options(), new Size(200, 200));
-          </span></p>
+          </code></p>
           <hr>
           <h3>Overloads:</h3>
           <p><b><a href="#Options">Options</a> o, Size sizeTo</b></p>
@@ -294,7 +284,7 @@
       </section>
       <div class="header">
         <a name="Easings"></a>
-        <p>Easings.cs Members</p>
+        <h2>Easings.cs Members</h2>
       </div>
       <section>
         <a name="AllEasings"></a>
@@ -312,7 +302,7 @@
         <a name="ImplementedEasings"></a>
         <div class="card doc">
           <h2>Implemented Easings (static)</h2>
-          <p>All easings found on <a href="http://gizma.com/easing/">Gizma</a> have been implemented as static functions according to the delegate <a href="#Function">Animate.Function</a> and are listed below with their abbreviations that they appear with in the Easings class. Each easing type will have an <span>In</span>, <span>Out</span>, and an <span>InOut</span> variant (except Linear).</p>
+          <p>All easings found on <a href="http://gizma.com/easing/">Gizma</a> have been implemented as static functions according to the delegate <a href="#Function">Animate.Function</a> and are listed below with their abbreviations that they appear with in the Easings class. Each easing type will have an <code>In</code>, <code>Out</code>, and an <code>InOut</code> variant (except Linear).</p>
           <br>
           <p><b>See Also:</b></p>
           <p><a href="#Function">Animate.Function</a></p>
@@ -330,15 +320,15 @@
       </section>
       <div class="header">
         <a name="Helpers"></a>
-        <p>Helpers.cs Members</p>
+        <h2>Helpers.cs Members</h2>
       </div>
       <section>
         <a name="CollectionToArray"></a>
         <div class="card doc">
           <h2>CollectionToArray (static)</h2>
-          <h3>Input: Control.ControlCollection <span>controlCollection</span></h3>
+          <h3>Input: Control.ControlCollection <code>controlCollection</code></h3>
           <h3>Output: Control[]</h3>
-          <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array for use in the animation functions.</p>
+          <p>Converts a ControlCollection that results from calling <code>parentControl.Controls</code> to a control array for use in the animation functions.</p>
           <br>
           <p><b>ProTip:</b> ControlCollections seem to be organized randomly, and you should only use this function when the resulting order of the array doesn't matter.</p>
         </div>
@@ -347,22 +337,22 @@
         <a name="HSV"></a>
         <div class="card doc">
           <h2>HSV (struct)</h2>
-          <h3>Parameters: double <span>Hue, Saturation, Value</span></h3>
+          <h3>Parameters: double <code>Hue, Saturation, Value</code></h3>
           <p>Holds an HSV color value for use by the <a href="#Recolor">Recolor</a> method or one of the <a href="#RGBtoHSV">RGBtoHSV</a> / <a href="#HSVtoRGB">HSVtoRGB</a> helper functions. Has a constructor so it can be called inline cleanly.</p>
           <br>
           <p><b>Examples:</b> </p>
-            <p><span>
-            var hsv = new Helpers.HSV(180, 0.5f, 0.5f);</span></p>
-            <p><span>
+            <p><code>
+            var hsv = new Helpers.HSV(180, 0.5f, 0.5f);</code></p>
+            <p><code>
             var hsv = new Helpers.HSV { Hue = 180, Saturation = 1, Value = 1 };
-          </span></p>
+          </code></p>
         </div>
       </section>
       <section>
         <a name="HSVtoRGB"></a>
         <div class="card doc">
           <h2>HSVtoRGB (static)</h2>
-          <h3>Input: <a href="#HSV">HSV</a> <span>hsv</span></h3>
+          <h3>Input: <a href="#HSV">HSV</a> <code>hsv</code></h3>
           <h3>Output: Color</h3>
           <p>Converts an HSV object into a System.Drawing.Color RGB color.</p>
         </div>
@@ -371,31 +361,31 @@
         <a name="RGBtoHSV"></a>
         <div class="card doc">
           <h2>RGBtoHSV (static)</h2>
-          <h3>Input: Color <span>color</span></h3>
+          <h3>Input: Color <code>color</code></h3>
           <h3>Output: <a href="#HSV">HSV</a></h3>
-          <p>Converts an RGB System.Drawing.Color <span>color</span> into an HSV object. If an alpha is provided, it will be ignored.</p>
+          <p>Converts an RGB System.Drawing.Color <code>color</code> into an HSV object. If an alpha is provided, it will be ignored.</p>
         </div>
       </section>
       <section>
         <a name="SortCollectionByName"></a>
         <div class="card doc">
           <h2>SortCollectionByName (static)</h2>
-          <h3>Input: Control.ControlCollection <span>controlCollection</span></h3>
+          <h3>Input: Control.ControlCollection <code>controlCollection</code></h3>
           <h3>Output: Control[]</h3>
-          <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array, which is sorted by the control's Name property in alphabetical order.</p>
+          <p>Converts a ControlCollection that results from calling <code>parentControl.Controls</code> to a control array, which is sorted by the control's Name property in alphabetical order.</p>
         </div>
       </section>
       <div class="header">
         <a name="Options"></a>
-        <p>Options.cs Members</p>
+        <h2>Options.cs Members</h2>
       </div>
       <section>
         <a name="Options"></a>
         <div class="card doc">
           <h2>Options</h2>
-          <h3>Parameters: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span></h3>
-          <h3>Optional Parameters: Control[] <span>controls</span>*, Function[] <span>easings</span>*, int <span>delay</span>, int <span>interval</span></h3>
-          <h3>Non-Constructor Paramters: int <span>endDelay</span></h3>
+          <h3>Parameters: Control <code>control</code>, Function <code>easing</code>, int <code>duration</code></h3>
+          <h3>Optional Parameters: Control[] <code>controls</code>*, Function[] <code>easings</code>*, int <code>delay</code>, int <code>interval</code></h3>
+          <h3>Non-Constructor Paramters: int <code>endDelay</code></h3>
           <p>An options object to allow greater control over some animation functions. It can be created by using a constructor with parameters or by setting each element individually. Currently, all animations will accept an options object and will process all parameters set in one, since the options are universal.</p>
           <br>
           <p><b>See Also:</b> <a href="#Function">Animate.Function</a></p>
@@ -413,38 +403,38 @@
       </section>
       <div class="header">
         <a name="Timeline"></a>
-        <p>Timeline.cs Members</p>
+        <h2>Timeline.cs Members</h2>
       </div>
       <section>
         <div class="card doc">
           <h2>Class Information</h2>
           <h3>Instantiable</h3>
           <p>Timelines are instantiable objects that can store a list of animations to run later. Instantiate with:</p>
-          <p><span>private readonly Timeline t = new Timeline();</span></p>
+          <p><code>private readonly Timeline t = new Timeline();</code></p>
           <br>
           <p>Then, add animations with the following:</p>
-          <p><span>t.Add(() => a.Method(...));</span></p>
+          <p><code>t.Add(() => a.Method(...));</code></p>
           <br>
           <p>Timelines can queue anything that returns a Task&lt;bool&gt;. As such, you can write your own custom functions to run in them.</p>
           <br>
           <p>When you wish to execute the timeline, use the following. Timelines can be reused, and are useful if there is a sequence of animations that need to be called repeatedly.</p>
-          <p><span>await t.Execute();</span></p>
+          <p><code>await t.Execute();</code></p>
           <br>
-          <p><b>ProTip #1:</b> Like other animate functions, a discard <span>_ = t.Execute();</span> can be used to run the timeline without blocking code.</p>
+          <p><b>ProTip #1:</b> Like other animate functions, a discard <code>_ = t.Execute();</code> can be used to run the timeline without blocking code.</p>
         </div>
       </section>
       <section>
         <a name="Add"></a>
         <div class="card doc">
           <h2>Add</h2>
-          <h3>Input: Func&lt;Task&lt;bool&gt;&gt; <span>func</span>, [bool shouldAwait = true]</h3>
-          <p>Adds an animation to the timeline. Use a lambda to provide the function to add it. The animation added can be removed using the <a href="#Remove">Remove</a> method and the index of the animation added. Should await means the animation should run using an <span>await</span> tag - if this is set false, it will run using a discard <span>_ =</span> instead causing it to happen at the same time as the next animation in queue. This can cause issues as if the animations are of the same type, the second will be rejected.</p>
+          <h3>Input: Func&lt;Task&lt;bool&gt;&gt; <code>func</code>, [bool shouldAwait = true]</h3>
+          <p>Adds an animation to the timeline. Use a lambda to provide the function to add it. The animation added can be removed using the <a href="#Remove">Remove</a> method and the index of the animation added. Should await means the animation should run using an <code>await</code> tag - if this is set false, it will run using a discard <code>_ =</code> instead causing it to happen at the same time as the next animation in queue. This can cause issues as if the animations are of the same type, the second will be rejected.</p>
           <br>
           <p><b>ProTip:</b> You can add your own function to a timeline so long as it returns Task&lt;bool&gt;.</p>
           <br>
           <p><b>Examples:</b> </p>
-            <p><span>
-            t.Add(() => a.Move(moveOptions, new Point(0, 0)));</span></p>
+            <p><code>
+            t.Add(() => a.Move(moveOptions, new Point(0, 0)));</code></p>
           <br>
         </div>
       </section>
@@ -452,15 +442,15 @@
         <a name="Remove"></a>
         <div class="card doc">
           <h2>Remove</h2>
-          <h3>Input: int <span>index</span></h3>
+          <h3>Input: int <code>index</code></h3>
           <p>Calls RemoveAt(int index) on the private List of functions within the Timeline object. May throw an ArgumentOutOfBounds exception.</p>
           <br>
           <p><b>Examples:</b> </p>
-            <p><span>
-            t.Remove(3);</span></p>
-            <p><span>
+            <p><code>
+            t.Remove(3);</code></p>
+            <p><code>
             t.Remove(0, 3);
-          </span></p>
+          </code></p>
           <hr>
           <h3>Overloads:</h3>
           <p><b>int index, int count</b></p>
@@ -476,8 +466,8 @@
           <p>Runs every action added to the Timeline object. It will await every single call. If discardAfterRun is set to true, after an animation is played, it will be removed from the Timeline object, effectively resetting the Timeline object.</p>
           <br>
           <p><b>Examples:</b> </p>
-            <p><span>
-            t.Execute();</span></p>
+            <p><code>
+            t.Execute();</code></p>
           <br>
         </div>
       </section>
@@ -486,23 +476,21 @@
     <br>
   </div>
   <footer>
-    <section>
-      <div>
+    <section class="flex-row">
+      <div class="flex">
         <h3>More Stuff</h3>
         <p><a href="https://sdproductions.github.io/p/about">About Us</a></p>
         <p><a href="https://sdproductions.github.io/p/about#privacy">Privacy</a></p>
         <p><a href="https://sdproductions.github.io/p/about#terms">Terms of Use</a></p>
       </div>
-      <hr>
-      <div>
+      <div class="flex">
         <h3>Contact</h3>
-        <p><a href="mailto:sdbagel@gmail.com">Email</a></p>
-        <p><a href="https://github.com/SDProductions">GitHub</a></p>
-        <p><a href="https://github.com/SDBagel">SDBagel</a></p>
+        <p><a href="https://github.com/SDBagel">GitHub</a></p>
+        <p><a href="https://sdbagel.com">SDBagel</a></p>
       </div>
     </section>
     <br>
-    <p>&#9400; SDProductions 2019</p>
+    <p>&#9400; SDBagel 2020</p>
   </footer>
 </body>
 </html>

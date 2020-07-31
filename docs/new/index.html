@@ -2,18 +2,21 @@
 <html>
 <head>
   <title>AnimateForms Prerelease</title>
+  <meta name="description" content="AnimateForms is a lightweight, asynchronous Windows Forms animation library. Use it to build your next WinForms project today.">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../lib/flexcore.min.css">
   <link rel="stylesheet" type="text/css" href="../css/site.css">
 </head>
 <body>
   <header>
-    <nav>
+    <nav class="flex-row align-center">
       <img src="../img/ico.svg" alt="Logo">
+      <code class="nav-spacer"></code>
       <a href="https://github.com/SDBagel/AnimateForms">
-        <button>Repository</button>
+        <button>GitHub</button>
       </a>
     </nav>
   </header>
@@ -21,223 +24,220 @@
     <img src="../img/Code-Banner.png" alt="Banner with Code">
     <h1>Upcoming Release</h1>
   </div>
-  <div id="content">
+  <div class="container-wide">
+    <div class="flex-column align-center">
+      <p><b>Prerelease: <code>v1.4.0-alpha</code></b></p>
+      <p><b><a href="../">Take me back to current documentation!</a></b></p>
+    </div>
     <div class="header">
-      <p>Overview</p>
+      <h2>Changes</h2>
     </div>
     <section>
       <div class="card">
-        <p>What's upcoming for v1.4.0a? Changes are highlighted in yellow and additions are highlighted in green.</p>
-        <a href="../"><button>Take me to the current documentation!</button></a>
-      </div>
-    </section>
-    <div class="header">
-      <p>Changes</p>
-    </div>
-    <section>
-      <div class="card highlight">
-        <h2>Animate.cs</h2>
-        <p>Behavioural and feature updates.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Animate.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Animate"><button>View Changes</button></a>
-      </div>
-      <div class="card highlight">
-        <h2>Helpers.cs</h2>
-        <p>API change for code clarity.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Helpers.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Helpers"><button>View Members</button></a>
-      </div>
-      <div class="card highlight">
-        <h2>Options.cs</h2>
-        <p>Added new alignment option for resizing controls.</p>
-        <a href="https://github.com/SDBagel/AnimateForms/blob/master/AnimateForms.Core/Options.cs">
-          <button>View On GitHub</button></a>
-        <a href="#Options"><button>View Members</button></a>
+        <p>What's upcoming for AnimateForms v1.4.0a? Changes are highlighted in yellow and additions are highlighted in green.</p>
       </div>
     </section>
     <br>
-    <div id="outline">
-      <div class="header">
-        <p>Outline</p>
-      </div>
-      <div class="card">
-        <p><b><a href="#Animate">Animate.cs</a></b></p>
-        <p><a href="#Resize">Resize</a></p>
-        <br>
-        <p><b><a href="#Helpers">Helpers.cs</a></b></p>
-        <p><a href="#CollectionToArray">CollectionToArray</a></p>
-        <p><a href="#HSVtoRGB">HSVtoRGB</a></p>
-        <p><a href="#RGBtoHSV">RGBtoHSV</a></p>
-        <p><a href="#SortCollectionByName">SortCollectionByName</a></p>
-        <br>
-        <p><b><a href="#Options">Options.cs</a></b></p>
-        <p><a href="#Alignment">Alignment</a></p>
-      </div>
-    </div>
-    <div id="documentation">
-      <div class="header">
-        <a name="Animate"></a>
-        <p>Animate.cs Members</p>
-      </div>
-      <section>
-        <div class="card doc">
-          <h2>Class Information</h2>
-          <h3>Instantiable</h3>
-          <p>To start using the animate functions, first declare an animator:</p>
-          <p><span>private Animate a = new Animate();</span></p>
-          <p>Then, any animated method is run as such:</p>
-          <p><span>await a.Method(parameters);</span></p>
-          <br>
-          <p class="highlight">AnimateForms used to return <span>false</span> if the animate call would result in nothing happening (e.g. moving a control to (0, 0) when it was already there). However, if it was called using an options object as a parameter, it would still follow through with the pre/post end delays, following through with the actual animation delay depending on the last control in the Options object. This could potentially result in erratic behaviour in certain edge cases, and so it has been modified so calls using Options must always complete their delay, interval, duration, end sequences. This comes with some performance benefits as well.</p>
-          <br>
-          <p><b>ProTip #1:</b> By specifying <span>await</span>, the method is run synchronously and will not allow code to continue before the method has finished executing. Instead, a discard can be used to run asynchronously:</p>
-          <p><span>_ = a.Method(parameters);</span></p>
-          <p><b>ProTip #2:</b> Animate classes will block two animations of the same type on the same control (unless otherwise noted in documentation). This prevents jittery graphics as two animations try to happen at once. As such, only one Animate class should ever be declared in your code.</p>
+    <section class="flex-smart flex-list">
+      <div class="card flex highlight">
+        <div class="flex-row justify-between">
+          <h2>Animate.cs</h2>
+          <a href="#Animate">View Changes</a>
         </div>
-      </section>
-      <section>
-        <a name="Resize"></a>
-        <div class="card doc">
-          <h2>Resize</h2>
-          <h3>Input: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span>, Size <span>sizeTo</span></h3>
-          <h3>Output: bool</h3>
-          <p>Resizes input <span>control</span> to input <span>sizeTo</span>, using the specified <span>duration</span> and <span>easing</span> function. Returns true if animation completed and false if <span>sizeTo</span> is equal to current size or another Resize is currently being run on the control.</p>
-          <br>
-          <p><b>See Also:</b></p>
-          <p><a href="#Function">Animate.Function</a></p>
-          <p><a href="#Options">Options</a></p>
-          <br>
-          <p><b>Examples:</b> </p>
-            <p><span>
-            _ = a.Resize(control, Easings.Linear, 1000, new Point(200, 200));</span></p>
-            <p><span>
-            _ = a.Resize(new Options(), new Size(200, 200));
-          </span></p>
-          <hr>
-          <h3>Overloads:</h3>
-          <p><b><a href="#Options">Options</a> o, Size sizeTo</b></p>
-          <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
-          <div class="addition">
-            <p><b><a href="#Options">Options</a> o, int? width = null, int? height = null</b></p>
-            <p>Resizes controls while preserving a dimension. E.g. if height was left null but width was set to 0, all controls selected by the options would animate to 0px wide while preserving their individual heights.</p>
+        <p>Behavioural and feature updates.</p>
+      </div>
+      <div class="card flex highlight">
+        <div class="flex-row justify-between">
+          <h2>Helpers.cs</h2>
+          <a href="#Helpers">View Changes</a>
+        </div>
+        <p>API change for code clarity.</p>
+      </div>
+      <div class="card flex highlight">
+        <div class="flex-row justify-between">
+          <h2>Options.cs</h2>
+          <a href="#Options">View Changes</a>
+        </div>
+        <p>Added new alignment option for resizing controls.</p>
+      </div>
+    </section>
+    <br><br><br>
+    <section class="flex-smart">
+      <div id="outline" class="flex-column flex-list">
+        <h2>Outline</h2>
+        <b><a href="#Animate">Animate.cs</a></b>
+        <a href="#Resize">Resize</a>
+        <br>
+        <b><a href="#Helpers">Helpers.cs</a></b>
+        <a href="#CollectionToArray">CollectionToArray</a>
+        <a href="#HSVtoRGB">HSVtoRGB</a>
+        <a href="#RGBtoHSV">RGBtoHSV</a>
+        <a href="#SortCollectionByName">SortCollectionByName</a>
+        <br>
+        <b><a href="#Options">Options.cs</a></b>
+        <a href="#Alignment">Alignment</a>
+      </div>
+      <div class="flex flex-column flex-list">
+        <div class="header">
+          <a name="Animate"></a>
+          <h2>Animate.cs Members</h2>
+        </div>
+        <section>
+          <div class="card doc">
+            <h2>Class Information</h2>
+            <h3>Instantiable</h3>
+            <p>To start using the animate functions, first declare an animator:</p>
+            <p><code>private Animate a = new Animate();</code></p>
+            <p>Then, any animated method is run as such:</p>
+            <p><code>await a.Method(parameters);</code></p>
+            <br>
+            <p class="highlight">AnimateForms used to return <code>false</code> if the animate call would result in nothing happening (e.g. moving a control to (0, 0) when it was already there). However, if it was called using an options object as a parameter, it would still follow through with the pre/post end delays, following through with the actual animation delay depending on the last control in the Options object. This could potentially result in erratic behaviour in certain edge cases, and so it has been modified so calls using Options must always complete their delay, interval, duration, end sequences. This comes with some performance benefits as well.</p>
+            <br>
+            <p><b>ProTip #1:</b> By specifying <code>await</code>, the method is run synchronously and will not allow code to continue before the method has finished executing. Instead, a discard can be used to run asynchronously:</p>
+            <p><code>_ = a.Method(parameters);</code></p>
+            <p><b>ProTip #2:</b> Animate classes will block two animations of the same type on the same control (unless otherwise noted in documentation). This prevents jittery graphics as two animations try to happen at once. As such, only one Animate class should ever be declared in your code.</p>
           </div>
+        </section>
+        <section>
+          <a name="Resize"></a>
+          <div class="card doc">
+            <h2>Resize</h2>
+            <h3>Input: Control <code>control</code>, Function <code>easing</code>, int <code>duration</code>, Size <code>sizeTo</code></h3>
+            <h3>Output: bool</h3>
+            <p>Resizes input <code>control</code> to input <code>sizeTo</code>, using the specified <code>duration</code> and <code>easing</code> function. Returns true if animation completed and false if <code>sizeTo</code> is equal to current size or another Resize is currently being run on the control.</p>
+            <br>
+            <p><b>See Also:</b></p>
+            <p><a href="#Function">Animate.Function</a></p>
+            <p><a href="#Options">Options</a></p>
+            <br>
+            <p><b>Examples:</b> </p>
+              <p><code>
+              _ = a.Resize(control, Easings.Linear, 1000, new Point(200, 200));</code></p>
+              <p><code>
+              _ = a.Resize(new Options(), new Size(200, 200));
+            </code></p>
+            <hr>
+            <h3>Overloads:</h3>
+            <p><b><a href="#Options">Options</a> o, Size sizeTo</b></p>
+            <p>Applies animation using an Options object. See the Options documentation for possible modifiers.</p>
+            <div class="addition">
+              <p><b><a href="#Options">Options</a> o, int? width = null, int? height = null</b></p>
+              <p>Resizes controls while preserving a dimension. E.g. if height was left null but width was set to 0, all controls selected by the options would animate to 0px wide while preserving their individual heights.</p>
+            </div>
+          </div>
+        </section>
+        <br>
+        <div class="header">
+          <a name="Helpers"></a>
+          <h2>Helpers.cs Members</h2>
         </div>
-      </section>
-      <br>
-      <div class="header">
-        <a name="Helpers"></a>
-        <p>Helpers.cs Members</p>
+        <section class="highlight">
+          <div class="card doc">
+            <h2>Class Information</h2>
+            <h3>Static</h3>
+            <p>The Helpers class is a static class containing useful methods relating to, but not necessary to AnimateForms. In v1.4.0a, Helper methods like <a href="#CollectionToArray">CollectionToArray</a> will be renamed to shorter things like <code>ToArray</code> and be converted to extension methods for their respective inputs. Their function will remain the same. If desired, extension methods can be called using the old method, passing in an argument into the method.</p>
+          </div>
+        </section>
+        <section>
+          <a name="CollectionToArray"></a>
+          <div class="card doc">
+            <h2 class="highlight">ToArray (static, extension: Control.ControlCollection)</h2>
+            <h3 class="highlight">Extension: <code>controlCollection.ToArray();</code></h3 class="highlight">
+            <h3>Output: Control[]</h3>
+            <p>Converts a ControlCollection that results from calling <code>parentControl.Controls</code> to a control array for use in the animation functions.</p>
+            <br>
+            <p><b>ProTip:</b> ControlCollections seem to be organized randomly, and you should only use this function when the resulting order of the array doesn't matter.</p>
+          </div>
+        </section>
+        <section>
+          <a name="HSVtoRGB"></a>
+          <div class="card doc">
+            <h2 class="highlight">ToRGB (static, extension: <a href="#HSV">HSV</a>)</h2 class="highlight">
+            <h3 class="highlight">Extension: <code>hsv.ToRGB();</code></h3 class="highlight">
+            <h3>Output: System.Drawing.Color</h3>
+            <p>Converts an HSV object into a System.Drawing.Color RGB color.</p>
+          </div>
+        </section>
+        <section>
+          <a name="RGBtoHSV"></a>
+          <div class="card doc">
+            <h2 class="highlight">ToHSV (static, extension: System.Drawing.Color)</h2 class="highlight">
+            <h3 class="highlight">Extension: <code>color.ToHSV();</code></h3 class="highlight">
+            <h3>Output: <a href="#HSV">HSV</a></h3>
+            <p>Converts an RGB System.Drawing.Color <code>color</code> into an HSV object. If an alpha is provided, it will be ignored.</p>
+          </div>
+        </section>
+        <section>
+          <a name="SortCollectionByName"></a>
+          <div class="card doc">
+            <h2 class="highlight">SortByName (static, extension: Control.ControlCollection)</h2 class="highlight">
+            <h3 class="highlight">Extension: <code>controlCollection.SortByName();</code></h3 class="highlight">
+            <h3>Output: Control[]</h3>
+            <p>Converts a ControlCollection that results from calling <code>parentControl.Controls</code> to a control array, which is sorted by the control's Name property in alphabetical order.</p>
+          </div>
+        </section>
+        <div class="header">
+          <a name="Options"></a>
+          <h2>Options.cs Members</h2>
+        </div>
+        <section>
+          <a name="Options"></a>
+          <div class="card doc">
+            <h2>Options</h2>
+            <h3>Parameters: Control <code>control</code>, Function <code>easing</code>, int <code>duration</code></h3>
+            <h3>Optional Parameters: Control[] <code>controls</code>*, Function[] <code>easings</code>*, int <code>delay</code>, int <code>interval</code></h3>
+            <h3>Non-Constructor Paramters: int <code>endDelay</code></h3>
+            <p>An options object to allow greater control over some animation functions. It can be created by using a constructor with parameters or by setting each element individually. Currently, all animations will accept an options object and will process all parameters set in one, since the options are universal.</p>
+            <br>
+            <p><b>See Also:</b> <a href="#Function">Animate.Function</a></p>
+            <br>
+            <p class="addition"><b>Alignment:</b> Uses the <a href="#Alignment">Alignment enumerable</a>. Determines transform origin of control for resizing.</p>
+            <p><b>Easing:</b> Easing function to use. Default = Linear.</p>
+            <p><b>Duration:</b> Duration of animation, in milliseconds. Default = 1000ms.</p>
+            <p><b>Delay:</b> Delay before animation starts.** Default = 0ms.</p>
+            <p><b>EndDelay:</b> Delay after animation ends.** Default = 0ms.</p>
+            <p><b>Interval:</b> Time between animations executing in bulk animation commands. Default = 0ms.</p>
+            <br>
+            <p>*Single control and single functions that get passed in as parameters get parsed into an array by the Options object anyway.</p>
+            <p>**If this is specified and the animation returns or will return false, it will still wait for this amount of time.</p>
+            <br>
+          </div>
+        </section>
+        <section class="addition">
+          <a name="Alignment"></a>
+          <div class="card doc">
+            <h2>Alignment</h2>
+            <h3><b>Enumerable</b></h3>
+            <p>An enumerable that determines the control's transform origin during resize.</p>
+            <br>
+            <p>Default - Top left aligned (default)</p>
+            <p>HorizontalCenter - Aligned to the top and horizontally centered</p>
+            <p>VerticalCenter - Aligned to the left and vertically centered</p>
+            <p>AbsoluteCenter - Aligned to the very middle of the control</p>
+            <p>Right - Top right aligned</p>
+            <p>Bottom - Bottom left aligned</p>
+          </div>
+        </section>
       </div>
-      <section class="highlight">
-        <div class="card doc">
-          <h2>Class Information</h2>
-          <h3>Static</h3>
-          <p>The Helpers class is a static class containing useful methods relating to, but not necessary to AnimateForms. In v1.4.0a, Helper methods like <a href="#CollectionToArray">CollectionToArray</a> will be renamed to shorter things like <span>ToArray</span> and be converted to extension methods for their respective inputs. Their function will remain the same. If desired, extension methods can be called using the old method, passing in an argument into the method.</p>
-        </div>
-      </section>
-      <section>
-        <a name="CollectionToArray"></a>
-        <div class="card doc">
-          <h2 class="highlight">ToArray (static, extension: Control.ControlCollection)</h2>
-          <h3 class="highlight">Extension: <span>controlCollection.ToArray();</span></h3 class="highlight">
-          <h3>Output: Control[]</h3>
-          <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array for use in the animation functions.</p>
-          <br>
-          <p><b>ProTip:</b> ControlCollections seem to be organized randomly, and you should only use this function when the resulting order of the array doesn't matter.</p>
-        </div>
-      </section>
-      <section>
-        <a name="HSVtoRGB"></a>
-        <div class="card doc">
-          <h2 class="highlight">ToRGB (static, extension: <a href="#HSV">HSV</a>)</h2 class="highlight">
-          <h3 class="highlight">Extension: <span>hsv.ToRGB();</span></h3 class="highlight">
-          <h3>Output: System.Drawing.Color</h3>
-          <p>Converts an HSV object into a System.Drawing.Color RGB color.</p>
-        </div>
-      </section>
-      <section>
-        <a name="RGBtoHSV"></a>
-        <div class="card doc">
-          <h2 class="highlight">ToHSV (static, extension: System.Drawing.Color)</h2 class="highlight">
-          <h3 class="highlight">Extension: <span>color.ToHSV();</span></h3 class="highlight">
-          <h3>Output: <a href="#HSV">HSV</a></h3>
-          <p>Converts an RGB System.Drawing.Color <span>color</span> into an HSV object. If an alpha is provided, it will be ignored.</p>
-        </div>
-      </section>
-      <section>
-        <a name="SortCollectionByName"></a>
-        <div class="card doc">
-          <h2 class="highlight">SortByName (static, extension: Control.ControlCollection)</h2 class="highlight">
-          <h3 class="highlight">Extension: <span>controlCollection.SortByName();</span></h3 class="highlight">
-          <h3>Output: Control[]</h3>
-          <p>Converts a ControlCollection that results from calling <span>parentControl.Controls</span> to a control array, which is sorted by the control's Name property in alphabetical order.</p>
-        </div>
-      </section>
-      <div class="header">
-        <a name="Options"></a>
-        <p>Options.cs Members</p>
-      </div>
-      <section>
-        <a name="Options"></a>
-        <div class="card doc">
-          <h2>Options</h2>
-          <h3>Parameters: Control <span>control</span>, Function <span>easing</span>, int <span>duration</span></h3>
-          <h3>Optional Parameters: Control[] <span>controls</span>*, Function[] <span>easings</span>*, int <span>delay</span>, int <span>interval</span></h3>
-          <h3>Non-Constructor Paramters: int <span>endDelay</span></h3>
-          <p>An options object to allow greater control over some animation functions. It can be created by using a constructor with parameters or by setting each element individually. Currently, all animations will accept an options object and will process all parameters set in one, since the options are universal.</p>
-          <br>
-          <p><b>See Also:</b> <a href="#Function">Animate.Function</a></p>
-          <br>
-          <p class="addition"><b>Alignment:</b> Uses the <a href="#Alignment">Alignment enumerable</a>. Determines transform origin of control for resizing.</p>
-          <p><b>Easing:</b> Easing function to use. Default = Linear.</p>
-          <p><b>Duration:</b> Duration of animation, in milliseconds. Default = 1000ms.</p>
-          <p><b>Delay:</b> Delay before animation starts.** Default = 0ms.</p>
-          <p><b>EndDelay:</b> Delay after animation ends.** Default = 0ms.</p>
-          <p><b>Interval:</b> Time between animations executing in bulk animation commands. Default = 0ms.</p>
-          <br>
-          <p>*Single control and single functions that get passed in as parameters get parsed into an array by the Options object anyway.</p>
-          <p>**If this is specified and the animation returns or will return false, it will still wait for this amount of time.</p>
-          <br>
-        </div>
-      </section>
-      <section class="addition">
-        <a name="Alignment"></a>
-        <div class="card doc">
-          <h2>Alignment</h2>
-          <h3><b>Enumerable</b>></h3>
-          <p>An enumerable that determines the control's transform origin during resize.</p>
-          <br>
-          <p>Default - Top left aligned (default)</p>
-          <p>HorizontalCenter - Aligned to the top and horizontally centered</p>
-          <p>VerticalCenter - Aligned to the left and vertically centered</p>
-          <p>AbsoluteCenter - Aligned to the very middle of the control</p>
-          <p>Right - Top right aligned</p>
-          <p>Bottom - Bottom left aligned</p>
-        </div>
-      </section>
-    </div>
+    </section>
     <br>
   </div>
   <footer>
-    <section>
-      <div>
+    <section class="flex-row">
+      <div class="flex">
         <h3>More Stuff</h3>
         <p><a href="https://sdproductions.github.io/p/about">About Us</a></p>
         <p><a href="https://sdproductions.github.io/p/about#privacy">Privacy</a></p>
         <p><a href="https://sdproductions.github.io/p/about#terms">Terms of Use</a></p>
       </div>
-      <hr>
-      <div>
+      <div class="flex">
         <h3>Contact</h3>
-        <p><a href="mailto:sdbagel@gmail.com">Email</a></p>
-        <p><a href="https://github.com/SDProductions">GitHub</a></p>
-        <p><a href="https://github.com/SDBagel">SDBagel</a></p>
+        <p><a href="https://github.com/SDBagel">GitHub</a></p>
+        <p><a href="https://sdbagel.com">SDBagel</a></p>
       </div>
     </section>
     <br>
-    <p>&#9400; SDProductions 2019</p>
+    <p>&#9400; SDBagel 2020</p>
   </footer>
 </body>
 </html>
