@@ -4,6 +4,9 @@
 
 AnimateForms is a lightweight, async animation library for Windows Forms that provides an easy to use API. This library is inspired by the JS library [anime.js](https://animejs.com), and aims to implement some basic features similar to or functionally equivalent to that library.
 
+### Where's v1.4.0a/1.0.0b?
+The features are implemented already for these releases - however, the underlying method AnimateForms uses to execute animations is unstable and will require a rework for these features to be stable enough for actual usage. This would take significantly more effort than time I have right now - so these versions will be delayed.
+
 # Installation, Usage, and Documentation
 
 Complete code documentation is available [here](https://sdbagel.github.io/AnimateForms/). It includes methods and detailed descriptions on all aspects of the library. If something is missing, please create a pull request or an issue on this repository.
